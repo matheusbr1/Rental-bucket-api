@@ -1,0 +1,547 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Rental Bucket Documentation",
+    "description": "This is an API for Rental Bucket",
+    "version": "1.0.0",
+    "contact": {
+      "email": "matheusbaron10@gmail.com"
+    }
+  },
+  "paths": {
+    "/customers": {
+      "post": {
+        "tags": ["Customer"],
+        "summary": "Create a customer",
+        "description": "Create a new customer, a fisic or legal person",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "personType": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "CPF": {
+                    "type": "number"
+                  },
+                  "CNPJ": {
+                    "type": "number"
+                  },
+                  "address": {
+                    "type": "object",
+                    "properties": {
+                      "CEP": {
+                        "type": "number"
+                      },
+                      "street": {
+                        "type": "string"
+                      },
+                      "number": {
+                        "type": "number"
+                      },
+                      "neighborhood": {
+                        "type": "string"
+                      },
+                      "city": {
+                        "type": "string"
+                      },
+                      "state": {
+                        "type": "string"
+                      },
+                      "complement": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "contact": {
+                    "type": "object",
+                    "properties": {
+                      "phone": {
+                        "type": "string"
+                      },
+                      "cellphone": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "personType": "F",
+                  "name": "Matheus Baron Ribeiro",
+                  "CPF": 67593635074,
+                  "address": {
+                    "CEP": 77001002,
+                    "street": "Praça Girassóis",
+                    "number": 170,
+                    "neighborhood": "Plano Diretor Norte",
+                    "city": "Palmas",
+                    "state": "TO",
+                    "complement": "Casa 2"
+                  },
+                  "contact": {
+                    "phone": "6335403178",
+                    "cellphone": "63997316401",
+                    "email": "matheusbaron10@gmail.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": 
+              "Category already exists | This CPF is invalid | This CNPJ is invalid"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Customer"],
+        "summary": "List all customers",
+        "description": "List all customers",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "string"
+                      },
+                      "personType": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "CPF": {
+                        "type": "number"
+                      },
+                      "CNPJ": {
+                        "type": "number"
+                      },
+                      "address": {
+                        "type": "object",
+                        "properties": {
+                          "CEP": {
+                            "type": "number"
+                          },
+                          "street": {
+                            "type": "string"
+                          },
+                          "number": {
+                            "type": "number"
+                          },
+                          "neighborhood": {
+                            "type": "string"
+                          },
+                          "city": {
+                            "type": "string"
+                          },
+                          "state": {
+                            "type": "string"
+                          },
+                          "complement": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "contact": {
+                        "type": "object",
+                        "properties": {
+                          "phone": {
+                            "type": "string"
+                          },
+                          "cellphone": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/drivers": {
+      "post": {
+        "tags": ["Driver"],
+        "summary": "Create a driver",
+        "description": "Create a new driver",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "CPF": {
+                    "type": "number"
+                  },
+                  "RG": {
+                    "type": "number"
+                  },
+                  "CNH": {
+                    "type": "number"
+                  },
+                  "birthday": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "object",
+                    "properties": {
+                      "CEP": {
+                        "type": "number"
+                      },
+                      "street": {
+                        "type": "string"
+                      },
+                      "number": {
+                        "type": "number"
+                      },
+                      "neighborhood": {
+                        "type": "string"
+                      },
+                      "city": {
+                        "type": "string"
+                      },
+                      "state": {
+                        "type": "string"
+                      },
+                      "complement": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "contact": {
+                    "type": "object",
+                    "properties": {
+                      "phone": {
+                        "type": "string"
+                      },
+                      "cellphone": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "name": "Ricardo Matheus Figueiredo",
+                  "CPF": 48122399665,
+                  "RG": 311723238,
+                  "CNH": 55474721686,
+                  "birthday": "08/05/1946",
+                  "address": {
+                    "CEP": 77001002,
+                    "street": "Praça Girassóis",
+                    "number": 170,
+                    "neighborhood": "Plano Diretor Norte",
+                    "city": "Palmas",
+                    "state": "TO",
+                    "complement": "Casa 2"
+                  },
+                  "contact": {
+                    "phone": "6335403178",
+                    "cellphone": "63997316401",
+                    "email": "matheusbaron10@gmail.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": 
+              "Driver already exists | This CPF is invalid"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Driver"],
+        "summary": "List all drivers",
+        "description": "List all drivers",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "CPF": {
+                        "type": "number"
+                      },
+                      "RG": {
+                        "type": "number"
+                      },
+                      "CNH": {
+                        "type": "number"
+                      },
+                      "birthday": {
+                        "type": "string"
+                      },
+                      "address": {
+                        "type": "object",
+                        "properties": {
+                          "CEP": {
+                            "type": "number"
+                          },
+                          "street": {
+                            "type": "string"
+                          },
+                          "number": {
+                            "type": "number"
+                          },
+                          "neighborhood": {
+                            "type": "string"
+                          },
+                          "city": {
+                            "type": "string"
+                          },
+                          "state": {
+                            "type": "string"
+                          },
+                          "complement": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "contact": {
+                        "type": "object",
+                        "properties": {
+                          "phone": {
+                            "type": "string"
+                          },
+                          "cellphone": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/trucks/types": {
+      "post": {
+        "tags": ["Truck"],
+        "summary": "Create a truck type",
+        "description": "Create a new truck type (truck equipment)",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Poliguindaste"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "This Category already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Truck"],
+        "summary": "get all truck types",
+        "description": "get all truck types",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "properties": {
+                    "id": "string",
+                    "name": "string",
+                    "created_at": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/trucks": {
+      "post": {
+        "tags": ["Truck"],
+        "summary": "Create a truck",
+        "description": "Create a new truck",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "brandId": {
+                    "type": "number"
+                  },
+                  "modelId": {
+                    "type": "number"
+                  },
+                  "typeId": {
+                    "type": "number"
+                  },
+                  "plate": {
+                    "type": "string"
+                  },
+                  "renavam": {
+                    "type": "number"
+                  },
+                  "year": {
+                    "type": "object",
+                    "properties": {
+                      "manufacture": {
+                        "type": "number"
+                      },
+                      "model": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "brandId": 10,
+                  "modelId": 2,
+                  "typeId": 1,
+                  "plate": "XPB-1212", 
+                  "renavam": 321321321, 
+                  "year": {
+                    "manufacture": 1997,
+                    "model": 1998
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Truck already exists"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Truck"],
+        "summary": "get all trucks",
+        "description": "get all trucks",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "created_at": {
+                        "type": "string"
+                      },
+                      "brandId": {
+                        "type": "number"
+                      },
+                      "modelId": {
+                        "type": "number"
+                      },
+                      "typeId": {
+                        "type": "number"
+                      },
+                      "plate": {
+                        "type": "string"
+                      },
+                      "renavam": {
+                        "type": "number"
+                      },
+                      "year": {
+                        "type": "object",
+                        "properties": {
+                          "manufacture": {
+                            "type": "number"
+                          },
+                          "model": {
+                            "type": "number"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

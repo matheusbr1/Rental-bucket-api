@@ -5,14 +5,9 @@ class Customer {
   
   // Pessoa Física ou Jurídica
   personType: 'F' | 'J' 
-  
-  // Pessoa Física
+  CPF_CNPJ?: number
+
   name?: string
-  CPF?: number
-  
-  // Pessoa Física
-  corporateName?: string
-  CNPJ?: number
   
   address: {
     CEP: string

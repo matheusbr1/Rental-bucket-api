@@ -4,14 +4,9 @@ import { Customer } from "../models/Customer";
 interface ICreateCustomerDTO {
   // Pessoa Física ou Jurídica
   personType: 'F' | 'J' 
+  CPF_CNPJ?: number
   
-  // Pessoa Física
   name?: string
-  CPF?: number
-  
-  // Pessoa Física
-  corporateName?: string
-  CNPJ?: number
   
   address: {
     CEP: string

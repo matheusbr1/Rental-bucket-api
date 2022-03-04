@@ -4,14 +4,9 @@ import { ICustomerRepository } from "../../repositories/ICustomersRepository";
 interface IRequest {
   // Pessoa Física ou Jurídica
   personType: 'F' | 'J' 
-  
-  // Pessoa Física
+  CPF_CNPJ?: number
+
   name?: string
-  CPF?: number
-  
-  // Pessoa Física
-  corporateName?: string
-  CNPJ?: number
   
   address: {
     CEP: string
@@ -36,17 +31,17 @@ class CreateCustomerUseCase {
     let customerAlreadyExists
 
     if (data.personType === 'F') {
-      customerAlreadyExists = this.customerRepository.findByCPF(data.CPF)
+      customerAlreadyExists = this.customerRepository.findByCPF(data.CPF_CNPJ)
 
-      const isCPFValid = validator.cpf.isValid(String(data.CPF))
+      const isCPFValid = validator.cpf.isValid(String(data.CPF_CNPJ))
   
       if (!isCPFValid) {
         throw new Error('This CPF is invalid')
       } 
     } else {
-      customerAlreadyExists = this.customerRepository.findByCNPJ(data.CNPJ)
+      customerAlreadyExists = this.customerRepository.findByCNPJ(data.CPF_CNPJ)
 
-      const isCNPJValid = validator.cnpj.isValid(String(data.CNPJ))
+      const isCNPJValid = validator.cnpj.isValid(String(data.CPF_CNPJ))
 
       if (!isCNPJValid) {
         throw new Error("This CNPJ is invalid")

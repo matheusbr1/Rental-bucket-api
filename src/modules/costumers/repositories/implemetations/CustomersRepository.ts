@@ -36,13 +36,13 @@ class CustomersRepository implements ICustomerRepository {
 
   findByCPF(CPF: number): Customer {
     const fisicPersonCustomers = this.customers.filter(customer => customer.personType === 'F')
-    const customer = fisicPersonCustomers.find(customer => customer.CPF === CPF)
+    const customer = fisicPersonCustomers.find(customer => customer.CPF_CNPJ === CPF)
     return customer
   }
 
   findByCNPJ(CNPJ: number): Customer {
     const legalPersonCustomers = this.customers.filter(customer => customer.personType === 'J')
-    const customer = legalPersonCustomers.find(customer => customer.CNPJ === CNPJ)
+    const customer = legalPersonCustomers.find(customer => customer.CPF_CNPJ === CNPJ)
     return customer
   }
 }

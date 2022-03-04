@@ -14,4 +14,6 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerFile))
 
 app.use(routes)
 
-app.listen(3334, () => console.log('Server is running!'))
+const port = 3334
+
+app.listen(port, () => console.log(`Server is running on port ${port}!`))

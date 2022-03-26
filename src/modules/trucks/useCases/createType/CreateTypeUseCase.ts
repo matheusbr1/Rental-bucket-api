@@ -1,3 +1,4 @@
+import { AppError } from "../../../../errors/AppError";
 import { ITypesRepository } from "../../repositories/ITypesRepository";
 
 interface IRequest {
@@ -11,7 +12,7 @@ class CreateTypeUseCase {
     const typeAlreadyExists = this.typesRepository.findByName(name)
 
     if (typeAlreadyExists) {
-      throw new Error("Type already exists")
+      throw new AppError("Type already exists")
     }
 
     this.typesRepository.create({ name })

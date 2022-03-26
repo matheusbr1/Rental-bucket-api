@@ -1,6 +1,6 @@
 import * as validator from 'cpf-cnpj-validator'
+import { AppError } from '../../../../errors/AppError';
 import { ICustomerRepository } from "../../repositories/ICustomersRepository";
-
 interface IRequest {
   // Pessoa Física ou Jurídica
   personType: 'F' | 'J' 
@@ -36,7 +36,7 @@ class CreateCustomerUseCase {
       const isCPFValid = validator.cpf.isValid(String(data.CPF_CNPJ))
   
       if (!isCPFValid) {
-        throw new Error('This CPF is invalid')
+        throw new AppError('This CPF is invalid')
       } 
     } else {
       customerAlreadyExists = this.customerRepository.findByCNPJ(data.CPF_CNPJ)
@@ -44,12 +44,12 @@ class CreateCustomerUseCase {
       const isCNPJValid = validator.cnpj.isValid(String(data.CPF_CNPJ))
 
       if (!isCNPJValid) {
-        throw new Error("This CNPJ is invalid")
+        throw new AppError("This CNPJ is invalid")
       }
     }
 
     if (customerAlreadyExists) {
-      throw new Error("Customer already exists")
+      throw new AppError("Customer already exists")
     }
 
     this.customerRepository.create(data)

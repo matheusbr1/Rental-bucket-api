@@ -1,3 +1,4 @@
+import { AppError } from "../../../../errors/AppError"
 import { ITrucksRepository } from "../../repositories/ITrucksRespository"
 
 interface IRequest {
@@ -19,7 +20,7 @@ class CreateTruckUseCase {
     const truckAlreadyExists = this.trucksRepository.findByRenavam(data.renavam)
 
     if (truckAlreadyExists) {
-      throw new Error("Truck already exists")
+      throw new AppError("Truck already exists")
     }
 
     this.trucksRepository.create(data)

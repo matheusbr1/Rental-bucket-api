@@ -1,5 +1,6 @@
 import { IDriversRepository } from "../../repositories/IDriversRepository"
 import { cpf } from 'cpf-cnpj-validator'
+import { AppError } from "../../../../errors/AppError"
 
 interface IRequest {
   name: string
@@ -30,13 +31,13 @@ class CreateDriverUseCase {
     const driverAlredyExists = this.driversRepository.findByCPF(data.CPF)
 
     if (driverAlredyExists) {
-      throw new Error('This driver already exists')
+      throw new AppError('This driver already exists')
     }
   
     const isCPFValid = cpf.isValid(String(data.CPF))
   
     if (!isCPFValid) {
-      throw new Error('This CPF is invalid')
+      throw new AppError('This CPF is invalid')
     } 
 
     this.driversRepository.create(data)

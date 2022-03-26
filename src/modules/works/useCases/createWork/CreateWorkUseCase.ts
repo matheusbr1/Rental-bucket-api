@@ -1,4 +1,5 @@
 import { cpf } from 'cpf-cnpj-validator'
+import { AppError } from '../../../../errors/AppError'
 import { IWorksRepository } from '../../repositories/IWorksRepository'
 
 interface IRequest {
@@ -17,7 +18,7 @@ class CreateWorkUseCase {
     const isDriverCPFValid = cpf.isValid(String(data.driver_CPF))
   
     if (!isDriverCPFValid) {
-      throw new Error('The driver CPF is invalid')
+      throw new AppError('The driver CPF is invalid')
     } 
 
     this.worksRepository.create(data)

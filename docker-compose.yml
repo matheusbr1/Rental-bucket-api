@@ -1,0 +1,17 @@
+# Docker compose
+# Funciona como um orquestrador de containers
+# Definir quais serviços vão rodar, quais as dependências e etc
+
+version: "3.7"
+
+services:
+  app: # nome do serviço
+    build: . # build no serviço declarado no dockerFile
+    container_name: rental_bucket
+    ports:
+      - 3334:3334 # Mapeando portas Máquina -> container
+    volumes:
+      - .:/usr/app # Diretório de trabalho
+
+# Para executa os serviços
+# docker-compose up

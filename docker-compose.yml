@@ -5,6 +5,19 @@
 version: "3.7"
 
 services:
+  database:
+    image: postgres # utilizando a imagem do PG
+    container_name: database
+    restart: always # Política para reiniciar o container
+    ports:
+      - 5432:5432 # Porta padrão do PG
+    environment: # Variáveis disponíveis na imagem do PG
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=rental_bucket
+      - POSTGRES_DB=rental_bucket_database
+    volumes:
+      - pgdata:/data/postgres # Onde ficam as informações do DB
+    
   app: # nome do serviço
     build: . # build no serviço declarado no dockerFile
     container_name: rental_bucket
@@ -12,6 +25,10 @@ services:
       - 3334:3334 # Mapeando portas Máquina -> container
     volumes:
       - .:/usr/app # Diretório de trabalho
+
+volumes: 
+  pgdata: 
+    driver: local
 
 # Para executa os serviços
 # docker-compose up

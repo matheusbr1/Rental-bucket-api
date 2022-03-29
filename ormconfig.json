@@ -1,0 +1,8 @@
+{
+  "type": "postgres",
+  "port": 5432,
+  "host": "localhost",
+  "username": "docker",
+  "password": "rental_bucket",
+  "database": "rental_bucket_database"
+}

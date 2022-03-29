@@ -1,5 +1,6 @@
+import { ICreateTruckDTO } from '../../dtos/ICreateTruckDTO'
 import { Truck } from '../../models/Truck'
-import { ITrucksRepository, ICreateTruckDTO } from '../ITrucksRespository'
+import { ITrucksRepository } from '../ITrucksRespository'
 
 class TrucksRepository implements ITrucksRepository {
   private trucks: Truck[]

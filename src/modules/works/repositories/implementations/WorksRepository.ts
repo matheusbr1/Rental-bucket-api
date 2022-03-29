@@ -1,5 +1,6 @@
+import { ICreateWorkDTO } from '../../dtos/ICreateWorkDTO';
 import { Work } from '../../models/Work'
-import { ICreateWorkDTO, IWorksRepository } from "../IWorksRepository";
+import { IWorksRepository } from "../IWorksRepository";
 
 class WorksRepository implements IWorksRepository {
   private works: Work[]

@@ -1,5 +1,6 @@
+import { ICreateCustomerDTO } from "../../dtos/ICreateCustomerDTO";
 import { Customer } from "../../models/Customer";
-import { ICreateCustomerDTO, ICustomerRepository } from "../ICustomersRepository";
+import { ICustomerRepository } from "../ICustomersRepository";
 
 class CustomersRepository implements ICustomerRepository {
   private customers: Customer[] = []

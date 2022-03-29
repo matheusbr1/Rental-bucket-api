@@ -1,5 +1,6 @@
+import { ICreateDriverDTO } from "../../dtos/ICreateDriverDTO"
 import { Driver } from "../../models/Driver"
-import { IDriversRepository, ICreateDriverDTO } from "../IDriversRepository"
+import { IDriversRepository } from "../IDriversRepository"
 
 class DriversRepository implements IDriversRepository {
   private drivers: Driver[]

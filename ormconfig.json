@@ -4,5 +4,10 @@
   "host": "localhost",
   "username": "docker",
   "password": "rental_bucket",
-  "database": "rental_bucket_database"
+  "database": "rental_bucket_database",
+  "entities": ["./src/modules/**/entities/*.ts"],
+  "migrations": ["./src/database/migrations/*.ts"],
+  "cli": {
+    "migrationsDir": "./src/database/migrations"
+  }
 }

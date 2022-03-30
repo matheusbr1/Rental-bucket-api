@@ -25,6 +25,10 @@ services:
       - 3334:3334 # Mapeando portas Máquina -> container
     volumes:
       - .:/usr/app # Diretório de trabalho
+    links:
+      - database
+    depends_on: 
+      - database
 
 volumes: 
   pgdata: 

@@ -1,5 +1,5 @@
 import { ICreateTypeDTO } from "../../dtos/ICreateTypeDTO";
-import { Type } from "../../models/Type";
+import { Type } from "../../entities/Type";
 import { ITypesRepository } from "../ITypesRepository";
 
 class TypesRepository implements ITypesRepository {

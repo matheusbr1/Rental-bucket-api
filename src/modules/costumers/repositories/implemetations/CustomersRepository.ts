@@ -1,5 +1,5 @@
 import { ICreateCustomerDTO } from "../../dtos/ICreateCustomerDTO";
-import { Customer } from "../../models/Customer";
+import { Customer } from "../../entities/Customer";
 import { ICustomerRepository } from "../ICustomersRepository";
 
 class CustomersRepository implements ICustomerRepository {

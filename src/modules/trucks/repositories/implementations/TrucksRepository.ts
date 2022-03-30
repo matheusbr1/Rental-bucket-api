@@ -1,5 +1,5 @@
 import { ICreateTruckDTO } from '../../dtos/ICreateTruckDTO'
-import { Truck } from '../../models/Truck'
+import { Truck } from '../../entities/Truck'
 import { ITrucksRepository } from '../ITrucksRespository'
 
 class TrucksRepository implements ITrucksRepository {

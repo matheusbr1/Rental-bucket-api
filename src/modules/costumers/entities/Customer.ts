@@ -3,8 +3,8 @@ import { v4 as uuidV4 } from 'uuid'
 class Customer {
   id?: string
   
-  // Pessoa Física ou Jurídica
-  personType: 'F' | 'J' 
+  personType: 'F' | 'J' // Pessoa Física ou Jurídica
+  
   CPF_CNPJ?: number
 
   name?: string
@@ -18,11 +18,13 @@ class Customer {
     city: string
     complement?: string
   }
+
   contact: {
     phone: string
     cellphone: string
     email: string
   }
+
   created_at: Date
 
   constructor() {

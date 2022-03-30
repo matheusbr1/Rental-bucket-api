@@ -1,7 +1,7 @@
 import express from 'express'
+import "./database"
 import 'express-async-errors'
 import cors from 'cors'
-import "./database"
 import { routes } from './routes'
 import swaggerUI from 'swagger-ui-express'
 import swaggerFile from './swagger.json'

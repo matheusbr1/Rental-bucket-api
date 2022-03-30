@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { createCustomerController } from "../modules/costumers/useCases/createCustomer";
-import { listCustomersCotroller } from "../modules/costumers/useCases/listCustomer";
+import { createCustomerController } from "../modules/customers/useCases/createCustomer";
+import { listCustomersCotroller } from "../modules/customers/useCases/listCustomer";
 
 const customersRoutes = Router()
 

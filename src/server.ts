@@ -1,6 +1,7 @@
 import express from 'express'
+import "express-async-errors"
 import "./database"
-import 'express-async-errors'
+import "./shared/container"
 import cors from 'cors'
 import { routes } from './routes'
 import swaggerUI from 'swagger-ui-express'

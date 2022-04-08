@@ -7,14 +7,14 @@ version: "3.7"
 services:
   database:
     image: postgres # utilizando a imagem do PG
-    container_name: database
+    container_name: 'database'
     restart: always # Política para reiniciar o container
     ports:
       - 5432:5432 # Porta padrão do PG
     environment: # Variáveis disponíveis na imagem do PG
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=rental_bucket
-      - POSTGRES_DB=rental_bucket_database
+      - POSTGRES_DB=rental_bucket
     volumes:
       - pgdata:/data/postgres # Onde ficam as informações do DB
     

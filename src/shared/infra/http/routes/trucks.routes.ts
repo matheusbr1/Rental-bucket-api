@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import { createTruckController } from '../modules/trucks/useCases/createTruck'
-import { createTypeController } from '../modules/trucks/useCases/createType'
-import { listTruksController } from '../modules/trucks/useCases/listTruck'
-import { listTypesController } from '../modules/trucks/useCases/listType'
+import { createTruckController } from '../../../../modules/trucks/useCases/createTruck'
+import { createTypeController } from '../../../../modules/trucks/useCases/createType'
+import { listTruksController } from '../../../../modules/trucks/useCases/listTruck'
+import { listTypesController } from '../../../../modules/trucks/useCases/listType'
 
 const trucksRoutes = Router()
 

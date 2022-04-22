@@ -1,4 +1,4 @@
-import { DriversRepository } from "../../repositories/implementations/DriversRepository";
+import { DriversRepository } from "../../infra/typeorm/repositories/DriversRepository";
 import { CreateDriverController } from "./CreateDriverController";
 import { CreateDriverUseCase } from "./CreateDriverUseCase";
 

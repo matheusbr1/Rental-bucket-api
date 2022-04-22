@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { createDriverController } from '../modules/drivers/useCases/createDriver'
-import { listDriversController } from '../modules/drivers/useCases/listDriver'
+import { createDriverController } from '../../../../modules/drivers/useCases/createDriver'
+import { listDriversController } from '../../../../modules/drivers/useCases/listDriver'
 
 const driversRoutes = Router()
 

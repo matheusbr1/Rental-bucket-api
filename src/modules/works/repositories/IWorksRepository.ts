@@ -1,5 +1,5 @@
 import { ICreateWorkDTO } from "../dtos/ICreateWorkDTO";
-import { Work } from "../entities/Work";
+import { Work } from "../infra/entities/Work";
 
 // Meu contrato para o DB, liskov substitution principle 
 interface IWorksRepository {

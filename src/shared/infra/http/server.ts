@@ -1,11 +1,11 @@
 import express from 'express'
 import "express-async-errors"
-import "./database"
-import "./shared/container"
+import "../typeorm" // Database
+import "../../container" // Tysinge
 import cors from 'cors'
 import { routes } from './routes'
 import swaggerUI from 'swagger-ui-express'
-import swaggerFile from './swagger.json'
+import swaggerFile from '../../../swagger.json'
 import { handleError } from './middlewares/handleError'
 
 const app = express()

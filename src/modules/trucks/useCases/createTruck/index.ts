@@ -1,4 +1,4 @@
-import { TrucksRepository } from "../../repositories/implementations/TrucksRepository";
+import { TrucksRepository } from "../../infra/repositories/TrucksRepository";
 import { CreateTruckController } from "./CreateTruckController";
 import { CreateTruckUseCase } from "./CreateTruckUseCase";
 

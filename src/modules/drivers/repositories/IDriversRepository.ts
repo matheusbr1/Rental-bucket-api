@@ -1,5 +1,5 @@
 import { ICreateDriverDTO } from "../dtos/ICreateDriverDTO";
-import { Driver } from "../entities/Driver";
+import { Driver } from "../infra/typeorm/entities/Driver";
 
 // Meu contrato para o DB, liskov substitution principle 
 interface IDriversRepository {

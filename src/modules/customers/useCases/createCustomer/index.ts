@@ -1,4 +1,4 @@
-import { CustomersRepository } from '../../repositories/implemetations/CustomersRepository'
+import { CustomersRepository } from '../../infra/typeorm/repositories/CustomersRepository'
 import { CreateDriverController } from './CreateCustomerController'
 import { CreateCustomerUseCase } from './CreateCustomerUseCase'
 

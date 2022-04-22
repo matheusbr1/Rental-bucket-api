@@ -1,6 +1,6 @@
 import { IDriversRepository } from "../../repositories/IDriversRepository"
 import { cpf } from 'cpf-cnpj-validator'
-import { AppError } from "../../../../errors/AppError"
+import { AppError } from "../../../../shared/errors/AppError"
 
 interface IRequest {
   name: string

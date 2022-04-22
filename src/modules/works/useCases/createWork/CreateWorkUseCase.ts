@@ -1,5 +1,5 @@
 import { cpf } from 'cpf-cnpj-validator'
-import { AppError } from '../../../../errors/AppError'
+import { AppError } from '../../../../shared/errors/AppError'
 import { IWorksRepository } from '../../repositories/IWorksRepository'
 
 interface IRequest {

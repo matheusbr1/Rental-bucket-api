@@ -1,5 +1,5 @@
 import * as validator from 'cpf-cnpj-validator'
-import { AppError } from '../../../../errors/AppError';
+import { AppError } from '../../../../shared/errors/AppError';
 import { ICustomerRepository } from "../../repositories/ICustomersRepository";
 interface IRequest {
   // Pessoa Física ou Jurídica

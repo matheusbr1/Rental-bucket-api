@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { createWorkController } from '../modules/works/useCases/createWork'
-import { listWorkController } from '../modules/works/useCases/listWork'
+import { createWorkController } from '../../../../modules/works/useCases/createWork'
+import { listWorkController } from '../../../../modules/works/useCases/listWork'
 
 const workRoutes = Router()
 

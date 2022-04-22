@@ -1,5 +1,5 @@
 import { ICreateCustomerDTO } from "../dtos/ICreateCustomerDTO";
-import { Customer } from "../entities/Customer";
+import { Customer } from "../infra/typeorm/entities/Customer";
 
 interface ICustomerRepository {
   create(data: ICreateCustomerDTO): void

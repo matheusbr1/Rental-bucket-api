@@ -1,4 +1,4 @@
-import { WorksRepository } from "../../repositories/implementations/WorksRepository";
+import { WorksRepository } from "../../infra/repositories/WorksRepository";
 import { ListWorkController } from "./listWorkController";
 import { ListWorkUseCase } from "./listWorkUseCase";
 

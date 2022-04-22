@@ -1,4 +1,4 @@
-import { CustomersRepository } from "../../repositories/implemetations/CustomersRepository";
+import { CustomersRepository } from "../../infra/typeorm/repositories/CustomersRepository";
 import { ListCustomersCotroller } from "./ListCustomersController";
 import { ListCustomersUseCase } from "./ListCustomersUseCase";
 

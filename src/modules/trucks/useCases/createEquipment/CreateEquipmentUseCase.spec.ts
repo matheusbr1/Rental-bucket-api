@@ -14,7 +14,8 @@ describe('Create truck type equipment', () => {
   it('should be able to create a equipment', async () => {
     const equipment = await createEquipmentUseCase.execute({
       name: 'equipment name',
-      description: 'equipment description'
+      description: 'equipment description',
+      capacity: 'equipment capacity'
     })
 
     expect(equipment).toHaveProperty('id')
@@ -24,12 +25,14 @@ describe('Create truck type equipment', () => {
     expect(async () => {
       await createEquipmentUseCase.execute({
         name: 'equipment name',
-        description: 'equipment description'
+        description: 'equipment description',
+        capacity: 'equipment capacity'
       })
   
       await createEquipmentUseCase.execute({
         name: 'equipment name',
-        description: 'equipment description'
+        description: 'equipment description',
+        capacity: 'equipment capacity'
       })
     }).rejects.toBeInstanceOf(AppError)
   })

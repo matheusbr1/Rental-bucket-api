@@ -11,14 +11,14 @@ class CreateEquipmentUseCase {
     private equipmentsRepository: IEquipmentsRepository
   ) {}
 
-  async execute({ name, description }: ICreateEquipmentDTO): Promise<Equipment> {
+  async execute({ name, description, capacity }: ICreateEquipmentDTO): Promise<Equipment> {
     const equipmentAlreadyExists = await this.equipmentsRepository.findByName(name)
 
     if(equipmentAlreadyExists) {
       throw new AppError('Equipment already exists')
     }
 
-    const equipment = await this.equipmentsRepository.create({ name, description })
+    const equipment = await this.equipmentsRepository.create({ name, description, capacity })
 
     return equipment
   }

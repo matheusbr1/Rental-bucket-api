@@ -12,6 +12,9 @@ class Equipment {
   @Column()
   description: string
 
+  @Column()
+  capacity: string
+
   @CreateDateColumn()
   created_at: Date
 

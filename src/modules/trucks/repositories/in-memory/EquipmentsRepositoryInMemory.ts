@@ -5,12 +5,13 @@ import { IEquipmentsRepository } from "../IEquipmentsRepository";
 class EquipmentsRepositoryInMemory implements IEquipmentsRepository {
   equipments: Equipment[] = []
 
-  async create({ name, description }: ICreateEquipmentDTO): Promise<Equipment> {
+  async create({ name, description, capacity }: ICreateEquipmentDTO): Promise<Equipment> {
     const equipment = new Equipment()
 
     Object.assign(equipment, {
       name, 
-      description
+      description,
+      capacity
     })
 
     this.equipments.push(equipment)

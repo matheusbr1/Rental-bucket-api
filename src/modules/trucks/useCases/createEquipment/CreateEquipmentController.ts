@@ -4,11 +4,11 @@ import { CreateEquipmentUseCase } from "./CreateEquipmentUseCase";
 
 class CreateEquipmentController {
   async handle (request: Request, response: Response): Promise<Response> {
-    const { name, description } = request.body
+    const { name, description, capacity } = request.body
 
     const createEquipmentUseCase = container.resolve(CreateEquipmentUseCase)
 
-    const equipment = await createEquipmentUseCase.execute({ name, description })
+    const equipment = await createEquipmentUseCase.execute({ name, description, capacity })
 
     return response.status(201).json(equipment)
   }

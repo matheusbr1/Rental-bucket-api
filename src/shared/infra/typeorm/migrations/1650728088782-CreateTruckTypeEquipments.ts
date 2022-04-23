@@ -20,6 +20,10 @@ export class CreateTruckTypeEquipments1650728088782 implements MigrationInterfac
                         type: 'varchar'
                     },
                     {
+                        name: 'capacity',
+                        type: 'varchar'
+                    },
+                    {
                         name: 'created_at',
                         type: 'timestamp',
                         default: 'now()'

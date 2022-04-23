@@ -7,10 +7,8 @@ class Truck {
   plate: string
   typeId: number
   renavam: number
-  year: {
-    manufacture: number
-    model: number
-  }
+  manufactureYear: number
+  modelYear: number
   created_at: Date
 
   constructor() {

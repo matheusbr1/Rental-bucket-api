@@ -4,10 +4,26 @@ import { CreateTruckUseCase } from './CreateTruckUseCase'
 class CreateTruckController {
   constructor(private createTruckUseCase: CreateTruckUseCase) {}
 
-  handle(request: Request, response: Response): Response {
-    const { brandId, modelId, typeId, plate, renavam, year } = request.body
+  async handle(request: Request, response: Response): Promise<Response> {
+    const { 
+      brandId, 
+      modelId, 
+      typeId, 
+      plate, 
+      renavam, 
+      manufactureYear,
+      modelYear,
+    } = request.body
 
-    this.createTruckUseCase.execute({ brandId, modelId, typeId, plate, renavam, year })
+    await this.createTruckUseCase.execute({ 
+      brandId, 
+      modelId, 
+      typeId, 
+      plate, 
+      renavam, 
+      manufactureYear,
+      modelYear
+    })
 
     return response.status(201).send()
   }

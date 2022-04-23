@@ -1,6 +1,6 @@
-import { ICreateTypeDTO } from "../../dtos/ICreateTypeDTO";
-import { Type } from "../../infra/entities/Type";
-import { ITypesRepository } from "../../repositories/ITypesRepository";
+import { ICreateTypeDTO } from "../../../dtos/ICreateTypeDTO"
+import { ITypesRepository } from "../../../repositories/ITypesRepository"
+import { Type } from "../entities/Type"
 
 class TypesRepository implements ITypesRepository {
   private types: Type[]

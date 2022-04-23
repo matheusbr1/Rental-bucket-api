@@ -39,6 +39,7 @@
 **RN**
 * Não deve ser possível alterar a placa e o renavam de um caminhão
 * Não deve ser possível deletar um caminhão com um serviço em aberto
+* Não deve ser possível cadastrar um caminhão de um tipo inexistente
 
 # Tipos de Caminhões
 
@@ -46,12 +47,17 @@
 * Deve ser possível cadastrar um tipo de caminhão
 * Deve ser possível listar todos os tipos de caminhão
 
+**RN**
+* Não deve ser possível criar um tipo de caminhão com um id de tipo de equipamento inexistente
+
 # Tipos de Equipamentos
 
 **RF**
 * Deve ser possível cadastrar um equipamento para o tipo de caminhão
 * Deve ser possível listar todos os equipamentos para tipo de caminhão
 
+**RN**
+* Não deve ser possível cadastrar um equipamento com o mesmo nome
 
 # Serviços
 

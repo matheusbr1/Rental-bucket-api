@@ -1,4 +1,4 @@
-import { TypesRepository } from "../../infra/repositories/TypesRepository";
+import { TypesRepository } from "../../infra/typeorm/repositories/TypesRepository";
 import { ListTypesController } from "./ListTypesController";
 import { ListTypesUseCase } from "./ListTypesUseCase";
 

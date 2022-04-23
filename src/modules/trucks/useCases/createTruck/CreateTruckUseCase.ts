@@ -1,22 +1,10 @@
 import { AppError } from "../../../../shared/errors/AppError"
+import { ICreateTruckDTO } from "../../dtos/ICreateTruckDTO"
 import { ITrucksRepository } from "../../repositories/ITrucksRespository"
-
-interface IRequest {
-  brandId: number // id of brand from FIPE api
-  modelId: number // id of model from FIPE api
-  plate: string
-  typeId: number // id of truck type
-  renavam: number
-  year: {
-    manufacture: number
-    model: number
-  }
-}
-
 class CreateTruckUseCase {
   constructor(private trucksRepository: ITrucksRepository) {}
 
-  execute(data: IRequest) {
+  async execute(data: ICreateTruckDTO): Promise<void> {
     const truckAlreadyExists = this.trucksRepository.findByRenavam(data.renavam)
 
     if (truckAlreadyExists) {

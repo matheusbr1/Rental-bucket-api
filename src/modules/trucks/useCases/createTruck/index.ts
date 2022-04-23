@@ -1,4 +1,5 @@
-import { TrucksRepository } from "../../infra/repositories/TrucksRepository";
+
+import { TrucksRepository } from "../../infra/typeorm/repositories/TrucksRepository";
 import { CreateTruckController } from "./CreateTruckController";
 import { CreateTruckUseCase } from "./CreateTruckUseCase";
 

@@ -1,9 +1,9 @@
 import { ICreateTruckDTO } from "../dtos/ICreateTruckDTO";
-import { Truck } from "../infra/entities/Truck";
+import { Truck } from "../infra/typeorm/entities/Truck";
 interface ITrucksRepository {
-  create(data: ICreateTruckDTO): void
-  findByRenavam(renavam: number): Truck
-  list(): Truck[]
+  create(data: ICreateTruckDTO): Promise<void>
+  findByRenavam(renavam: number): Promise<Truck>
+  list(): Promise<Truck[]>
 }
 
 export { ITrucksRepository }

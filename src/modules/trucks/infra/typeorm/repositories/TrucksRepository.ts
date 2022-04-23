@@ -1,6 +1,6 @@
-import { ICreateTruckDTO } from '../../dtos/ICreateTruckDTO'
-import { Truck } from '../../infra/entities/Truck'
-import { ITrucksRepository } from '../../repositories/ITrucksRespository'
+import { ICreateTruckDTO } from "../../../dtos/ICreateTruckDTO"
+import { ITrucksRepository } from "../../../repositories/ITrucksRespository"
+import { Truck } from "../entities/Truck"
 
 class TrucksRepository implements ITrucksRepository {
   private trucks: Truck[]
@@ -19,7 +19,7 @@ class TrucksRepository implements ITrucksRepository {
     return TrucksRepository.INSTANCE
   }
 
-  create(data: ICreateTruckDTO): void {
+  async create(data: ICreateTruckDTO): Promise<void> {
     const truck = new Truck()
 
     Object.assign(truck, {
@@ -30,13 +30,13 @@ class TrucksRepository implements ITrucksRepository {
     this.trucks.push(truck)
   }
 
-  findByRenavam(renavam: number): Truck {
+  async findByRenavam(renavam: number): Promise<Truck> {
     const truck = this.trucks.find(truck => truck.renavam === renavam)
 
     return truck
   }
 
-  list(): Truck[] {
+  async list(): Promise<Truck[]> {
     return this.trucks
   }
 }

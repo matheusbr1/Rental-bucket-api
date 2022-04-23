@@ -27,6 +27,12 @@ class EquipmentsRepository implements IEquipmentsRepository {
 
     return equipment
   }
+
+  async list(): Promise<Equipment[]> {
+    const allEquipments = await this.repository.find()
+
+    return allEquipments
+  }
 }
 
 export { EquipmentsRepository }

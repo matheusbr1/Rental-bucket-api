@@ -24,6 +24,10 @@ class EquipmentsRepositoryInMemory implements IEquipmentsRepository {
     
     return equipment
   }
+
+  async list(): Promise<Equipment[]> {
+    return this.equipments
+  }
 }
 
 export { EquipmentsRepositoryInMemory }

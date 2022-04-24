@@ -1,10 +1,16 @@
+import { inject, injectable } from "tsyringe"
+import { Truck } from "../../infra/typeorm/entities/Truck"
 import { ITrucksRepository } from "../../repositories/ITrucksRespository"
 
+@injectable()
 class ListTrucksUseCase {
-  constructor(private trucksRepository: ITrucksRepository) {}
+  constructor(
+    @inject('TrucksRepository')
+    private trucksRepository: ITrucksRepository
+  ) {}
 
-  execute() {
-    return this.trucksRepository.list()
+  async execute(): Promise<Truck[]> {
+    return await this.trucksRepository.list()
   }
 }
 

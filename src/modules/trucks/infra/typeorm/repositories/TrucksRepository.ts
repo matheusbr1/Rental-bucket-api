@@ -1,43 +1,33 @@
+import { getRepository, Repository } from "typeorm"
 import { ICreateTruckDTO } from "../../../dtos/ICreateTruckDTO"
 import { ITrucksRepository } from "../../../repositories/ITrucksRespository"
 import { Truck } from "../entities/Truck"
 
 class TrucksRepository implements ITrucksRepository {
-  private trucks: Truck[]
+  repository: Repository<Truck>
 
-  private static INSTANCE: TrucksRepository
-
-  private constructor() {
-    this.trucks = []
+  constructor() {
+    this.repository = getRepository(Truck)
   }
 
-  public static getInstance(): TrucksRepository {
-    if (!TrucksRepository.INSTANCE) {
-      TrucksRepository.INSTANCE = new TrucksRepository()
-    }
+  async create(data: ICreateTruckDTO): Promise<Truck> {
+    const truck = this.repository.create(data)
 
-    return TrucksRepository.INSTANCE
-  }
-
-  async create(data: ICreateTruckDTO): Promise<void> {
-    const truck = new Truck()
-
-    Object.assign(truck, {
-      ...data,
-      created_at: new Date()
-    })
-
-    this.trucks.push(truck)
-  }
-
-  async findByRenavam(renavam: number): Promise<Truck> {
-    const truck = this.trucks.find(truck => truck.renavam === renavam)
+    await this.repository.save(truck)
 
     return truck
   }
 
+  async findByRenavam(renavam: number): Promise<Truck> {
+    return await this.repository.findOne({ renavam })
+  }
+
+  async findByPlate(plate: string): Promise<Truck> {
+    return await this.repository.findOne({ plate })
+  }
+
   async list(): Promise<Truck[]> {
-    return this.trucks
+    return await this.repository.find()
   }
 }
 

@@ -1,10 +1,10 @@
 
 export interface ICreateTruckDTO {
-  brandId: number // id of brand from FIPE api
-  modelId: number // id of model from FIPE api
+  brand_id: string // id of brand from FIPE api
+  model_id: string // id of model from FIPE api
   plate: string
-  typeId: number
+  truck_type_id: string
   renavam: number
-  manufactureYear: number
-  modelYear: number
+  manufacture_year: number
+  model_year: number
 }

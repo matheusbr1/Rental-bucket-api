@@ -1,25 +1,24 @@
 import { Router } from 'express'
 import { CreateEquipmentController } from '../../../../modules/trucks/useCases/createEquipment/CreateEquipmentController'
-import { createTruckController } from '../../../../modules/trucks/useCases/createTruck'
+import { CreateTruckController } from '../../../../modules/trucks/useCases/createTruck/CreateTruckController'
 import { CreateTypeController } from '../../../../modules/trucks/useCases/createType/CreateTypeController'
 import { ListEquipmentController } from '../../../../modules/trucks/useCases/listEquipment/ListEquipmentController'
-import { listTruksController } from '../../../../modules/trucks/useCases/listTruck'
+import { ListTrucksController } from '../../../../modules/trucks/useCases/listTruck/ListTrucksController'
 import { ListTypesController } from '../../../../modules/trucks/useCases/listType/ListTypesController'
 
 const trucksRoutes = Router()
 
-const createEquipmentController = new CreateEquipmentController()
-const listEquipmentController = new ListEquipmentController()
+const createTruckController = new CreateTruckController()
+const listTruckController = new ListTrucksController()
+
 const createTypeController = new CreateTypeController()
 const listTypeController = new ListTypesController()
 
-trucksRoutes.post('/', (request, response) => {
-  return createTruckController.handle(request, response)
-})
+const createEquipmentController = new CreateEquipmentController()
+const listEquipmentController = new ListEquipmentController()
 
-trucksRoutes.get('/', (request, response) => {
-  return listTruksController.handle(request, response)
-})
+trucksRoutes.post('/', createTruckController.handle)
+trucksRoutes.get('/', listTruckController.handle)
 
 trucksRoutes.post('/types', createTypeController.handle)
 trucksRoutes.get('/types', listTypeController.handle)

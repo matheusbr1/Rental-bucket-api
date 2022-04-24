@@ -3,7 +3,7 @@ import { Equipment } from "../../infra/typeorm/entities/Equipment";
 import { IEquipmentsRepository } from "../IEquipmentsRepository";
 
 class EquipmentsRepositoryInMemory implements IEquipmentsRepository {
-  equipments: Equipment[] = []
+  private equipments: Equipment[] = []
 
   async create({ 
     name, 

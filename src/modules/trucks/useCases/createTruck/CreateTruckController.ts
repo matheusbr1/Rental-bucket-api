@@ -1,31 +1,32 @@
 import { Request, Response } from "express"
+import { container } from "tsyringe"
 import { CreateTruckUseCase } from './CreateTruckUseCase'
 
 class CreateTruckController {
-  constructor(private createTruckUseCase: CreateTruckUseCase) {}
-
   async handle(request: Request, response: Response): Promise<Response> {
     const { 
-      brandId, 
-      modelId, 
-      typeId, 
+      brand_id, 
+      model_id, 
+      truck_type_id, 
       plate, 
       renavam, 
-      manufactureYear,
-      modelYear,
+      manufacture_year,
+      model_year,
     } = request.body
 
-    await this.createTruckUseCase.execute({ 
-      brandId, 
-      modelId, 
-      typeId, 
+    const createTruckUseCase = container.resolve(CreateTruckUseCase)
+
+    const truck = await createTruckUseCase.execute({ 
+      brand_id, 
+      model_id, 
+      truck_type_id, 
       plate, 
       renavam, 
-      manufactureYear,
-      modelYear
+      manufacture_year,
+      model_year
     })
 
-    return response.status(201).send()
+    return response.status(201).json(truck)
   }
 }
 

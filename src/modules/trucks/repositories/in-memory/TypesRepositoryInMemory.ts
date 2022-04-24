@@ -3,7 +3,7 @@ import { Type } from "../../infra/typeorm/entities/Type";
 import { ITypesRepository } from "../ITypesRepository";
 
 class TypesRepositoryInMemory implements ITypesRepository {
-  types: Type[] = []
+  private types: Type[] = []
 
   async create({ name, description }: ICreateTypeDTO): Promise<Type> {
     const truckType = new Type()

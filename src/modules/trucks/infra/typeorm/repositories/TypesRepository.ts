@@ -33,6 +33,7 @@ class TypesRepository implements ITypesRepository {
     return  await this.repository
     .createQueryBuilder("type")
     .leftJoinAndSelect("type.equipments", "equipments")
+    .leftJoinAndSelect("type.trucks", "trucks")
     .getMany()
   }
 }

@@ -1,6 +1,7 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn } from 'typeorm'
 import { v4 as uuidV4 } from 'uuid'
 import { Equipment } from './Equipment'
+import { Truck } from './Truck'
 
 @Entity('truck_types')
 class Type {
@@ -15,6 +16,9 @@ class Type {
 
   @OneToMany(() => Equipment, (equipment) => equipment.type)
   equipments: Equipment[]
+  
+  @OneToMany(() => Truck, (truck) => truck.type)
+  trucks: Truck[]
   
   @CreateDateColumn()
   created_at: Date

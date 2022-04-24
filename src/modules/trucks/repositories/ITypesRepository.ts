@@ -1,9 +1,9 @@
 import { ICreateTypeDTO } from '../dtos/ICreateTypeDTO'
 import { Type } from '../infra/typeorm/entities/Type'
 interface ITypesRepository {
- create({ name }: ICreateTypeDTO): void
- findByName(name: string): Type
- list(): Type[]
+ create({ name, description }: ICreateTypeDTO): Promise<Type>
+ findByName(name: string): Promise<Type>
+ list(): Promise<Type[]>
 }
 
 export { ITypesRepository }

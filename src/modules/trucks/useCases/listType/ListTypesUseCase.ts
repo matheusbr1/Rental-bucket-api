@@ -1,12 +1,17 @@
-import { TypesRepository } from "../../repositories/implementations/TypesRepository";
-
+import { inject, injectable } from "tsyringe"
+import { Type } from "../../infra/typeorm/entities/Type"
+import { ITypesRepository } from "../../repositories/ITypesRepository"
+@injectable()
 class ListTypesUseCase {
-  constructor(private typesRepository: TypesRepository) {}
+  constructor(
+    @inject('TypesRepository')
+    private typesRepository: ITypesRepository
+  ) {}
 
-  execute() {
-    const types = this.typesRepository.list()
+  async execute(): Promise<Type[]> {
+    const truckTypes = await this.typesRepository.list()
 
-    return types
+    return truckTypes
   }
 }
 

@@ -1,15 +1,16 @@
 import { Request, Response } from 'express'
+import { container } from 'tsyringe';
 import { CreateTypeUseCase } from "./CreateTypeUseCase";
 
 class CreateTypeController {
-  constructor(private createTypeUseCase: CreateTypeUseCase) {}
+  async handle(request: Request, response: Response): Promise<Response> {
+    const { name, description } = request.body
 
-  handle(request: Request, response: Response): Response {
-    const { name } = request.body
+    const createTypeUseCase = container.resolve(CreateTypeUseCase)
 
-    this.createTypeUseCase.execute({ name })
+    const truckType = await createTypeUseCase.execute({ name, description })
 
-    return response.status(201).send()
+    return response.status(201).send(truckType)
   }
 }
 

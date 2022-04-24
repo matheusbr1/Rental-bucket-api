@@ -1,21 +1,26 @@
+import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../shared/errors/AppError";
+import { ICreateTypeDTO } from "../../dtos/ICreateTypeDTO";
+import { Type } from "../../infra/typeorm/entities/Type";
 import { ITypesRepository } from "../../repositories/ITypesRepository";
 
-interface IRequest {
-  name: string
-}
-
+@injectable()
 class CreateTypeUseCase {
-  constructor(private typesRepository: ITypesRepository) {}
+  constructor(
+    @inject('TypesRepository')
+    private typesRepository: ITypesRepository
+  ) {}
 
-  execute({ name }: IRequest) {
-    const typeAlreadyExists = this.typesRepository.findByName(name)
+  async execute({ name, description }: ICreateTypeDTO): Promise<Type> {
+    const typeAlreadyExists = await this.typesRepository.findByName(name)
 
     if (typeAlreadyExists) {
       throw new AppError("Type already exists")
     }
 
-    this.typesRepository.create({ name })
+    const truckType = await this.typesRepository.create({ name, description })
+
+    return truckType
   } 
 }
 

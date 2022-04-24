@@ -1,7 +1,7 @@
-import { TrucksRepository } from "../../repositories/implementations/TrucksRepository";
+import { ITrucksRepository } from "../../repositories/ITrucksRespository"
 
 class ListTrucksUseCase {
-  constructor(private trucksRepository: TrucksRepository) {}
+  constructor(private trucksRepository: ITrucksRepository) {}
 
   execute() {
     return this.trucksRepository.list()

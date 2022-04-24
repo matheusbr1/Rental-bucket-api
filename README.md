@@ -48,7 +48,7 @@
 * Deve ser possível listar todos os tipos de caminhão
 
 **RN**
-* Não deve ser possível criar um tipo de caminhão com um id de tipo de equipamento inexistente
+* Não deve ser possível criar um tipo de caminhão com um nome já existente
 
 # Tipos de Equipamentos
 
@@ -58,6 +58,7 @@
 
 **RN**
 * Não deve ser possível cadastrar um equipamento com o mesmo nome
+* Não deve ser possível criar um tipo de equipamento com um id de tipo de caminhão inexistente
 
 # Serviços
 

@@ -1,43 +1,32 @@
+import { getRepository, Repository } from "typeorm"
 import { ICreateTypeDTO } from "../../../dtos/ICreateTypeDTO"
 import { ITypesRepository } from "../../../repositories/ITypesRepository"
 import { Type } from "../entities/Type"
 
 class TypesRepository implements ITypesRepository {
-  private types: Type[]
+  repository: Repository<Type>
 
-  private static INSTANCE: TypesRepository
-
-  private constructor() {
-    this.types = []
+  constructor() {
+    this.repository = getRepository(Type)
   }
 
-  public static getInstance(): TypesRepository {
-    if (!TypesRepository.INSTANCE) {
-      TypesRepository.INSTANCE = new TypesRepository()
-    }
-
-    return TypesRepository.INSTANCE
-  }
-
-  create({ name }: ICreateTypeDTO): void {
-    const type = new Type()
-
-    Object.assign(type, {
+  async create({ name, description }: ICreateTypeDTO): Promise<Type> {
+    const truckType = this.repository.create({
       name,
-      created_at: new Date()
+      description
     })
 
-    this.types.push(type)
+    await this.repository.save(truckType)
+
+    return truckType
   }
 
-  findByName(name: string): Type {
-    const type = this.types.find(type => type.name === name)
-    
-    return type
+  async findByName(name: string): Promise<Type> {
+    return await this.repository.findOne({ name })
   }
 
-  list(): Type[] {
-    return this.types
+  async list(): Promise<Type[]> {
+    return await this.repository.find()
   }
 }
 

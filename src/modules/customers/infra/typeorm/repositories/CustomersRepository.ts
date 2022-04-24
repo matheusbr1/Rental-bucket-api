@@ -18,8 +18,15 @@ class CustomersRepository implements ICustomerRepository {
     return customer
   }
 
+  async findByCPF_CNPJ(CPF_CNPJ: number): Promise<Customer> {
+    return await this.repository.findOne({ CPF_CNPJ })
+  }
+
   async list(): Promise<Customer[]> {
-    let customers = await this.repository.find()
+    let customers = await this.repository
+    .createQueryBuilder("customers")
+    .leftJoinAndSelect("customers.contacts", "contacts")
+    .getMany()
 
     customers = customers.map((customer) => {
       if (customer.person_type === 'F') {
@@ -37,10 +44,6 @@ class CustomersRepository implements ICustomerRepository {
     })
 
     return customers
-  }
-
-  async findByCPF_CNPJ(CPF_CNPJ: number): Promise<Customer> {
-    return await this.repository.findOne({ CPF_CNPJ })
   }
 }
 

@@ -1,7 +1,9 @@
 import { container } from 'tsyringe'
 import { UserRepository } from '../../modules/accounts/infra/typeorm/repositories/UsersRepository'
 import { IUsersRepository } from '../../modules/accounts/repositories/IUsersRepository'
+import { ContactsRepository } from '../../modules/customers/infra/typeorm/repositories/ContactsRepository'
 import { CustomersRepository } from '../../modules/customers/infra/typeorm/repositories/CustomersRepository'
+import { IContactsRepository } from '../../modules/customers/repositories/IContactsRepository'
 import { ICustomerRepository } from '../../modules/customers/repositories/ICustomersRepository'
 import { DriversRepository } from '../../modules/drivers/infra/typeorm/repositories/DriversRepository'
 import { IDriversRepository } from '../../modules/drivers/repositories/IDriversRepository'
@@ -40,4 +42,9 @@ container.registerSingleton<IDriversRepository>(
 container.registerSingleton<ICustomerRepository>(
   'CustomersRepository',
   CustomersRepository
+)
+
+container.registerSingleton<IContactsRepository>(
+  'ContactsRepository',
+  ContactsRepository
 )

@@ -30,7 +30,7 @@ class TypesRepository implements ITypesRepository {
   }
 
   async list(): Promise<Type[]> {
-    return  await this.repository
+    return await this.repository
     .createQueryBuilder("type")
     .leftJoinAndSelect("type.equipments", "equipments")
     .leftJoinAndSelect("type.trucks", "trucks")

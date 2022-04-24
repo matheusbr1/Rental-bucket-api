@@ -15,6 +15,7 @@ describe('List truck type equipments', () => {
       name: 'Equipment name',
       description: 'Equipment description',
       capacity: 'Equipment capacity',
+      truck_type_id: '123'
     })
 
     const allEquipments = await listEquipmentsUseCase.execute()

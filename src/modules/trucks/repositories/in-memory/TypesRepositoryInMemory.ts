@@ -10,7 +10,7 @@ class TypesRepositoryInMemory implements ITypesRepository {
 
     Object.assign(truckType, {
       name, 
-      description
+      description,
     })
 
     this.types.push(truckType)
@@ -20,6 +20,10 @@ class TypesRepositoryInMemory implements ITypesRepository {
 
   async findByName(name: string): Promise<Type> {
     return this.types.find(type => type.name === name)
+  }
+
+  async findById(id: string): Promise<Type> {
+    return this.types.find(type => type.id === id)
   }
 
   async list(): Promise<Type[]> {

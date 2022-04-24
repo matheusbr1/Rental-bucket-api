@@ -1,6 +1,7 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CreateTruckTypeEquipments1650728088782 implements MigrationInterface {
+export class CreateTruckTypeEquipment1650815074573 implements MigrationInterface {
+
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
@@ -24,9 +25,23 @@ export class CreateTruckTypeEquipments1650728088782 implements MigrationInterfac
                         type: 'varchar'
                     },
                     {
+                        name: 'truck_type_id',
+                        type: 'uuid',
+                    },
+                    {
                         name: 'created_at',
                         type: 'timestamp',
                         default: 'now()'
+                    }
+                ],
+                foreignKeys: [
+                    {
+                        name: 'FKTruckTypesEquipment', // Nome da chave estrangeira
+                        referencedTableName: 'truck_types', // Tabela origem
+                        referencedColumnNames: ['id'], // Nome do campo na tabela origem
+                        columnNames: ['truck_type_id'], // Nome do campo na tabela destino
+                        onDelete: 'SET NULL', // Se a categoria (tabela origem) for removida o campo ficará nulo
+                        onUpdate: 'SET NULL',
                     }
                 ]
             })
@@ -36,4 +51,5 @@ export class CreateTruckTypeEquipments1650728088782 implements MigrationInterfac
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.dropTable('truck_type_equipments')
     }
+
 }

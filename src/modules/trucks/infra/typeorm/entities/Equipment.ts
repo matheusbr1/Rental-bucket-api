@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm'
 import { v4 as uuidv4 } from 'uuid'
+import { Type } from './Type'
 
 @Entity('truck_type_equipments')
 class Equipment {
@@ -14,6 +15,13 @@ class Equipment {
 
   @Column()
   capacity: string
+
+  @ManyToOne(() => Type, (type) => type.equipments)
+  @JoinColumn({ name: "truck_type_id" })
+  type: Type
+ 
+  @Column()
+  truck_type_id: string
 
   @CreateDateColumn()
   created_at: Date

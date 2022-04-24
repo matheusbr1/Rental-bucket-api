@@ -25,8 +25,15 @@ class TypesRepository implements ITypesRepository {
     return await this.repository.findOne({ name })
   }
 
+  async findById(id: string): Promise<Type> {
+    return await this.repository.findOne(id)
+  }
+
   async list(): Promise<Type[]> {
-    return await this.repository.find()
+    return  await this.repository
+    .createQueryBuilder("type")
+    .leftJoinAndSelect("type.equipments", "equipments")
+    .getMany()
   }
 }
 

@@ -10,11 +10,17 @@ class EquipmentsRepository implements IEquipmentsRepository {
     this.repository = getRepository(Equipment)
   }
 
-  async create({ name, description, capacity }: ICreateEquipmentDTO): Promise<Equipment> {
+  async create({ 
+    name, 
+    description, 
+    capacity,
+    truck_type_id
+  }: ICreateEquipmentDTO): Promise<Equipment> {
       const equipment = this.repository.create({
         name, 
         description,
-        capacity
+        capacity,
+        truck_type_id
       })
 
       await this.repository.save(equipment)

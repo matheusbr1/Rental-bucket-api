@@ -1,30 +1,27 @@
+import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
 import { v4 as uuidV4 } from 'uuid'
 
+@Entity('customers')
 class Customer {
+  @PrimaryColumn()
   id?: string
   
-  personType: 'F' | 'J' // Pessoa Física ou Jurídica
+  @Column()
+  person_type: 'F' | 'J' // Pessoa Física ou Jurídica
   
+  @Column()
   CPF_CNPJ?: number
 
+  @Column()
   name?: string
-  
-  address: {
-    CEP: string
-    street: string
-    number: number
-    neighborhood: string
-    state: string
-    city: string
-    complement?: string
-  }
 
-  contact: {
-    phone: string
-    cellphone: string
-    email: string
-  }
+  @Column()
+  company_name?: string
 
+  @Column()
+  fantasy_name?: string
+
+  @CreateDateColumn()
   created_at: Date
 
   constructor() {

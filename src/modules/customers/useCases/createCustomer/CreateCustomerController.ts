@@ -1,17 +1,17 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { CreateDriverUseCase } from "../../../drivers/useCases/createDriver/CreateDriverUseCase";
+import { CreateCustomerUseCase } from "./CreateCustomerUseCase";
 
-class CreateDriverController {
+class CreateCustomerController {
   async handle(request: Request, response: Response): Promise<Response> {
     const data = request.body
 
-    const createDriverUseCase = container.resolve(CreateDriverUseCase)
+    const createCustomerUseCase = container.resolve(CreateCustomerUseCase)
 
-    const driver = await createDriverUseCase.execute(data)
+    const customer = await createCustomerUseCase.execute(data)
 
-    return response.status(201).json(driver)
+    return response.status(201).json(customer)
   }
 }
 
-export { CreateDriverController }
+export { CreateCustomerController }

@@ -1,50 +1,46 @@
+import { getRepository, Repository } from "typeorm"
 import { ICreateCustomerDTO } from "../../../dtos/ICreateCustomerDTO"
 import { ICustomerRepository } from "../../../repositories/ICustomersRepository"
 import { Customer } from "../entities/Customer"
 
 class CustomersRepository implements ICustomerRepository {
-  private customers: Customer[] = []
+  repository: Repository<Customer>
 
-  private static INSTANCE: CustomersRepository
-
-  private constructor () {
-    this.customers = []
-  }
-  
-  // SINGLETON pattern
-  public static getInstance(): CustomersRepository {
-    if (!this.INSTANCE) {
-      this.INSTANCE = new CustomersRepository()
-    }
-
-    return this.INSTANCE
+  constructor() {
+    this.repository = getRepository(Customer)
   }
 
-  create(data: ICreateCustomerDTO): void {
-    const customer = new Customer()
+  async create(data: ICreateCustomerDTO): Promise<Customer> {
+    const customer = this.repository.create(data)
 
-    Object.assign(customer, {
-      ...data,
-      created_at: new Date()
+    await this.repository.save(customer)
+
+    return customer
+  }
+
+  async list(): Promise<Customer[]> {
+    let customers = await this.repository.find()
+
+    customers = customers.map((customer) => {
+      if (customer.person_type === 'F') {
+        const fisicCustomer = customer
+        delete fisicCustomer.company_name
+        delete fisicCustomer.fantasy_name
+        return fisicCustomer
+      }
+
+      if (customer.person_type === 'J') {
+        const juridicCustomer = customer
+        delete juridicCustomer.name
+        return juridicCustomer
+      }
     })
 
-    this.customers.push(customer)
+    return customers
   }
 
-  list(): Customer[] {
-    return this.customers
-  }
-
-  findByCPF(CPF: number): Customer {
-    const fisicPersonCustomers = this.customers.filter(customer => customer.personType === 'F')
-    const customer = fisicPersonCustomers.find(customer => customer.CPF_CNPJ === CPF)
-    return customer
-  }
-
-  findByCNPJ(CNPJ: number): Customer {
-    const legalPersonCustomers = this.customers.filter(customer => customer.personType === 'J')
-    const customer = legalPersonCustomers.find(customer => customer.CPF_CNPJ === CNPJ)
-    return customer
+  async findByCPF_CNPJ(CPF_CNPJ: number): Promise<Customer> {
+    return await this.repository.findOne({ CPF_CNPJ })
   }
 }
 

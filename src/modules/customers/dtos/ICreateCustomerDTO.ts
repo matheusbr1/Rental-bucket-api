@@ -1,23 +1,12 @@
 // Data Transfer Object -> DTO
 export interface ICreateCustomerDTO {
-  // Pessoa Física ou Jurídica
-  personType: 'F' | 'J' 
+  person_type: 'F' | 'J'  // Pessoa Física ou Jurídica
+  
   CPF_CNPJ?: number
   
   name?: string
   
-  address: {
-    CEP: string
-    street: string
-    number: number
-    neighborhood: string
-    state: string
-    city: string
-    complement?: string
-  }
-  contact: {
-    phone: string
-    cellphone: string
-    email: string
-  }
+  company_name?: string
+
+  fantasy_name?: string 
 }

@@ -4,7 +4,7 @@ import { ListDriversUseCase } from "./ListDriversUseCase"
 let driversRepositoryInMemory: DriversRepositoryInMemory
 let listDriversUseCase: ListDriversUseCase
 
-describe('Create Driver', () => {
+describe('List Driver', () => {
   beforeEach(() => {
     driversRepositoryInMemory = new DriversRepositoryInMemory()
     listDriversUseCase = new ListDriversUseCase(driversRepositoryInMemory)

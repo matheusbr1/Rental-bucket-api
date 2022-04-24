@@ -20,7 +20,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "personType": {
+                  "person_type": {
                     "type": "string"
                   },
                   "name": {
@@ -74,7 +74,7 @@
                   }
                 },
                 "example": {
-                  "personType": "F",
+                  "person_type": "F",
                   "name": "Matheus Baron Ribeiro",
                   "CPF": 67593635074,
                   "address": {
@@ -126,7 +126,7 @@
                       "created_at": {
                         "type": "string"
                       },
-                      "personType": {
+                      "person_type": {
                         "type": "string"
                       },
                       "name": {

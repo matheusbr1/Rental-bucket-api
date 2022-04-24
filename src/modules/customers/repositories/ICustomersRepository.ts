@@ -2,10 +2,9 @@ import { ICreateCustomerDTO } from "../dtos/ICreateCustomerDTO";
 import { Customer } from "../infra/typeorm/entities/Customer";
 
 interface ICustomerRepository {
-  create(data: ICreateCustomerDTO): void
-  list(): Customer[]
-  findByCPF(CPF: number): Customer
-  findByCNPJ(CNPJ: number): Customer
+  create(data: ICreateCustomerDTO): Promise<Customer>
+  list(): Promise<Customer[]>
+  findByCPF_CNPJ(CPF_CNPJ: number): Promise<Customer>
 }
 
 export { ICustomerRepository }

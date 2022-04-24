@@ -1,15 +1,13 @@
 import { Router } from "express";
-import { createCustomerController } from "../../../../modules/customers/useCases/createCustomer";
-import { listCustomersCotroller } from "../../../../modules/customers/useCases/listCustomer";
+import { CreateCustomerController } from "../../../../modules/customers/useCases/createCustomer/CreateCustomerController";
+import { ListCustomersCotroller } from "../../../../modules/customers/useCases/listCustomer/ListCustomersController";
 
 const customersRoutes = Router()
 
-customersRoutes.post('/', (request, response) => {
-  return createCustomerController.handle(request, response)
-}) 
+const createCustomerController = new CreateCustomerController()
+const listCustomersController = new ListCustomersCotroller()
 
-customersRoutes.get('/', (request, response) => {
-  return listCustomersCotroller.handle(request, response)
-}) 
+customersRoutes.post('/', createCustomerController.handle) 
+customersRoutes.get('/', listCustomersController.handle) 
 
 export { customersRoutes }

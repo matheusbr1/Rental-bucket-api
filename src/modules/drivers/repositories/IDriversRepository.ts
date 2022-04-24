@@ -3,9 +3,9 @@ import { Driver } from "../infra/typeorm/entities/Driver";
 
 // Meu contrato para o DB, liskov substitution principle 
 interface IDriversRepository {
-  create(data: ICreateDriverDTO): void
-  list(): Driver[]
-  findByCPF(CPF: number): Driver
+  create(data: ICreateDriverDTO): Promise<Driver>
+  list(): Promise<Driver[]>
+  findByCPF(CPF: number): Promise<Driver>
 }
 
 export { IDriversRepository }

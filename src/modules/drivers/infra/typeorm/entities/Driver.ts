@@ -1,26 +1,27 @@
+import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
 import { v4 as uuidV4 } from 'uuid'
 
+@Entity('drivers')
 class Driver {
+  @PrimaryColumn()
   id?: string
+
+  @Column()
   name: string
+  
+  @Column()
   CPF: number
+  
+  @Column()
   RG: string
-  CNH: string
+  
+  @Column()
+  CNH: number
+  
+  @Column()
   birthday: string
-  address: {
-    CEP: string
-    street: string
-    number: number
-    neighborhood: string
-    state: string
-    city: string
-    complement?: string
-  }
-  contact: {
-    phone: string
-    cellphone: string
-    email: string
-  }
+  
+  @CreateDateColumn()
   created_at: Date
 
   constructor() {

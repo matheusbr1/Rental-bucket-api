@@ -1,10 +1,15 @@
-import { DriversRepository } from "../../repositories/implementations/DriversRepository";
-
+import { inject, injectable } from "tsyringe"
+import { Driver } from "../../infra/typeorm/entities/Driver"
+import { IDriversRepository } from "../../repositories/IDriversRepository"
+@injectable()
 class ListDriversUseCase {
-  constructor (private driversRepository: DriversRepository) {}
+  constructor (
+    @inject('DriversRepository')
+    private driversRepository: IDriversRepository
+  ) {}
 
-  execute() {
-    const drivers = this.driversRepository.list()
+  async execute(): Promise<Driver[]> {
+    const drivers = await this.driversRepository.list()
 
     return drivers
   }

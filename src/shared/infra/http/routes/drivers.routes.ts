@@ -1,15 +1,13 @@
 import { Router } from 'express'
-import { createDriverController } from '../../../../modules/drivers/useCases/createDriver'
-import { listDriversController } from '../../../../modules/drivers/useCases/listDriver'
+import { CreateDriverController } from '../../../../modules/customers/useCases/createCustomer/CreateCustomerController'
+import { ListDriversController } from '../../../../modules/drivers/useCases/listDriver/ListDriversController'
 
 const driversRoutes = Router()
 
-driversRoutes.post('/', (request, response) => {
-  createDriverController.handle(request, response)
-})
+const createDriverController = new CreateDriverController()
+const listDriversController = new ListDriversController()
 
-driversRoutes.get('/', (request, response) => {
-  listDriversController.handle(request, response)
-})
+driversRoutes.post('/', createDriverController.handle)
+driversRoutes.get('/', listDriversController.handle)
 
 export { driversRoutes }

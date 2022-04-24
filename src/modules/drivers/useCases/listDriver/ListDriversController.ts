@@ -1,11 +1,12 @@
 import { Request, Response } from "express";
+import { container } from "tsyringe";
 import { ListDriversUseCase } from "./ListDriversUseCase";
 
 class ListDriversController {
-  constructor (private listDriversUseCase: ListDriversUseCase) {}
+  async handle(request: Request, response: Response): Promise<Response> {
+    const listDriverUseCase = container.resolve(ListDriversUseCase)
 
-  handle(request: Request, response: Response): Response {
-    const drivers = this.listDriversUseCase.execute()
+    const drivers = await listDriverUseCase.execute()
 
     return response.json(drivers)
   }

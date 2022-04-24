@@ -1,6 +1,8 @@
 import { container } from 'tsyringe'
 import { UserRepository } from '../../modules/accounts/infra/typeorm/repositories/UsersRepository'
 import { IUsersRepository } from '../../modules/accounts/repositories/IUsersRepository'
+import { DriversRepository } from '../../modules/drivers/infra/typeorm/repositories/DriversRepository'
+import { IDriversRepository } from '../../modules/drivers/repositories/IDriversRepository'
 import { EquipmentsRepository } from '../../modules/trucks/infra/typeorm/repositories/EquipmentsRepository'
 import { TrucksRepository } from '../../modules/trucks/infra/typeorm/repositories/TrucksRepository'
 import { TypesRepository } from '../../modules/trucks/infra/typeorm/repositories/TypesRepository'
@@ -26,4 +28,9 @@ container.registerSingleton<ITypesRepository>(
 container.registerSingleton<ITrucksRepository>(
   'TrucksRepository',
   TrucksRepository
+)
+
+container.registerSingleton<IDriversRepository>(
+  'DriversRepository',
+  DriversRepository
 )

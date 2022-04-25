@@ -30,17 +30,41 @@ class CustomersRepository implements ICustomerRepository {
     .getMany()
 
     customers = customers.map((customer) => {
+      const addresses = customer.adresses.map(address => {
+        const updatedAddress = address
+
+        if (!address.customer_id) {
+          delete updatedAddress.customer_id
+          return updatedAddress
+        }
+        if (!address.driver_id) {
+          delete updatedAddress.driver_id
+          return updatedAddress
+        }
+      })
+
+      const contacts = customer.contacts.map(contact => {
+        const updatedContact = contact
+
+        if (!contact.customer_id)
+          delete updatedContact.customer_id
+        if (!contact.driver_id) 
+          delete updatedContact.driver_id
+
+        return updatedContact
+      })
+
       if (customer.person_type === 'F') {
-        const fisicCustomer = customer
+        let fisicCustomer = customer
         delete fisicCustomer.company_name
         delete fisicCustomer.fantasy_name
-        return fisicCustomer
+        return { ...fisicCustomer, contacts, addresses }
       }
 
       if (customer.person_type === 'J') {
         const juridicCustomer = customer
         delete juridicCustomer.name
-        return juridicCustomer
+        return { ...juridicCustomer, contacts, addresses}
       }
     })
 

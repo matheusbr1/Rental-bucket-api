@@ -27,7 +27,7 @@ class Driver {
   contacts: Contact[]
 
   @OneToOne(() => Address, (address) => address.driver)
-  address: Contact
+  address: Address
   
   @CreateDateColumn()
   created_at: Date

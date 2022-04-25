@@ -1,6 +1,6 @@
-import { ICreateWorkDTO } from '../../dtos/ICreateWorkDTO';
-import { Work } from '../../infra/entities/Work'
-import { IWorksRepository } from '../../repositories/IWorksRepository';
+import { ICreateWorkDTO } from "../../../dtos/ICreateWorkDTO"
+import { IWorksRepository } from "../../../repositories/IWorksRepository"
+import { Work } from "../entities/Work"
 
 class WorksRepository implements IWorksRepository {
   private works: Work[]

@@ -26,8 +26,6 @@ describe('Create Truck', () => {
   })
 
   it('should be able to create a truck', async () => {
-   
-
     const truck = await createTruckUseCase.execute({
       brand_id: '1',
       model_id: '2',

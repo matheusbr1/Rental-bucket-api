@@ -1,4 +1,4 @@
-import { WorksRepository } from "../../infra/repositories/WorksRepository";
+import { WorksRepository } from "../../infra/typeorm/repositories/WorksRepository";
 import { CreateWorkController } from "./CreateWorkController";
 import { CreateWorkUseCase } from "./CreateWorkUseCase";
 

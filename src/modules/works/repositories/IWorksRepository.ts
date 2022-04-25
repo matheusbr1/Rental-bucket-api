@@ -1,7 +1,7 @@
 import { ICreateWorkDTO } from "../dtos/ICreateWorkDTO";
-import { Work } from "../infra/entities/Work";
+import { Work } from "../infra/typeorm/entities/Work";
 
-// Meu contrato para o DB, liskov substitution principle 
+// Meu contrato para o DB, liskov substitution principle
 interface IWorksRepository {
   create(data: ICreateWorkDTO): void
   list(): Work[]

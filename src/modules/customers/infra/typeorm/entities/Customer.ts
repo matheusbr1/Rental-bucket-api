@@ -1,5 +1,6 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn } from 'typeorm'
 import { v4 as uuidV4 } from 'uuid'
+import { Address } from './Address'
 import { Contact } from './Contact'
 
 @Entity('customers')
@@ -18,6 +19,9 @@ class Customer {
 
   @OneToMany(() => Contact, (contact) => contact.customer)
   contacts: Contact[]
+
+  @OneToMany(() => Address, (address) => address.customer)
+  adresses: Contact[]
 
   @Column()
   company_name?: string

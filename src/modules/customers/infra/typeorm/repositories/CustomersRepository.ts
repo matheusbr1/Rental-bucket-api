@@ -26,6 +26,7 @@ class CustomersRepository implements ICustomerRepository {
     let customers = await this.repository
     .createQueryBuilder("customers")
     .leftJoinAndSelect("customers.contacts", "contacts")
+    .leftJoinAndSelect("customers.adresses", "adresses")
     .getMany()
 
     customers = customers.map((customer) => {

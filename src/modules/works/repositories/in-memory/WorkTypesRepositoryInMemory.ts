@@ -1,5 +1,5 @@
 import { WorkType } from "../../infra/typeorm/entities/WorkType";
-import { IWorkTypesRepository } from "../IWorkTypes";
+import { IWorkTypesRepository } from "../IWorkTypesRepository";
 
 class WorkTypesRepositoryInMemory implements IWorkTypesRepository {
   private workTypes: WorkType[] = []
@@ -16,6 +16,10 @@ class WorkTypesRepositoryInMemory implements IWorkTypesRepository {
 
   async findByName(name: string): Promise<WorkType> {
     return this.workTypes.find(workType => workType.name === name)
+  }
+
+  async list(): Promise<WorkType[]> {
+    return this.workTypes
   }
 }
 

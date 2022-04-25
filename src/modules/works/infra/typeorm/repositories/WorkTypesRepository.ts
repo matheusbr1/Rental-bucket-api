@@ -20,6 +20,11 @@ class WorkTypesRepository implements IWorkTypesRepository {
   async findByName(name: string): Promise<WorkType> {
     return await this.repository.findOne({ name })
   }
+
+  async list(): Promise<WorkType[]> {
+    return await this.repository.find()
+  }
+
 }
 
 export { WorkTypesRepository }

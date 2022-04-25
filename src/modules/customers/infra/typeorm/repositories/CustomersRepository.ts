@@ -30,19 +30,6 @@ class CustomersRepository implements ICustomerRepository {
     .getMany()
 
     customers = customers.map((customer) => {
-      const addresses = customer.adresses.map(address => {
-        const updatedAddress = address
-
-        if (!address.customer_id) {
-          delete updatedAddress.customer_id
-          return updatedAddress
-        }
-        if (!address.driver_id) {
-          delete updatedAddress.driver_id
-          return updatedAddress
-        }
-      })
-
       const contacts = customer.contacts.map(contact => {
         const updatedContact = contact
 
@@ -58,13 +45,13 @@ class CustomersRepository implements ICustomerRepository {
         let fisicCustomer = customer
         delete fisicCustomer.company_name
         delete fisicCustomer.fantasy_name
-        return { ...fisicCustomer, contacts, addresses }
+        return { ...fisicCustomer, contacts }
       }
 
       if (customer.person_type === 'J') {
         const juridicCustomer = customer
         delete juridicCustomer.name
-        return { ...juridicCustomer, contacts, addresses}
+        return { ...juridicCustomer, contacts}
       }
     })
 

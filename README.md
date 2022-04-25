@@ -77,6 +77,7 @@
 
  **RN**
 * Não deve ser possível alterar o cliente do serviço
+* O serviço deve ter duração mínima de 24 horas
 
 # Tipos de Serviços
 

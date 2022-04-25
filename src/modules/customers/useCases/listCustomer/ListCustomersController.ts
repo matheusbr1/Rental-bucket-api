@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { ListCustomersUseCase } from "./ListCustomersUseCase";
+import { instanceToPlain } from "class-transformer";
 
 class ListCustomersCotroller {
   async handle(request: Request, response: Response): Promise<Response> {
@@ -8,7 +9,7 @@ class ListCustomersCotroller {
 
     const customers = await listCustomersUseCase.execute()
 
-    return response.json(customers)
+    return response.json(instanceToPlain(customers))
   }
 }
 

@@ -24,32 +24,6 @@ class DriversRepository implements IDriversRepository {
       .leftJoinAndSelect("drivers.address", "address")
       .getMany()
 
-    drivers = drivers.map((driver) => {
-      let updatedDriver = driver
-
-      const address = driver.address
-
-      if (!address.customer_id)
-        delete address.customer_id
-      if (!address.driver_id)
-        delete address.driver_id
-
-      const contacts = driver.contacts.map(contact => {
-        const updatedContact = contact
-
-        if (!contact.customer_id)
-          delete updatedContact.customer_id
-        if (!contact.driver_id)
-          delete updatedContact.driver_id
-
-        return updatedContact
-      })
-
-      updatedDriver = { ...driver, contacts, address }
-
-      return updatedDriver
-    })
-
     return drivers
   }
 

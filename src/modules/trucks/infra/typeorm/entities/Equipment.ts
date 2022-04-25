@@ -1,6 +1,7 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm'
 import { v4 as uuidv4 } from 'uuid'
 import { Type } from './Type'
+import { Exclude } from 'class-transformer'
 
 @Entity('truck_type_equipments')
 class Equipment {
@@ -21,6 +22,7 @@ class Equipment {
   type: Type
  
   @Column()
+  @Exclude()
   truck_type_id: string
 
   @CreateDateColumn()

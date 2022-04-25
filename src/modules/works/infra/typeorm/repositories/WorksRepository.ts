@@ -1,44 +1,34 @@
+import { getRepository, Repository } from "typeorm"
 import { ICreateWorkDTO } from "../../../dtos/ICreateWorkDTO"
 import { IWorksRepository } from "../../../repositories/IWorksRepository"
 import { Work } from "../entities/Work"
 
 class WorksRepository implements IWorksRepository {
-  private works: Work[]
+  repository: Repository<Work>
 
-  private static INSTANCE: WorksRepository
-
-  private constructor () {
-    this.works = []
+  constructor () {
+    this.repository = getRepository(Work)
   }
 
-  // SINGLETON pattern
-  public static getIntance(): WorksRepository {
-    if(!WorksRepository.INSTANCE) {
-      WorksRepository.INSTANCE = new WorksRepository()
-    }
+  async create(data: ICreateWorkDTO): Promise<Work> {
+    const work = this.repository.create(data)
 
-    return WorksRepository.INSTANCE
+    await this.repository.save(work)
+
+    return work
   }
 
-  create(data: ICreateWorkDTO): void {
-    const work = new Work()
-  
-    Object.assign(work, {
-      ...data,
-      created_at: new Date()
-    })
-  
-    this.works.push(work)
-  }
+  async list(): Promise<Work[]> {
+  const works = await this.repository.createQueryBuilder("works")
+      .leftJoinAndSelect("works.customer", "customer")
+      .leftJoinAndSelect("works.driver", "driver")
+      .leftJoinAndSelect("works.address", "address")
+      .leftJoinAndSelect("works.truck", "truck")
+      .leftJoinAndSelect("works.work_type", "work_type")
+      .leftJoinAndSelect("works.equipment", "equipment")
+      .getMany()
 
-  list(): Work[] {
-    return this.works
-  }
-
-  findByClient(CPF_CNPJ: number): Work | Work[] {
-    const works = this.works.find(work => work.customer_CPF_CNPJ === CPF_CNPJ)
-
-    return works
+  return works
   }
 }
 

@@ -1,10 +1,16 @@
+import { inject, injectable } from "tsyringe";
+import { Work } from "../../infra/typeorm/entities/Work";
 import { IWorksRepository } from "../../repositories/IWorksRepository";
 
+@injectable()
 class ListWorkUseCase {
-  constructor(private worksRepository: IWorksRepository) {}
+  constructor(
+    @inject('WorksRepository')
+    private worksRepository: IWorksRepository
+  ) {}
 
-  execute() {
-    const allWorks = this.worksRepository.list()
+  async execute(): Promise<Work[]> {
+    const allWorks = await this.worksRepository.list()
 
     return allWorks
   }

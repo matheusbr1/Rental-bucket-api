@@ -1,15 +1,16 @@
 import { Request, Response} from 'express'
+import { container } from 'tsyringe';
 import { CreateWorkUseCase } from './CreateWorkUseCase';
 
 class CreateWorkController {
-  constructor (private createWorkUseCase: CreateWorkUseCase) {}
-
-  handle(request: Request, response: Response): Response {
+  async handle(request: Request, response: Response): Promise<Response> {
     const data = request.body
 
-    this.createWorkUseCase.execute(data)
+    const createWorkUseCase = container.resolve(CreateWorkUseCase)
 
-    return response.status(201).send()
+    const work = await createWorkUseCase.execute(data)
+
+    return response.status(201).send(work)
   }
 }
 

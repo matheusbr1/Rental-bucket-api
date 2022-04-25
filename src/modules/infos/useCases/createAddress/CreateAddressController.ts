@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { CreateAddressUseCase } from "./CreateAddressUseCase";
+import { instanceToPlain } from "class-transformer";
 
 class CreateAddressController {
   async handle(request: Request, response: Response): Promise<Response> {
@@ -10,7 +11,7 @@ class CreateAddressController {
 
     const address = await createAddressUseCase.execute(data)    
 
-    return response.status(201).json(address)
+    return response.status(201).json(instanceToPlain(address))
   }
 }
 

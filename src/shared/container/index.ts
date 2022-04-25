@@ -17,6 +17,8 @@ import { ITrucksRepository } from '../../modules/trucks/repositories/ITrucksResp
 import { ITypesRepository } from '../../modules/trucks/repositories/ITypesRepository'
 import { IWorkTypesRepository } from '../../modules/works/repositories/IWorkTypesRepository'
 import { WorkTypesRepository } from '../../modules/works/infra/typeorm/repositories/WorkTypesRepository'
+import { IWorksRepository } from '../../modules/works/repositories/IWorksRepository'
+import { WorksRepository } from '../../modules/works/infra/typeorm/repositories/WorksRepository'
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -61,4 +63,9 @@ container.registerSingleton<IAdressesRepository>(
 container.registerSingleton<IWorkTypesRepository>(
   'WorkTypesRepository',
   WorkTypesRepository
+)
+
+container.registerSingleton<IWorksRepository>(
+  'WorksRepository',
+  WorksRepository
 )

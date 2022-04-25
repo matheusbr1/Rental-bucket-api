@@ -1,5 +1,6 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm'
 import { v4 as uuidV4 } from 'uuid'
+import { Exclude } from 'class-transformer'
 import { Type } from './Type'
 
 @Entity('trucks')
@@ -15,13 +16,14 @@ class Truck {
   
   @Column()
   plate: string
+  
+  @Column()
+  @Exclude()
+  truck_type_id: string
 
   @ManyToOne(() => Type, (type) => type.trucks)
   @JoinColumn({ name: "truck_type_id" })
   type: Type
-  
-  @Column()
-  truck_type_id: string
   
   @Column()
   renavam: number

@@ -1,27 +1,20 @@
-import { cpf } from 'cpf-cnpj-validator'
+import { inject, injectable } from 'tsyringe'
 import { AppError } from '../../../../shared/errors/AppError'
+import { ICreateWorkDTO } from '../../dtos/ICreateWorkDTO'
+import { Work } from '../../infra/typeorm/entities/Work'
 import { IWorksRepository } from '../../repositories/IWorksRepository'
 
-interface IRequest {
-  customer_CPF_CNPJ: number
-  driver_CPF: number
-  truck: string
-  equipment: string
-  quantity: number
-  type: string
-}
-
+@injectable()
 class CreateWorkUseCase {
-  constructor(private worksRepository: IWorksRepository) {}
+  constructor(
+    @inject('WorksRepository')
+    private worksRepository: IWorksRepository
+  ) {}
 
-  execute(data: IRequest) {
-    const isDriverCPFValid = cpf.isValid(String(data.driver_CPF))
-  
-    if (!isDriverCPFValid) {
-      throw new AppError('The driver CPF is invalid')
-    } 
+  async execute(data: ICreateWorkDTO): Promise<Work> {
+    const work = await this.worksRepository.create(data)
 
-    this.worksRepository.create(data)
+    return work
   }
 }
 

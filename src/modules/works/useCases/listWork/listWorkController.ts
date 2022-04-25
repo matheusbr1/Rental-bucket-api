@@ -1,13 +1,15 @@
 import { Request, Response } from 'express'
+import { container } from 'tsyringe';
 import { ListWorkUseCase } from "./listWorkUseCase";
+import { instanceToPlain } from "class-transformer";
 
 class ListWorkController {
-  constructor(private listWorkUseCase: ListWorkUseCase) {}
+  async handle(request: Request, response: Response): Promise<Response> {
+    const listWorksUseCase = container.resolve(ListWorkUseCase)
 
-  handle(request: Request, response: Response): Response {
-    const allWorks = this.listWorkUseCase.execute()
+    const allWorks = await listWorksUseCase.execute()
 
-    return response.send(allWorks)
+    return response.json(instanceToPlain(allWorks))
   }
 }
 

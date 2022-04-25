@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { ListDriversUseCase } from "./ListDriversUseCase";
+import { instanceToPlain } from "class-transformer";
 
 class ListDriversController {
   async handle(request: Request, response: Response): Promise<Response> {
@@ -8,7 +9,7 @@ class ListDriversController {
 
     const drivers = await listDriverUseCase.execute()
 
-    return response.json(drivers)
+    return response.json(instanceToPlain(drivers))
   }
 }
 

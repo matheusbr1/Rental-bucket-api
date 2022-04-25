@@ -1,5 +1,6 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm'
 import { v4 as uuidv4 } from 'uuid'
+import { Exclude } from 'class-transformer'
 import { Customer } from '../../../../customers/infra/typeorm/entities/Customer'
 import { Driver } from '../../../../drivers/infra/typeorm/entities/Driver'
 
@@ -19,6 +20,7 @@ class Contact {
   customer: Customer
   
   @Column()
+  @Exclude()
   customer_id: string
 
   @ManyToOne(() => Driver, (driver) => driver.address)
@@ -26,6 +28,7 @@ class Contact {
   driver: Driver
   
   @Column()
+  @Exclude()
   driver_id: string
 
   @CreateDateColumn()

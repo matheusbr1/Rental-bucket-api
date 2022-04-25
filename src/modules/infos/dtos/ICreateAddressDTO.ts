@@ -1,4 +1,4 @@
-interface ICreateCustomerAddressDTO {
+interface ICreateAddressDTO {
   CEP: string
   street: string
   number: number
@@ -6,7 +6,8 @@ interface ICreateCustomerAddressDTO {
   state: string
   city: string
   complement?: string
-  customer_id: string
+  customer_id?: string
+  driver_id?: string
 }
 
-export { ICreateCustomerAddressDTO }
+export { ICreateAddressDTO }

@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { CreateCustomerContactUseCase } from "./CreateCustomerContactUseCase";
+import { CreateContactUseCase } from "./CreateContactUseCase";
 
-class CreateCustomerContactController {
+class CreateContactController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { contact, contact_type, customer_id } = request.body
 
-    const createCustomerContactUseCase = container.resolve(CreateCustomerContactUseCase)
+    const createContactUseCase = container.resolve(CreateContactUseCase)
 
-    const newContact = await createCustomerContactUseCase.execute({ 
+    const newContact = await createContactUseCase.execute({ 
       contact, 
       contact_type,
       customer_id
@@ -18,4 +18,4 @@ class CreateCustomerContactController {
   }
 }
 
-export { CreateCustomerContactController }
+export { CreateContactController }

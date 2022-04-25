@@ -1,8 +1,8 @@
-import { ICreateCustomerContactDTO } from "../dtos/ICreateCustomerContactDTO";
+import { ICreateContactDTO } from "../dtos/ICreateContactDTO";
 import { Contact } from "../infra/typeorm/entities/Contact";
 
 interface IContactsRepository {
-  create({ contact, contact_type, customer_id }: ICreateCustomerContactDTO): Promise<Contact>
+  create(data: ICreateContactDTO): Promise<Contact>
   findContact(contactInfo: string): Promise<Contact>
   list(): Promise<Contact[]>
 }

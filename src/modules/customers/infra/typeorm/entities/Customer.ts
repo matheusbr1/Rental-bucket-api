@@ -1,7 +1,7 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn } from 'typeorm'
 import { v4 as uuidV4 } from 'uuid'
-import { Address } from './Address'
-import { Contact } from './Contact'
+import { Address } from '../../../../infos/infra/typeorm/entities/Address'
+import { Contact } from '../../../../infos/infra/typeorm/entities/Contact'
 
 @Entity('customers')
 class Customer {

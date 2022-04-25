@@ -1,17 +1,17 @@
 import { AdressesRepositoryInMemory } from "../../repositories/in-memory/AdressesRepositoryInMemory"
-import { CreateCustomerAddressUseCase } from "./CreateCustomerAddressUseCase"
+import { CreateAddressUseCase } from "./CreateAddressUseCase"
 
 let adressesRepositoryInMemory: AdressesRepositoryInMemory
-let createCustomerAddressUseCase: CreateCustomerAddressUseCase
+let createAddressUseCase: CreateAddressUseCase
 
-describe('Create Customer Address', () => {
+describe('Create Address', () => {
   beforeEach(() => {
     adressesRepositoryInMemory = new AdressesRepositoryInMemory()
-    createCustomerAddressUseCase = new CreateCustomerAddressUseCase(adressesRepositoryInMemory)
+    createAddressUseCase = new CreateAddressUseCase(adressesRepositoryInMemory)
   })
 
-  it('should be able to create a customer address', async () => {
-    const address = await createCustomerAddressUseCase.execute({
+  it('should be able to create a address', async () => {
+    const address = await createAddressUseCase.execute({
       CEP: '06065220',
       street: 'Rua santo Roverco',
       number: 22,

@@ -1,17 +1,21 @@
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../shared/errors/AppError";
-import { ICreateCustomerAddressDTO } from "../../dtos/ICreateCustomerAddressDTO";
+import { ICreateAddressDTO } from "../../dtos/ICreateAddressDTO";
 import { Address } from "../../infra/typeorm/entities/Address";
 import { IAdressesRepository } from "../../repositories/IAdressesRepository";
 
 @injectable()
-class CreateCustomerAddressUseCase {
+class CreateAddressUseCase {
   constructor (
     @inject('AdressesRepository')
     private adressesRepository: IAdressesRepository
   ) {}
 
-  async execute(data: ICreateCustomerAddressDTO): Promise<Address> {
+  async execute(data: ICreateAddressDTO): Promise<Address> {
+    if(!data.customer_id && !data.driver_id) {
+      throw new AppError('missing customer_id or driver_id')
+    }
+
     const addressAlreadyExists = await this.adressesRepository.findByCEP(data.CEP)
 
     if (addressAlreadyExists) {
@@ -24,4 +28,4 @@ class CreateCustomerAddressUseCase {
   }
 }
 
-export { CreateCustomerAddressUseCase }
+export { CreateAddressUseCase }

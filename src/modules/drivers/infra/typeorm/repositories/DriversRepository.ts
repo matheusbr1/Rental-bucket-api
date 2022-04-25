@@ -19,7 +19,10 @@ class DriversRepository implements IDriversRepository {
   }
 
   async list(): Promise<Driver[]> {
-    return await this.repository.find()
+    return await this.repository.createQueryBuilder("drivers")
+    .leftJoinAndSelect("drivers.contacts", "contacts")
+    .leftJoinAndSelect("drivers.address", "address")
+    .getMany()
   }
 
   async findByCPF(CPF: number): Promise<Driver> {

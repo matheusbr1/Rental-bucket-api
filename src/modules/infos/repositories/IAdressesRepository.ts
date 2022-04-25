@@ -1,8 +1,8 @@
-import { ICreateCustomerAddressDTO } from "../dtos/ICreateCustomerAddressDTO"
+import { ICreateAddressDTO } from "../dtos/ICreateAddressDTO"
 import { Address } from "../infra/typeorm/entities/Address"
 
 interface IAdressesRepository {
-  create(data: ICreateCustomerAddressDTO): Promise<Address>
+  create(data: ICreateAddressDTO): Promise<Address>
   findByCEP(CEP: string): Promise<Address>
 }
 

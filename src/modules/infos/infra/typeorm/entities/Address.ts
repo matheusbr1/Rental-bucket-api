@@ -1,6 +1,7 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm'
 import { v4 as uuidv4 } from 'uuid'
-import { Customer } from './Customer'
+import { Customer } from '../../../../customers/infra/typeorm/entities/Customer'
+import { Driver } from '../../../../drivers/infra/typeorm/entities/Driver'
 
 @Entity('adresses')
 class Address {
@@ -34,6 +35,13 @@ class Address {
   
   @Column()
   customer_id: string
+
+  @ManyToOne(() => Driver, (driver) => driver.address)
+  @JoinColumn({ name: "driver_id" })
+  driver: Driver
+  
+  @Column()
+  driver_id: string
 
   @CreateDateColumn()
   created_at: Date

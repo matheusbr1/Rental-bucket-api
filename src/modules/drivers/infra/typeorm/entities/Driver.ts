@@ -1,5 +1,7 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryColumn } from 'typeorm'
 import { v4 as uuidV4 } from 'uuid'
+import { Address } from '../../../../infos/infra/typeorm/entities/Address'
+import { Contact } from '../../../../infos/infra/typeorm/entities/Contact'
 
 @Entity('drivers')
 class Driver {
@@ -20,6 +22,12 @@ class Driver {
   
   @Column()
   birthday: string
+
+  @OneToMany(() => Contact, (contact) => contact.driver)
+  contacts: Contact[]
+
+  @OneToOne(() => Address, (address) => address.driver)
+  address: Contact
   
   @CreateDateColumn()
   created_at: Date

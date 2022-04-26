@@ -27,7 +27,11 @@ class TrucksRepository implements ITrucksRepository {
   }
 
   async list(): Promise<Truck[]> {
-    return await this.repository.find()
+    // return await this.repository.find()
+
+    return await this.repository.createQueryBuilder("truck")
+    .leftJoinAndSelect("truck.type", "type")
+    .getMany()
   }
 }
 

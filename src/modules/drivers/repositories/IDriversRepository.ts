@@ -5,6 +5,7 @@ import { Driver } from "../infra/typeorm/entities/Driver";
 interface IDriversRepository {
   create(data: ICreateDriverDTO): Promise<Driver>
   list(): Promise<Driver[]>
+  findById(id: string): Promise<Driver>
   findByCPF(CPF: number): Promise<Driver>
 }
 

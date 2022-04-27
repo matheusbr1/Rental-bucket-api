@@ -18,6 +18,22 @@ class DriversRepository implements IDriversRepository {
     return driver
   }
 
+  async findById(id: string): Promise<Driver> {
+    const driver = await this.repository.createQueryBuilder('driver')
+    .leftJoinAndSelect("driver.contacts", "contacts")
+    .leftJoinAndSelect("driver.address", "address")
+    .where({ id })
+    .getOne()
+
+    return driver
+  }
+
+  async findByCPF(CPF: number): Promise<Driver> {
+    const driver = await this.repository.findOne({ CPF })
+    
+    return driver
+  }
+
   async list(): Promise<Driver[]> {
     let drivers = await this.repository.createQueryBuilder("drivers")
       .leftJoinAndSelect("drivers.contacts", "contacts")
@@ -25,12 +41,6 @@ class DriversRepository implements IDriversRepository {
       .getMany()
 
     return drivers
-  }
-
-  async findByCPF(CPF: number): Promise<Driver> {
-    const driver = await this.repository.findOne({ CPF })
-    
-    return driver
   }
 }
 

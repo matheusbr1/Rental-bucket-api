@@ -18,6 +18,10 @@ class WorksRepository implements IWorksRepository {
     return work
   }
 
+  async delete(id: string): Promise<void> {
+    await this.repository.delete(id)
+  }
+
   async findById(id: string): Promise<Work> {
     const work = await this.repository.createQueryBuilder("work")
       .leftJoinAndSelect("work.customer", "customer")

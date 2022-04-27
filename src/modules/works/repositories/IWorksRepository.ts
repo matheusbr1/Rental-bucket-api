@@ -6,6 +6,7 @@ interface IWorksRepository {
   create(data: ICreateWorkDTO): Promise<Work>
   list(): Promise<Work[]>
   findById(id: string): Promise<Work>
+  delete(id: string): Promise<void>
 }
 
 export { IWorksRepository }

@@ -18,8 +18,22 @@ class WorksRepository implements IWorksRepository {
     return work
   }
 
+  async findById(id: string): Promise<Work> {
+    const work = await this.repository.createQueryBuilder("work")
+      .leftJoinAndSelect("work.customer", "customer")
+      .leftJoinAndSelect("work.driver", "driver")
+      .leftJoinAndSelect("work.address", "address")
+      .leftJoinAndSelect("work.truck", "truck")
+      .leftJoinAndSelect("work.work_type", "work_type")
+      .leftJoinAndSelect("work.equipment", "equipment")
+      .where({ id })
+      .getOne()
+
+    return work
+  }
+
   async list(): Promise<Work[]> {
-  const works = await this.repository.createQueryBuilder("works")
+    const works = await this.repository.createQueryBuilder("works")
       .leftJoinAndSelect("works.customer", "customer")
       .leftJoinAndSelect("works.driver", "driver")
       .leftJoinAndSelect("works.address", "address")
@@ -28,7 +42,7 @@ class WorksRepository implements IWorksRepository {
       .leftJoinAndSelect("works.equipment", "equipment")
       .getMany()
 
-  return works
+    return works
   }
 }
 

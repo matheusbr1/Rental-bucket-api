@@ -3,6 +3,7 @@ import { CreateWorkController } from '../../../../modules/works/useCases/createW
 import { CreateWorkTypeController } from '../../../../modules/works/useCases/createWorkType/CreateWorkTypeController'
 import { ListWorkController } from '../../../../modules/works/useCases/listWork/listWorkController'
 import { ListWorkTypesController } from '../../../../modules/works/useCases/listWorkTypes/ListWorkTypesController'
+import { WorkDetailController } from '../../../../modules/works/useCases/workDetail/WorkDetailController'
 
 const workRoutes = Router()
 
@@ -12,8 +13,12 @@ const listWorkTypesController = new ListWorkTypesController()
 const createWorkController = new CreateWorkController()
 const listWorksController = new ListWorkController()
 
+const workDetailController = new WorkDetailController()
+
 workRoutes.post('/', createWorkController.handle)
 workRoutes.get('/', listWorksController.handle)
+
+workRoutes.get('/:id', workDetailController.handle)
 
 workRoutes.get('/types', listWorkTypesController.handle)
 workRoutes.post('/type', createWorkTypeController.handle)

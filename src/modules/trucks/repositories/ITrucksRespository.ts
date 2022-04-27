@@ -4,6 +4,7 @@ interface ITrucksRepository {
   create(data: ICreateTruckDTO): Promise<Truck>
   findByRenavam(renavam: number): Promise<Truck>
   findByPlate(plate: string): Promise<Truck>
+  findById(id: string): Promise<Truck>
   list(): Promise<Truck[]>
 }
 

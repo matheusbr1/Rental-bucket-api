@@ -5,6 +5,7 @@ import { CreateTypeController } from '../../../../modules/trucks/useCases/create
 import { ListEquipmentController } from '../../../../modules/trucks/useCases/listEquipment/ListEquipmentController'
 import { ListTrucksController } from '../../../../modules/trucks/useCases/listTruck/ListTrucksController'
 import { ListTypesController } from '../../../../modules/trucks/useCases/listType/ListTypesController'
+import { TruckDetailController } from '../../../../modules/trucks/useCases/truckDetail/TruckDetailController'
 
 const trucksRoutes = Router()
 
@@ -17,8 +18,12 @@ const listTypeController = new ListTypesController()
 const createEquipmentController = new CreateEquipmentController()
 const listEquipmentController = new ListEquipmentController()
 
+const truckDetailController = new TruckDetailController()
+
 trucksRoutes.post('/', createTruckController.handle)
 trucksRoutes.get('/', listTruckController.handle)
+
+trucksRoutes.get('/:id', truckDetailController.handle)
 
 trucksRoutes.post('/types', createTypeController.handle)
 trucksRoutes.get('/types', listTypeController.handle)

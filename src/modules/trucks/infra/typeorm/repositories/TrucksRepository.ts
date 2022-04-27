@@ -18,6 +18,10 @@ class TrucksRepository implements ITrucksRepository {
     return truck
   }
 
+  async findById(id: string): Promise<Truck> {
+    return await this.repository.findOne(id)
+  }
+
   async findByRenavam(renavam: number): Promise<Truck> {
     return await this.repository.findOne({ renavam })
   }
@@ -27,8 +31,6 @@ class TrucksRepository implements ITrucksRepository {
   }
 
   async list(): Promise<Truck[]> {
-    // return await this.repository.find()
-
     return await this.repository.createQueryBuilder("truck")
     .leftJoinAndSelect("truck.type", "type")
     .getMany()

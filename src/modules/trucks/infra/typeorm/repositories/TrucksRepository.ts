@@ -18,6 +18,10 @@ class TrucksRepository implements ITrucksRepository {
     return truck
   }
 
+  async delete(id: string): Promise<void> {
+    await this.repository.delete(id)
+  }
+
   async findById(id: string): Promise<Truck> {
     return await this.repository.findOne(id)
   }

@@ -5,6 +5,7 @@ interface ITrucksRepository {
   findByRenavam(renavam: number): Promise<Truck>
   findByPlate(plate: string): Promise<Truck>
   findById(id: string): Promise<Truck>
+  delete(id: string): Promise<void>
   list(): Promise<Truck[]>
 }
 

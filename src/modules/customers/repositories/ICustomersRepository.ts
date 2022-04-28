@@ -6,6 +6,7 @@ interface ICustomerRepository {
   list(): Promise<Customer[]>
   findById(id: string): Promise<Customer>
   findByCPF_CNPJ(CPF_CNPJ: number): Promise<Customer>
+  delete(id: string): Promise<void>
 }
 
 export { ICustomerRepository }

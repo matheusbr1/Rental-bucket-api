@@ -18,6 +18,10 @@ class CustomersRepository implements ICustomerRepository {
     return customer
   }
 
+  async delete(id: string): Promise<void> {
+    await this.repository.delete(id)
+  }
+
   async findById(id: string): Promise<Customer> {
     let customer = await this.repository
       .createQueryBuilder("customer")

@@ -18,42 +18,27 @@ class CustomersRepository implements ICustomerRepository {
     return customer
   }
 
+  async findById(id: string): Promise<Customer> {
+    let customer = await this.repository
+      .createQueryBuilder("customer")
+      .leftJoinAndSelect("customer.contacts", "contacts")
+      .leftJoinAndSelect("customer.adresses", "adresses")
+      .where({ id })
+      .getOne()
+
+    return customer
+  }
+
   async findByCPF_CNPJ(CPF_CNPJ: number): Promise<Customer> {
     return await this.repository.findOne({ CPF_CNPJ })
   }
 
   async list(): Promise<Customer[]> {
     let customers = await this.repository
-    .createQueryBuilder("customers")
-    .leftJoinAndSelect("customers.contacts", "contacts")
-    .leftJoinAndSelect("customers.adresses", "adresses")
-    .getMany()
-
-    customers = customers.map((customer) => {
-      const contacts = customer.contacts.map(contact => {
-        const updatedContact = contact
-
-        if (!contact.customer_id)
-          delete updatedContact.customer_id
-        if (!contact.driver_id) 
-          delete updatedContact.driver_id
-
-        return updatedContact
-      })
-
-      if (customer.person_type === 'F') {
-        let fisicCustomer = customer
-        delete fisicCustomer.company_name
-        delete fisicCustomer.fantasy_name
-        return { ...fisicCustomer, contacts }
-      }
-
-      if (customer.person_type === 'J') {
-        const juridicCustomer = customer
-        delete juridicCustomer.name
-        return { ...juridicCustomer, contacts}
-      }
-    })
+      .createQueryBuilder("customers")
+      .leftJoinAndSelect("customers.contacts", "contacts")
+      .leftJoinAndSelect("customers.adresses", "adresses")
+      .getMany()
 
     return customers
   }

@@ -18,6 +18,10 @@ class DriversRepository implements IDriversRepository {
     return driver
   }
 
+  async delete(id: string): Promise<void> {
+    await this.repository.delete(id)
+  }
+
   async findById(id: string): Promise<Driver> {
     const driver = await this.repository.createQueryBuilder('driver')
     .leftJoinAndSelect("driver.contacts", "contacts")

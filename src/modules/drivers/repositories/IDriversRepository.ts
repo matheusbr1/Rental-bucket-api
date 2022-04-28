@@ -7,6 +7,7 @@ interface IDriversRepository {
   list(): Promise<Driver[]>
   findById(id: string): Promise<Driver>
   findByCPF(CPF: number): Promise<Driver>
+  delete(id: string): Promise<void>
 }
 
 export { IDriversRepository }

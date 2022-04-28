@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { CreateDriverController } from '../../../../modules/drivers/useCases/createDriver/CreateDriverController'
+import { DeleteDriverController } from '../../../../modules/drivers/useCases/deleteDriver/DeleteDriverController'
 import { DriverDetailController } from '../../../../modules/drivers/useCases/driverDetail/DriverDetailController'
 import { ListDriversController } from '../../../../modules/drivers/useCases/listDriver/ListDriversController'
 import { CreateAddressController } from '../../../../modules/infos/useCases/createAddress/CreateAddressController'
@@ -13,12 +14,14 @@ const listDriversController = new ListDriversController()
 const createContactController = new CreateContactController()
 const createAdressController = new CreateAddressController()
 
-const driverDetail = new DriverDetailController()
+const driverDetailController = new DriverDetailController()
+const deleteDriverController = new DeleteDriverController()
 
 driversRoutes.post('/', createDriverController.handle)
 driversRoutes.get('/', listDriversController.handle)
 
-driversRoutes.get('/:id', driverDetail.handle)
+driversRoutes.get('/:id', driverDetailController.handle)
+driversRoutes.delete('/:id', deleteDriverController.handle)
 
 driversRoutes.post('/contact', createContactController.handle)
 driversRoutes.post('/address', createAdressController.handle)

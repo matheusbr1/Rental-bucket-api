@@ -6,10 +6,9 @@ import { ListWorkController } from '../../../../modules/works/useCases/listWork/
 import { ListWorkTypesController } from '../../../../modules/works/useCases/listWorkTypes/ListWorkTypesController'
 import { WorkDetailController } from '../../../../modules/works/useCases/workDetail/WorkDetailController'
 
-const workRoutes = Router()
+// Work
 
-const createWorkTypeController = new CreateWorkTypeController()
-const listWorkTypesController = new ListWorkTypesController()
+const workRoutes = Router()
 
 const createWorkController = new CreateWorkController()
 const listWorksController = new ListWorkController()
@@ -19,11 +18,17 @@ const deleteWorkController = new DeleteWorkController()
 
 workRoutes.post('/', createWorkController.handle)
 workRoutes.get('/', listWorksController.handle)
-
 workRoutes.get('/:id', workDetailController.handle)
 workRoutes.delete('/:id', deleteWorkController.handle)
 
-workRoutes.get('/types', listWorkTypesController.handle)
-workRoutes.post('/type', createWorkTypeController.handle)
+// Work Types
 
-export { workRoutes }
+const workTypesRoutes = Router()
+
+const createWorkTypeController = new CreateWorkTypeController()
+const listWorkTypesController = new ListWorkTypesController()
+
+workTypesRoutes.get('/', listWorkTypesController.handle)
+workTypesRoutes.post('/', createWorkTypeController.handle)
+
+export { workRoutes, workTypesRoutes }

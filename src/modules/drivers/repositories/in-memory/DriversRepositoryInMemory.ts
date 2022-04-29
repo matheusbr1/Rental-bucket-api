@@ -22,6 +22,14 @@ class DriversRepositoryInMemory implements IDriversRepository {
   async findByCPF(CPF: number): Promise<Driver> {
     return this.drivers.find(driver => driver.CPF === CPF)
   }
+
+  findById(id: string): Promise<Driver> {
+    throw new Error("Method not implemented.");
+  }
+  
+  delete(id: string): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
 }
 
 export { DriversRepositoryInMemory }

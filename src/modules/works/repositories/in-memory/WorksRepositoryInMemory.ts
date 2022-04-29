@@ -16,6 +16,14 @@ class WorksRepositoryInMemory implements IWorksRepository {
   async list(): Promise<Work[]> {
     return this.works
   }
+
+  findById(id: string): Promise<Work> {
+    throw new Error("Method not implemented.");
+  }
+  
+  delete(id: string): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
 }
 
 export { WorksRepositoryInMemory }

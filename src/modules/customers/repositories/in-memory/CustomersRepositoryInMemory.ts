@@ -22,6 +22,14 @@ class CustomersRepositoryInMemory implements ICustomerRepository {
   async findByCPF_CNPJ(CPF_CNPJ: number): Promise<Customer> {
     return this.customers.find(customer => customer.CPF_CNPJ === CPF_CNPJ)
   }
+
+  findById(id: string): Promise<Customer> {
+    throw new Error("Method not implemented.");
+  }
+  
+  delete(id: string): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
 }
 
 export { CustomersRepositoryInMemory }

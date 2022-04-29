@@ -26,6 +26,13 @@ class TrucksRepositoryInMemory implements ITrucksRepository {
   async list(): Promise<Truck[]> {
     return this.trucks
   }
+
+  findById(id: string): Promise<Truck> {
+    throw new Error("Method not implemented.");
+  }
+  delete(id: string): Promise<void> {
+    throw new Error("Method not implemented.");
+  }
 }
 
 export { TrucksRepositoryInMemory }

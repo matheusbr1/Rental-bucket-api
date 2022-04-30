@@ -12,8 +12,7 @@ class UpdateUserAvatarController {
 
     await updateUserAvatar.execute({ user_id: id, avatar_file })
 
-    // 204 -> no-content
-    return response.status(204).send()
+    return response.json(avatar_file)
   }
 }
 

@@ -3,13 +3,7 @@ import { AppError } from "../../../errors/AppError";
 import { verify } from 'jsonwebtoken'
 import { UserRepository } from "../../../../modules/accounts/infra/typeorm/repositories/UsersRepository";
 
-interface IRequest extends Request {
-  user: {
-    id: string 
-  }
-}
-
-export function ensureAutenticated (request: IRequest, response: Response, next: NextFunction) {
+export function ensureAutenticated (request: Request, response: Response, next: NextFunction) {
   const authHeader = request.headers.authorization
 
   if (!authHeader) {

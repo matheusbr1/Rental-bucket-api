@@ -41,16 +41,16 @@ export class CreateContacts1650841548281 implements MigrationInterface {
                         referencedTableName: 'drivers', // Tabela origem
                         referencedColumnNames: ['id'], // Nome do campo na tabela origem
                         columnNames: ['driver_id'], // Nome do campo na tabela destino
-                        onDelete: 'SET NULL', // Se a categoria (tabela origem) for removida o campo ficará nulo
-                        onUpdate: 'SET NULL',
+                        onDelete: 'CASCADE', // Se a categoria (tabela origem) for removida o campo ficará nulo
+                        onUpdate: 'CASCADE',
                     },
                     {
                         name: 'FKCustomerContact', // Nome da chave estrangeira
                         referencedTableName: 'customers', // Tabela origem
                         referencedColumnNames: ['id'], // Nome do campo na tabela origem
                         columnNames: ['customer_id'], // Nome do campo na tabela destino
-                        onDelete: 'SET NULL', // Se a categoria (tabela origem) for removida o campo ficará nulo
-                        onUpdate: 'SET NULL',
+                        onDelete: 'CASCADE', // Se a categoria (tabela origem) for removida o campo ficará nulo
+                        onUpdate: 'CASCADE',
                     }
                 ]
             })

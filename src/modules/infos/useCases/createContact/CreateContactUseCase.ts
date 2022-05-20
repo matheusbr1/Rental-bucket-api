@@ -21,12 +21,6 @@ class CreateContactUseCase {
       throw new AppError('missing customer_id or driver_id')
     }
 
-    const contactAlreadyExists = await this.contactsRepository.findContact(contact)
-
-    if (contactAlreadyExists) {
-      throw new AppError('Contact already exists')
-    }
-
     const newContact = await this.contactsRepository.create({ 
       contact, 
       contact_type,

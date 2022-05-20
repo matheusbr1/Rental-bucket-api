@@ -15,13 +15,7 @@ class CreateAddressUseCase {
     if(!data.customer_id && !data.driver_id) {
       throw new AppError('missing customer_id or driver_id')
     }
-
-    const addressAlreadyExists = await this.adressesRepository.findByCEP(data.CEP)
-
-    if (addressAlreadyExists) {
-      throw new AppError('Address already exists')
-    }
-
+    
     const address = await this.adressesRepository.create(data)
 
     return address

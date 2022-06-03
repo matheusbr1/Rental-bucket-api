@@ -21,6 +21,14 @@ class AdressesRepository implements IAdressesRepository {
   async findByCEP(CEP: string): Promise<Address> {
     return this.repository.findOne({ CEP })
   }
+
+  async findById(id: string): Promise<Address> {
+    return this.repository.findOne(id)
+  }
+
+  async delete(id: string): Promise<void> {
+    this.repository.delete(id)
+  }
 }
 
 export { AdressesRepository }

@@ -6,6 +6,7 @@ import { ListCustomersCotroller } from "../../../../modules/customers/useCases/l
 import { UpdateCustomerController } from "../../../../modules/customers/useCases/updateCustomer/UpdateCustomerController";
 import { CreateAddressController } from "../../../../modules/infos/useCases/createAddress/CreateAddressController";
 import { CreateContactController } from "../../../../modules/infos/useCases/createContact/CreateContactController";
+import { DeleteAddressController } from "../../../../modules/infos/useCases/deleteAddress/DeleteAddressController";
 
 const customersRoutes = Router()
 
@@ -13,7 +14,9 @@ const createCustomerController = new CreateCustomerController()
 const listCustomersController = new ListCustomersCotroller()
 
 const createContactController = new CreateContactController()
-const createAdressController = new CreateAddressController()
+
+const createAddressController = new CreateAddressController()
+const deleteAddressController = new DeleteAddressController()
 
 const customerDetailController = new CustomerDetailController()
 const deleteCustomerController = new DeleteCustomerController()
@@ -27,6 +30,8 @@ customersRoutes.delete('/:id', deleteCustomerController.handle)
 customersRoutes.put('/:id', updateCustomerController.handle)
 
 customersRoutes.post('/contact', createContactController.handle)
-customersRoutes.post('/address', createAdressController.handle)
+
+customersRoutes.post('/address', createAddressController.handle)
+customersRoutes.delete('/address/:id', deleteAddressController.handle)
 
 export { customersRoutes }

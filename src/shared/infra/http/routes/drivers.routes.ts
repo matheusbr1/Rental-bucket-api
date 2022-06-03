@@ -6,6 +6,7 @@ import { ListDriversController } from '../../../../modules/drivers/useCases/list
 import { CreateAddressController } from '../../../../modules/infos/useCases/createAddress/CreateAddressController'
 import { CreateContactController } from '../../../../modules/infos/useCases/createContact/CreateContactController'
 import { DeleteAddressController } from '../../../../modules/infos/useCases/deleteAddress/DeleteAddressController'
+import { DeleteContactController } from '../../../../modules/infos/useCases/deleteContact/DeleteContactController'
 
 const driversRoutes = Router()
 
@@ -13,6 +14,7 @@ const createDriverController = new CreateDriverController()
 const listDriversController = new ListDriversController()
 
 const createContactController = new CreateContactController()
+const deleteContactController = new DeleteContactController()
 
 const createAdressController = new CreateAddressController()
 const deleteAddressController = new DeleteAddressController()
@@ -27,6 +29,7 @@ driversRoutes.get('/:id', driverDetailController.handle)
 driversRoutes.delete('/:id', deleteDriverController.handle)
 
 driversRoutes.post('/contact', createContactController.handle)
+driversRoutes.delete('/contact/:id', deleteContactController.handle)
 
 driversRoutes.post('/address', createAdressController.handle)
 driversRoutes.delete('/address/:id', deleteAddressController.handle)

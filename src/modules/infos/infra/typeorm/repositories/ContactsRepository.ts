@@ -35,6 +35,14 @@ class ContactsRepository implements IContactsRepository{
   async list(): Promise<Contact[]> {
     return this.repository.find()
   }
+
+  async findById(id: string): Promise<Contact> {
+    return this.repository.findOne(id)
+  }
+
+  async delete(id: string): Promise<void> {
+    this.repository.delete(id)
+  }
 }
 
 export { ContactsRepository }

@@ -5,6 +5,8 @@ interface IContactsRepository {
   create(data: ICreateContactDTO): Promise<Contact>
   findContact(contactInfo: string): Promise<Contact>
   list(): Promise<Contact[]>
+  findById(id: string): Promise<Contact>
+  delete(id: string): Promise<void>
 }
 
 export { IContactsRepository }

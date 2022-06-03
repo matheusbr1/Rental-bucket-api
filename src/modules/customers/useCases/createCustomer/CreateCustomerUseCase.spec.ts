@@ -2,7 +2,6 @@ import { AppError } from "../../../../shared/errors/AppError"
 import { CustomersRepositoryInMemory } from "../../repositories/in-memory/CustomersRepositoryInMemory"
 import { CreateCustomerUseCase } from "./CreateCustomerUseCase"
 
-
 let customersRepositoryInMemory: CustomersRepositoryInMemory
 let createCustomerUseCase: CreateCustomerUseCase
 

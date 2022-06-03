@@ -1,4 +1,5 @@
 interface ICreateAddressDTO {
+  id?: string // If filled, the register will be updated
   CEP: string
   street: string
   number: number

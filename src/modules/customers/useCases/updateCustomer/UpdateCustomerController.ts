@@ -13,7 +13,7 @@ class UpdateCustomerController {
     const updatedCustomer = await updateCustomerUseCase.execute(id, data)
 
     return response.json({
-      message: 'Costumer updated!',
+      message: 'register updated',
       data: updatedCustomer
     })
   } 

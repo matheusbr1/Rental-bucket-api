@@ -10,18 +10,8 @@ class ContactsRepository implements IContactsRepository{
     this.repository = getRepository(Contact)
   }
 
-  async create({ 
-    contact, 
-    contact_type, 
-    customer_id,
-    driver_id
-  }: ICreateContactDTO): Promise<Contact> {
-    const newContact = this.repository.create({ 
-      contact, 
-      contact_type, 
-      customer_id,
-      driver_id
-    })
+  async create(data: ICreateContactDTO): Promise<Contact> {
+    const newContact = this.repository.create(data)
 
     await this.repository.save(newContact)
 

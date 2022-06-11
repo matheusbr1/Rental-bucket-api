@@ -48,14 +48,14 @@ class UpdateCustomerUseCase {
       }
     }
 
-    customer = { 
+    customer = {
       ...customer,
       person_type: data.person_type,
       CPF_CNPJ: data.CPF_CNPJ,
       company_name:  data?.company_name,
       fantasy_name: data?.fantasy_name,
       name: data?.name
-     }
+    }
 
     const updatedCustomer = await this.customerRepository.create(customer)
 

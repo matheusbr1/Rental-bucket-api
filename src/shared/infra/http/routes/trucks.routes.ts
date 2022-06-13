@@ -7,6 +7,8 @@ import { ListEquipmentController } from '../../../../modules/trucks/useCases/lis
 import { ListTrucksController } from '../../../../modules/trucks/useCases/listTruck/ListTrucksController'
 import { ListTypesController } from '../../../../modules/trucks/useCases/listType/ListTypesController'
 import { TruckDetailController } from '../../../../modules/trucks/useCases/truckDetail/TruckDetailController'
+import { UpdateTruckController } from '../../../../modules/trucks/useCases/updateTruck/UpdateTruckController'
+import { UpdateTruckUseCase } from '../../../../modules/trucks/useCases/updateTruck/updateTruckUseCase'
 
 // Trucks
 
@@ -16,10 +18,12 @@ const createTruckController = new CreateTruckController()
 const listTruckController = new ListTrucksController()
 const truckDetailController = new TruckDetailController()
 const deleteTruckController = new DeleteTruckController()
+const updateTruckController = new UpdateTruckController()
 
 trucksRoutes.post('/', createTruckController.handle)
 trucksRoutes.get('/', listTruckController.handle)
 trucksRoutes.get('/:id', truckDetailController.handle)
+trucksRoutes.put('/:id', updateTruckController.handle)
 trucksRoutes.delete('/:id', deleteTruckController.handle)
 
 // Truck Types

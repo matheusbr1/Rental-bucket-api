@@ -3,7 +3,7 @@ import { compare } from 'bcryptjs'
 import { AppError } from "../../../../shared/errors/AppError"
 import { IUsersRepository } from "../../repositories/IUsersRepository"
 import { sign } from 'jsonwebtoken'
-import { IUsersTokensRespository } from "../../repositories/IUsersTokensRepository"
+import { IUsersTokensRepository } from "../../repositories/IUsersTokensRepository"
 import auth from "../../../../config/auth"
 import { IDateProvider } from "../../../../shared/container/providers/DateProvider/IDateProvider"
 
@@ -28,7 +28,7 @@ class AuthenticateUserUseCase {
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
     @inject('UsersTokensRepository')
-    private usersTokensRepository: IUsersTokensRespository,
+    private usersTokensRepository: IUsersTokensRepository,
     @inject('DateProvider')
     private dateProvider: IDateProvider
   ) {}

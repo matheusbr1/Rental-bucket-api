@@ -1,7 +1,8 @@
-import { Request, Response, NextFunction } from "express";
-import { AppError } from "../../../errors/AppError";
+import { Request, Response, NextFunction } from "express"
+import { AppError } from "../../../errors/AppError"
 import { verify } from 'jsonwebtoken'
-import { UserRepository } from "../../../../modules/accounts/infra/typeorm/repositories/UsersRepository";
+import { UserRepository } from "../../../../modules/accounts/infra/typeorm/repositories/UsersRepository"
+import auth from "../../../../config/auth"
 
 export function ensureAutenticated (request: Request, response: Response, next: NextFunction) {
   const authHeader = request.headers.authorization
@@ -13,7 +14,7 @@ export function ensureAutenticated (request: Request, response: Response, next: 
   const [, token] = authHeader.split(' ')
 
   try {
-    const { sub: user_id } = verify(token, '437b930db84b8079c2dd804a71936b5f')
+    const { sub: user_id } = verify(token, auth.secret_token)
 
     const usersRepository = new UserRepository()
 

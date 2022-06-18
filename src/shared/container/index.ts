@@ -1,4 +1,7 @@
 import { container } from 'tsyringe'
+
+import './providers/index'
+
 import { UserRepository } from '../../modules/accounts/infra/typeorm/repositories/UsersRepository'
 import { IUsersRepository } from '../../modules/accounts/repositories/IUsersRepository'
 import { CustomersRepository } from '../../modules/customers/infra/typeorm/repositories/CustomersRepository'
@@ -19,10 +22,8 @@ import { IWorkTypesRepository } from '../../modules/works/repositories/IWorkType
 import { WorkTypesRepository } from '../../modules/works/infra/typeorm/repositories/WorkTypesRepository'
 import { IWorksRepository } from '../../modules/works/repositories/IWorksRepository'
 import { WorksRepository } from '../../modules/works/infra/typeorm/repositories/WorksRepository'
-import { IUsersTokensRespository } from '../../modules/accounts/repositories/IUsersTokensRepository'
+import { IUsersTokensRepository } from '../../modules/accounts/repositories/IUsersTokensRepository'
 import { UsersTokensRepository } from '../../modules/accounts/infra/typeorm/repositories/UsersTokensRepository'
-
-import './providers/index'
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -74,7 +75,7 @@ container.registerSingleton<IWorksRepository>(
   WorksRepository
 )
 
-container.registerSingleton<IUsersTokensRespository>(
+container.registerSingleton<IUsersTokensRepository>(
   'UsersTokensRepository',
   UsersTokensRepository
 )

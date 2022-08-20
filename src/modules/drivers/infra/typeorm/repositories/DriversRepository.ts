@@ -11,7 +11,7 @@ class DriversRepository implements IDriversRepository {
   }
 
   async create(data: ICreateDriverDTO): Promise<Driver> {
-    const driver = await this.repository.create(data)
+    const driver = this.repository.create(data)
 
     await this.repository.save(driver)
 

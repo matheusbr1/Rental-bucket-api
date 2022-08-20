@@ -4,6 +4,7 @@ import { CreateWorkTypeController } from '../../../../modules/works/useCases/cre
 import { DeleteWorkController } from '../../../../modules/works/useCases/deleteWork/DeleteWorkController'
 import { ListWorkController } from '../../../../modules/works/useCases/listWork/listWorkController'
 import { ListWorkTypesController } from '../../../../modules/works/useCases/listWorkTypes/ListWorkTypesController'
+import { UpdateWorkController } from '../../../../modules/works/useCases/updateWork/UpdateWorkController'
 import { WorkDetailController } from '../../../../modules/works/useCases/workDetail/WorkDetailController'
 
 // Work
@@ -15,11 +16,13 @@ const listWorksController = new ListWorkController()
 
 const workDetailController = new WorkDetailController()
 const deleteWorkController = new DeleteWorkController()
+const updateWorkController = new UpdateWorkController()
 
 workRoutes.post('/', createWorkController.handle)
 workRoutes.get('/', listWorksController.handle)
 workRoutes.get('/:id', workDetailController.handle)
 workRoutes.delete('/:id', deleteWorkController.handle)
+workRoutes.put('/:id', updateWorkController.handle)
 
 // Work Types
 

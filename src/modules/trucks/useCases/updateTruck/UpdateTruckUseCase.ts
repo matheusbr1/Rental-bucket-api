@@ -16,16 +16,18 @@ class UpdateTruckUseCase {
       new AppError('Missing truck id')
     }
 
-    const truck = await this.trucksRepository.findById(id)
+    let truck = await this.trucksRepository.findById(id)
 
     if (!truck) {
       new AppError('Truck not found')
     }
 
-    const updatedTruck = await this.trucksRepository.create({
+    truck = {
       ...truck,
       ...data
-    })
+    }
+
+    const updatedTruck = await this.trucksRepository.create(truck)
 
     return updatedTruck
   }

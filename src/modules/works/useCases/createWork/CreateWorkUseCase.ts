@@ -1,5 +1,4 @@
 import { inject, injectable } from 'tsyringe'
-import { AppError } from '../../../../shared/errors/AppError'
 import { ICreateWorkDTO } from '../../dtos/ICreateWorkDTO'
 import { Work } from '../../infra/typeorm/entities/Work'
 import { IWorksRepository } from '../../repositories/IWorksRepository'

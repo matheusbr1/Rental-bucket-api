@@ -23,7 +23,10 @@ class TrucksRepository implements ITrucksRepository {
   }
 
   async findById(id: string): Promise<Truck> {
-    return await this.repository.findOne(id)
+    return await this.repository.createQueryBuilder("truck")
+      .leftJoinAndSelect("truck.type", "type")
+      .where("truck.id = :id", { id })
+      .getOne()
   }
 
   async findByRenavam(renavam: number): Promise<Truck> {

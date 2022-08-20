@@ -1,4 +1,11 @@
-# Clientes
+## Rental Bucket API (in progress 🚧)
+
+Application built for create, edit and list services, clients, trucks ands drives of some rental bucket company.
+
+I'm bulding the frontend that uses this API too:
+<a href='https://github.com/matheusbr1/rental-bucket-api' target='_blank' />Access frontend repo</a>
+
+## Clientes
 
 **RF**
 * Deve ser possível cadastrar um cliente
@@ -14,7 +21,7 @@
 * Não deve ser possível alterar o endereço de um cliente com serviço para aquele endereço em aberto
 * Não deve ser possível cadastrar um endereço com o mesmo CEP para o cliente
 
-# Motoristas
+## Motoristas
 
 **RF**
 * Deve ser possível cadastrar um motorista
@@ -27,7 +34,7 @@
 * Não deve ser possível alterar o CPF do motorista já existente
 * Não deve ser possível deletar um motorista com um serviço em aberto
 
-# Caminhões
+## Caminhões
 
 **RF**
 * Deve ser possível cadastrar um caminhão
@@ -41,7 +48,7 @@
 * Não deve ser possível deletar um caminhão com um serviço em aberto
 * Não deve ser possível cadastrar um caminhão de um tipo inexistente
 
-# Tipos de Caminhões
+## Tipos de Caminhões
 
 **RF**
 * Deve ser possível cadastrar um tipo de caminhão
@@ -50,7 +57,7 @@
 **RN**
 * Não deve ser possível criar um tipo de caminhão com um nome já existente
 
-# Tipos de Equipamentos
+## Tipos de Equipamentos
 
 **RF**
 * Deve ser possível cadastrar um equipamento para o tipo de caminhão
@@ -60,7 +67,7 @@
 * Não deve ser possível cadastrar um equipamento com o mesmo nome
 * Não deve ser possível criar um tipo de equipamento com um id de tipo de caminhão inexistente
 
-# Serviços
+## Serviços
 
 **RF**
 * Deve ser possível criar um serviço
@@ -79,7 +86,7 @@
 * Não deve ser possível alterar o cliente do serviço
 * O serviço deve ter duração mínima de 24 horas
 
-# Tipos de Serviços
+## Tipos de Serviços
 
 **RF**
 * Deve ser possível cadastrar um tipo de serviço

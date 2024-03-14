@@ -3,7 +3,7 @@
 Application built for create, edit and list services, clients, trucks ands drives of some rental bucket company.
 
 I'm bulding the frontend that uses this API too:
-<a href='https://github.com/matheusbr1/rental-bucket-api' target='_blank' />Access frontend repo</a>
+<a href='https://github.com/matheusbr1/rental-bucket' target='_blank' />Access frontend repo</a>
 
 ## Clientes
 

@@ -23,6 +23,6 @@ EXPOSE 3334
 CMD ["npm", "run", "dev"]
 
 # Para criar a imagem com as instruções acima:
-# docker build -t APPNAMEHERE . 
+# docker build -t rental-bucket . 
 # Para rodar após a criação
-# docker run -p 3334:3334 APPNAMEHERE
+# docker run -p 3334:3334 rental-bucket

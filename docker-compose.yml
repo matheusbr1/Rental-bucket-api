@@ -20,7 +20,7 @@ services:
     
   app: # nome do serviço
     build: . # build no serviço declarado no dockerFile
-    container_name: rental_bucket
+    container_name: api
     ports:
       - 3334:3334 # Mapeando portas Máquina -> container
     volumes:
@@ -35,4 +35,5 @@ volumes:
     driver: local
 
 # Para executa os serviços
-# docker-compose up
+# docker-compose -p rental-bucket up 
+# Para rodar as migrations: npm run typeorm migration:run

@@ -21,9 +21,9 @@ async function seed() {
 
     const truckEquipment = new Equipment()
     truckEquipment.truck_type_id = truckType.id
-    truckEquipment.name = 'Caçamba 7m³'
-    truckEquipment.description = 'Caçamba 7m³'
-    truckEquipment.capacity = '7m³'
+    truckEquipment.name = 'Caçamba 4m³'
+    truckEquipment.description = 'Caçamba 4m³'
+    truckEquipment.capacity = '4m³'
 
     console.log('Seed successful');
 

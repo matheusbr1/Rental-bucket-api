@@ -16,7 +16,8 @@ async function seed() {
     await connection.manager.save(workType2);
 
     const truckType = new TruckType();
-    workType2.name = 'Poliguindaste';
+    truckType.name = 'Poliguindaste';
+    truckType.description = 'Poliguindaste';
     await connection.manager.save(truckType);
 
     const truckEquipment = new Equipment()

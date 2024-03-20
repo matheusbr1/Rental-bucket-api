@@ -5,9 +5,9 @@ import { CreateUserController } from '../../../../modules/accounts/useCases/crea
 import { UpdateUserAvatarController } from '../../../../modules/accounts/useCases/updateUserAvatar/UpdateUserAvatarController'
 import { ensureAutenticated } from '../middlewares/ensureAuthenticated'
 
-const usersRoutes  = Router()
+const usersRoutes = Router()
 
-const uploadAvatar = multer(uploadConfig.upload('./tmp/avatar'))
+// const uploadAvatar = multer(uploadConfig.upload('./tmp/avatar'))
 
 const createUserController = new CreateUserController()
 const updateUserAvatarController = new UpdateUserAvatarController()
@@ -15,11 +15,11 @@ const updateUserAvatarController = new UpdateUserAvatarController()
 usersRoutes.post('/', createUserController.handle)
 
 // Utilizado para alterar somente uma informação
-usersRoutes.patch(
-  '/avatar', 
-  ensureAutenticated,
-  uploadAvatar.single('avatar'),
-  updateUserAvatarController.handle
-)
+// usersRoutes.patch(
+//   '/avatar', 
+//   ensureAutenticated,
+//   uploadAvatar.single('avatar'),
+//   updateUserAvatarController.handle
+// )
 
 export { usersRoutes }

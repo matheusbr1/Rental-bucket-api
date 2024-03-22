@@ -12,8 +12,14 @@ createConnection({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
   logging: true,
-  entities: ["./src/modules/**/entities/*.ts"],
-  migrations: ["./src/shared/infra/typeorm/migrations/*.ts"],
+  entities: [
+    "./src/modules/**/entities/*.js",
+    // "./src/modules/**/entities/*.ts"
+  ],
+  migrations: [
+    "./src/shared/infra/typeorm/migrations/*.js",
+    // "./src/shared/infra/typeorm/migrations/*.ts",
+  ],
   cli: {
     migrationsDir: "./src/shared/infra/typeorm/migrations"
   },

@@ -1,17 +1,16 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn } from 'typeorm'
 import { v4 as uuidV4 } from 'uuid'
 import { Address } from '../../../../infos/infra/typeorm/entities/Address'
 import { Contact } from '../../../../infos/infra/typeorm/entities/Contact'
-import { Work } from '../../../../works/infra/typeorm/entities/Work'
 
 @Entity('customers')
 class Customer {
   @PrimaryColumn()
   id?: string
-  
+
   @Column()
   person_type: 'F' | 'J' // Pessoa Física ou Jurídica
-  
+
   @Column()
   CPF_CNPJ?: number
 

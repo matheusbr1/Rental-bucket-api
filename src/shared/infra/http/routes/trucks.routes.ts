@@ -8,7 +8,6 @@ import { ListTrucksController } from '../../../../modules/trucks/useCases/listTr
 import { ListTypesController } from '../../../../modules/trucks/useCases/listType/ListTypesController'
 import { TruckDetailController } from '../../../../modules/trucks/useCases/truckDetail/TruckDetailController'
 import { UpdateTruckController } from '../../../../modules/trucks/useCases/updateTruck/UpdateTruckController'
-import { UpdateTruckUseCase } from '../../../../modules/trucks/useCases/updateTruck/updateTruckUseCase'
 
 // Trucks
 

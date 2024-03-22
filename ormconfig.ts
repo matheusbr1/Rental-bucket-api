@@ -9,7 +9,11 @@ const connectionOptions: ConnectionOptions = {
   database: process.env.DB_DATABASE,
   synchronize: true,
   logging: true,
-  entities: ["src/**/*.entity.ts"],
+  entities: ["./src/modules/**/entities/*.ts"],
+  migrations: ["./src/shared/infra/typeorm/migrations/*.ts"],
+  cli: {
+    migrationsDir: "./src/shared/infra/typeorm/migrations"
+  },
   ssl: {
     rejectUnauthorized: false // You can set this to true in production for secure connections
   }

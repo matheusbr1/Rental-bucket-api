@@ -1,6 +1,6 @@
 import express from 'express'
 import "express-async-errors"
-// import "../typeorm" // Database
+import "../typeorm" // Database
 import "reflect-metadata";
 import "../../container" // Tysinge
 import cors from 'cors'

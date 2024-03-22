@@ -1,3 +1,6 @@
 /node_modules
 /coverage
 /tmp/avatar/*
+.env
+.env.development
+.env.production

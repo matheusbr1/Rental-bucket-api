@@ -21,6 +21,6 @@ app.use(routes)
 
 app.use(handleError)
 
-const port = 3334
+const port = 3333
 
 app.listen(port, () => console.log(`Server is running on port ${port}!`))

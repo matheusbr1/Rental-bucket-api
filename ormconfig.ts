@@ -18,4 +18,4 @@ const connectionOptions: ConnectionOptions = {
   }
 };
 
-export = connectionOptions;
+export default connectionOptions;

@@ -5,16 +5,16 @@ import { IContactsRepository } from "../IContactsRepository";
 class ContactsRepositoryInMemory implements IContactsRepository {
   private contacts: Contact[] = []
 
-  async create({ 
-    contact, 
-    contact_type, 
-    customer_id, 
-    driver_id 
+  async create({
+    contact,
+    contact_type,
+    customer_id,
+    driver_id
   }: ICreateContactDTO): Promise<Contact> {
     const newContact = new Contact()
 
     Object.assign(newContact, {
-      contact, 
+      contact,
       contact_type,
       customer_id,
       driver_id
@@ -31,6 +31,14 @@ class ContactsRepositoryInMemory implements IContactsRepository {
 
   async list(): Promise<Contact[]> {
     return this.contacts
+  }
+
+  findById(id: string): Promise<Contact> {
+    throw new Error("Method not implemented.");
+  }
+
+  delete(id: string): Promise<void> {
+    throw new Error("Method not implemented.");
   }
 }
 

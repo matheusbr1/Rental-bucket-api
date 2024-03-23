@@ -22,7 +22,7 @@ services:
     build: . # build no serviço declarado no dockerFile
     container_name: api
     ports:
-      - 3334:3334 # Mapeando portas Máquina -> container
+      - 3333:3333 # Mapeando portas Máquina -> container
     volumes:
       - .:/usr/app # Diretório de trabalho
     links:

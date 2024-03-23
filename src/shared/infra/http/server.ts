@@ -1,3 +1,6 @@
+import { config } from 'dotenv';
+config(); // Carrega as variáveis de ambiente do arquivo .env
+
 import express from 'express'
 import "express-async-errors"
 import "../typeorm" // Database

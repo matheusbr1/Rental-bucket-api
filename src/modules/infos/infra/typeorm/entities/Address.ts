@@ -8,32 +8,38 @@ import { Driver } from '../../../../drivers/infra/typeorm/entities/Driver'
 class Address {
   @PrimaryColumn()
   id: string
-  
+
   @Column()
   CEP: string
-  
+
   @Column()
   street: string
-  
+
   @Column()
   number: number
-  
+
   @Column()
   neighborhood: string
-  
+
   @Column()
   state: string
-  
+
   @Column()
   city: string
-  
+
   @Column()
   complement?: string
+
+  @Column()
+  lat?: number
+
+  @Column()
+  lng?: number
 
   @ManyToOne(() => Customer, (customer) => customer.adresses, { onDelete: 'CASCADE' })
   @JoinColumn({ name: "customer_id" })
   customer: Customer
-  
+
   @Column()
   @Exclude()
   customer_id: string
@@ -41,7 +47,7 @@ class Address {
   @ManyToOne(() => Driver, (driver) => driver.address, { onDelete: 'CASCADE' })
   @JoinColumn({ name: "driver_id" })
   driver: Driver
-  
+
   @Column()
   @Exclude()
   driver_id: string

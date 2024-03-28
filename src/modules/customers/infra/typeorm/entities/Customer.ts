@@ -21,7 +21,7 @@ class Customer {
   contacts: Contact[]
 
   @OneToMany(() => Address, (address) => address.customer)
-  adresses: Contact[]
+  adresses: Address[]
 
   @Column()
   company_name?: string

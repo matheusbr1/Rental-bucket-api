@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, OneToOne, PrimaryColumn } from 'typeorm'
 import { v4 as uuidV4 } from 'uuid'
 import { Address } from '../../../../infos/infra/typeorm/entities/Address'
 
@@ -11,7 +11,6 @@ class Company {
   name: string
 
   @OneToOne(() => Address)
-  @JoinColumn({ name: 'address_id' })
   adress: Address
 
   @CreateDateColumn()

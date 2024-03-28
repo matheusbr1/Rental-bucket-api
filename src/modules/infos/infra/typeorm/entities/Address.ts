@@ -1,8 +1,9 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryColumn } from 'typeorm'
 import { v4 as uuidv4 } from 'uuid'
 import { Exclude } from 'class-transformer'
 import { Customer } from '../../../../customers/infra/typeorm/entities/Customer'
 import { Driver } from '../../../../drivers/infra/typeorm/entities/Driver'
+import { Company } from '../../../../companies/infra/typeorm/entities/Company'
 
 @Entity('adresses')
 class Address {
@@ -36,6 +37,9 @@ class Address {
   @Column()
   lng?: number
 
+  @CreateDateColumn()
+  created_at: Date
+
   @ManyToOne(() => Customer, (customer) => customer.adresses, { onDelete: 'CASCADE' })
   @JoinColumn({ name: "customer_id" })
   customer: Customer
@@ -52,8 +56,13 @@ class Address {
   @Exclude()
   driver_id: string
 
-  @CreateDateColumn()
-  created_at: Date
+  @OneToOne(() => Company, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: "company_id" })
+  company: Company
+
+  @Column()
+  @Exclude()
+  company_id: string
 
   constructor() {
     if (!this.id) {

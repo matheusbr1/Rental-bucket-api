@@ -11,9 +11,9 @@ const connectionOptions = {
   cli: {
     migrationsDir: "./src/shared/infra/typeorm/migrations"
   },
-  ssl: {
-    rejectUnauthorized: false // You can set this to true in production for secure connections
-  }
+  // ssl: {
+  //   rejectUnauthorized: false // You can set this to true in production for secure connections
+  // }
 };
 
 export default connectionOptions;

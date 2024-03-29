@@ -7,4 +7,5 @@ export interface ICreateTruckDTO {
   renavam: number
   manufacture_year: number
   model_year: number
+  company_id: string
 }

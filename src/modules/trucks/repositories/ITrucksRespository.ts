@@ -7,6 +7,7 @@ interface ITrucksRepository {
   findById(id: string): Promise<Truck>
   delete(id: string): Promise<void>
   list(): Promise<Truck[]>
+  listByCompanyId(company_id: string): Promise<Truck[]>
 }
 
 export { ITrucksRepository }

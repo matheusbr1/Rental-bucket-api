@@ -7,16 +7,19 @@ import { Type } from './Type'
 class Truck {
   @PrimaryColumn()
   id?: string
-  
+
   @Column()
   brand_id: string // id of brand from FIPE api
-  
+
   @Column()
   model_id: string // id of model from FIPE api
-  
+
   @Column()
   plate: string
-  
+
+  @Column()
+  company_id: string
+
   @Column()
   @Exclude()
   truck_type_id: string
@@ -24,16 +27,16 @@ class Truck {
   @ManyToOne(() => Type, (type) => type.trucks)
   @JoinColumn({ name: "truck_type_id" })
   type: Type
-  
+
   @Column()
   renavam: number
-  
+
   @Column()
   manufacture_year: number
-  
+
   @Column()
   model_year: number
-  
+
   @CreateDateColumn()
   created_at: Date
 

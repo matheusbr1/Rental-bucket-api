@@ -1,9 +1,10 @@
-import { TableColumn, MigrationInterface, QueryRunner, TableForeignKey } from "typeorm";
+import { MigrationInterface, QueryRunner, TableColumn, TableForeignKey } from "typeorm";
 
-export class AddCompanyIdOnAdresses1711667030569 implements MigrationInterface {
+export class AddCompanyIdOnDrivers1711737004374 implements MigrationInterface {
+
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.addColumn(
-            "adresses",
+            "drivers",
             new TableColumn({
                 name: 'company_id',
                 type: 'uuid',
@@ -11,9 +12,9 @@ export class AddCompanyIdOnAdresses1711667030569 implements MigrationInterface {
             })
         )
         await queryRunner.createForeignKey(
-            'adresses',
+            'drivers',
             new TableForeignKey({
-                name: 'FKCompanyAddress',
+                name: 'FKCompanyDrivers',
                 referencedTableName: 'companies',
                 referencedColumnNames: ['id'],
                 columnNames: ['company_id'],
@@ -24,7 +25,8 @@ export class AddCompanyIdOnAdresses1711667030569 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropColumn('adresses', 'company_id')
-        await queryRunner.dropForeignKey('adresses', 'FKCompanyAddress')
+        await queryRunner.dropColumn('drivers', 'company_id')
+        await queryRunner.dropForeignKey('drivers', 'FKCompanyDrivers')
     }
+
 }

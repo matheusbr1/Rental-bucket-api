@@ -10,6 +10,11 @@ class CompaniesRepository implements ICompaniesRepository {
     this.repository = getRepository(Company)
   }
 
+  async findById(id: string): Promise<Company> {
+    const company = await this.repository.findOne(id);
+    return company;
+  }
+
   async list(): Promise<Company[]> {
     let companies = await this.repository.createQueryBuilder("companies")
       .leftJoinAndSelect("companies.address", "address")

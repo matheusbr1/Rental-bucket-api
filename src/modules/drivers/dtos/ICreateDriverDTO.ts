@@ -5,4 +5,5 @@ export interface ICreateDriverDTO {
   RG: string
   CNH: number
   birthday: string
+  company_id: string
 }

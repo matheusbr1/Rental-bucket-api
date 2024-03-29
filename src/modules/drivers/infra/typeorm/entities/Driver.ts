@@ -10,25 +10,28 @@ class Driver {
 
   @Column()
   name: string
-  
+
   @Column()
   CPF: number
-  
+
   @Column()
   RG: string
-  
+
   @Column()
   CNH: number
-  
+
   @Column()
   birthday: string
+
+  @Column()
+  company_id: string
 
   @OneToMany(() => Contact, (contact) => contact.driver)
   contacts: Contact[]
 
   @OneToOne(() => Address, (address) => address.driver)
   address: Address
-  
+
   @CreateDateColumn()
   created_at: Date
 

@@ -3,6 +3,7 @@ import path from "path"
 import { driversRoutes } from "./drivers.routes"
 import { trucksRoutes, truckTypesRoutes } from "./trucks.routes"
 import { customersRoutes } from "./customers.routes"
+import { companiesRoutes } from "./companies.routes"
 import { workRoutes, workTypesRoutes } from "./works.routes"
 import { usersRoutes } from "./users.routes"
 import { authenticateRoutes } from "./authenticate.routes"
@@ -23,6 +24,8 @@ routes.use('/trucks', trucksRoutes)
 routes.use('/truck/types', truckTypesRoutes)
 
 routes.use('/customers', customersRoutes)
+
+routes.use('/companies', companiesRoutes)
 
 routes.use('/works', workRoutes)
 routes.use('/work/types', workTypesRoutes)

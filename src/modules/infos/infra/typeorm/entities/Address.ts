@@ -56,7 +56,7 @@ class Address {
   @Exclude()
   driver_id: string
 
-  @OneToOne(() => Company, { onDelete: 'CASCADE' })
+  @OneToOne(() => Company, (company) => company.address, { onDelete: 'CASCADE' })
   @JoinColumn({ name: "company_id" })
   company: Company
 

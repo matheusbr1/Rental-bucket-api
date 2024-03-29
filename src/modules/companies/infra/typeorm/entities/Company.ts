@@ -10,8 +10,8 @@ class Company {
   @Column()
   name: string
 
-  @OneToOne(() => Address)
-  adress: Address
+  @OneToOne(() => Address, (address => address.company))
+  address: Address
 
   @CreateDateColumn()
   created_at: Date

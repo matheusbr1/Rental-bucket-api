@@ -13,6 +13,7 @@ interface ICreateAddressDTO {
   complement?: string
   customer_id?: string
   driver_id?: string
+  company_id?: string
 
   /**
    * is used only on create address use case execution

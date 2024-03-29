@@ -13,8 +13,8 @@ class CreateAddressUseCase {
   ) { }
 
   async execute(data: ICreateAddressDTO): Promise<Address> {
-    if (!data.customer_id && !data.driver_id) {
-      throw new AppError('missing customer_id or driver_id')
+    if (!data.customer_id && !data.driver_id && !data.company_id) {
+      throw new AppError('missing customer_id or driver_id or company_id')
     }
 
     const response = await axios

@@ -24,6 +24,13 @@ import { IWorksRepository } from '../../modules/works/repositories/IWorksReposit
 import { WorksRepository } from '../../modules/works/infra/typeorm/repositories/WorksRepository'
 import { IUsersTokensRepository } from '../../modules/accounts/repositories/IUsersTokensRepository'
 import { UsersTokensRepository } from '../../modules/accounts/infra/typeorm/repositories/UsersTokensRepository'
+import { CompaniesRepository } from '../../modules/companies/infra/typeorm/repositories/CompaniesRepository'
+import { ICompaniesRepository } from '../../modules/companies/repositories/ICompaniesRepository'
+
+container.registerSingleton<ICompaniesRepository>(
+  'CompaniesRepository',
+  CompaniesRepository
+)
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',

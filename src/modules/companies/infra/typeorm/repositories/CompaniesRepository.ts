@@ -30,6 +30,10 @@ class CompaniesRepository implements ICompaniesRepository {
       .where("LOWER(company.name) ILIKE LOWER(:name)", { name: `%${name}%` })
       .getOne();
   }
+
+  async delete(id: string): Promise<void> {
+    await this.repository.delete(id)
+  }
 }
 
 export { CompaniesRepository }

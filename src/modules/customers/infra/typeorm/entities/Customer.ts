@@ -29,6 +29,9 @@ class Customer {
   @Column()
   fantasy_name?: string
 
+  @Column()
+  company_id: string
+
   @CreateDateColumn()
   created_at: Date
 

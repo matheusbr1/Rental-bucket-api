@@ -46,6 +46,17 @@ class CustomersRepository implements ICustomerRepository {
 
     return customers
   }
+
+  async listByCompanyId(company_id: string): Promise<Customer[]> {
+    const customers = await this.repository
+      .createQueryBuilder("customers")
+      .leftJoinAndSelect("customers.contacts", "contacts")
+      .leftJoinAndSelect("customers.adresses", "adresses")
+      .where("customers.company_id = :company_id", { company_id })
+      .getMany()
+
+    return customers
+  }
 }
 
 export { CustomersRepository }

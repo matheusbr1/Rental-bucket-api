@@ -4,5 +4,6 @@ export interface ICreateCustomerDTO {
   CPF_CNPJ?: number
   name?: string
   company_name?: string
-  fantasy_name?: string 
+  fantasy_name?: string
+  company_id?: string
 }

@@ -5,6 +5,7 @@ import { Work } from "../infra/typeorm/entities/Work";
 interface IWorksRepository {
   create(data: ICreateWorkDTO): Promise<Work>
   list(): Promise<Work[]>
+  listByCompanyId(company_id: string): Promise<Work[]>
   findById(id: string): Promise<Work>
   delete(id: string): Promise<void>
 }

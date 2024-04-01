@@ -72,6 +72,9 @@ class Work {
   @JoinColumn({ name: "equipment_id" })
   equipment: Equipment
 
+  @Column()
+  company_id: string
+
   @CreateDateColumn()
   created_at: Date
 

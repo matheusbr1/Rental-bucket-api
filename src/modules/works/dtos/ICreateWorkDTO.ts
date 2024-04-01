@@ -9,4 +9,5 @@ export interface ICreateWorkDTO {
   driver_id: string
   work_type_id: string
   equipment_id: string
+  company_id: string
 }

@@ -6,7 +6,7 @@ import { Work } from "../entities/Work"
 class WorksRepository implements IWorksRepository {
   repository: Repository<Work>
 
-  constructor () {
+  constructor() {
     this.repository = getRepository(Work)
   }
 
@@ -44,6 +44,20 @@ class WorksRepository implements IWorksRepository {
       .leftJoinAndSelect("works.truck", "truck")
       .leftJoinAndSelect("works.work_type", "work_type")
       .leftJoinAndSelect("works.equipment", "equipment")
+      .getMany()
+
+    return works
+  }
+
+  async listByCompanyId(company_id: string): Promise<Work[]> {
+    const works = await this.repository.createQueryBuilder("works")
+      .leftJoinAndSelect("works.customer", "customer")
+      .leftJoinAndSelect("works.driver", "driver")
+      .leftJoinAndSelect("works.address", "address")
+      .leftJoinAndSelect("works.truck", "truck")
+      .leftJoinAndSelect("works.work_type", "work_type")
+      .leftJoinAndSelect("works.equipment", "equipment")
+      .where({ company_id })
       .getMany()
 
     return works

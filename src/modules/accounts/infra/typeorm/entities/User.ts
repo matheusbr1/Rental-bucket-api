@@ -8,7 +8,7 @@ class User {
 
   @Column()
   name: string
-  
+
   @Column()
   email: string
 
@@ -18,11 +18,14 @@ class User {
   @Column()
   avatar: string
 
+  @Column()
+  company_id: string
+
   @CreateDateColumn()
   created_at: Date
 
   constructor() {
-    if(!this.id) {
+    if (!this.id) {
       this.id = uuidv4()
     }
   }

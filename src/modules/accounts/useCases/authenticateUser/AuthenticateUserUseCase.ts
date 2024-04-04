@@ -17,6 +17,7 @@ interface IResponse {
     name: string
     email: string
     avatar: string
+    company_id: string
   }
   token: string
   refresh_token: string
@@ -24,25 +25,25 @@ interface IResponse {
 
 @injectable()
 class AuthenticateUserUseCase {
-  constructor (
+  constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
     @inject('UsersTokensRepository')
     private usersTokensRepository: IUsersTokensRepository,
     @inject('DateProvider')
     private dateProvider: IDateProvider
-  ) {}
+  ) { }
 
   async execute({ email, password }: IRequest): Promise<IResponse> {
     const user = await this.usersRepository.findByEmail(email)
 
-    if(!user) {
+    if (!user) {
       throw new AppError('Email or password incorrect')
     }
 
     const passwordMatch = await compare(password, user.password)
 
-    if(!passwordMatch) {
+    if (!passwordMatch) {
       throw new AppError('Email or password incorrect')
     }
 
@@ -68,7 +69,8 @@ class AuthenticateUserUseCase {
       user: {
         name: user.name,
         email: user.email,
-        avatar: user.avatar
+        avatar: user.avatar,
+        company_id: user.company_id,
       },
       token,
       refresh_token

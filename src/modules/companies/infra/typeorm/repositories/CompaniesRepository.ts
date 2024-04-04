@@ -11,7 +11,10 @@ class CompaniesRepository implements ICompaniesRepository {
   }
 
   async findById(id: string): Promise<Company> {
-    const company = await this.repository.findOne(id);
+    const company = await this.repository.createQueryBuilder('company')
+      .leftJoinAndSelect("company.address", "address")
+      .where({ id })
+      .getOne()
     return company;
   }
 

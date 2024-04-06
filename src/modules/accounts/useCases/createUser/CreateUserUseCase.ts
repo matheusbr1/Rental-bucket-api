@@ -4,6 +4,8 @@ import { ICreateUserDTO } from "../../dtos/ICreateUserDTO"
 import { IUsersRepository } from "../../repositories/IUsersRepository"
 import { AppError } from "../../../../shared/errors/AppError"
 import { CompaniesRepository } from "../../../companies/infra/typeorm/repositories/CompaniesRepository"
+import { createStripeCustomer } from "../../../../config/stripe"
+import { User } from "../../infra/typeorm/entities/User"
 @injectable()
 class CreateUserUseCase {
   constructor(
@@ -14,7 +16,7 @@ class CreateUserUseCase {
     private companiesRepository: CompaniesRepository
   ) { }
 
-  async execute({ name, email, password, company_id }: ICreateUserDTO): Promise<void> {
+  async execute({ name, email, password, company_id }: ICreateUserDTO): Promise<User> {
     if (!company_id) {
       throw new AppError('Field company_id is missing')
     }
@@ -33,12 +35,20 @@ class CreateUserUseCase {
 
     const passwordHash = await hash(password, 8)
 
-    await this.usersRepository.create({
+    const stripeCustomer = await createStripeCustomer({
+      email,
+      name
+    })
+
+    const user = await this.usersRepository.create({
       company_id,
       name,
       email,
       password: passwordHash,
+      stripe_customer_id: stripeCustomer.id
     })
+
+    return user
   }
 }
 

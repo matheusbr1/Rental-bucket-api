@@ -16,17 +16,18 @@ class UserRepository implements IUsersRepository {
     return user
   }
 
-  async create({ name, email, password, avatar, id, company_id }: ICreateUserDTO): Promise<void> {
-    const user = this.repository.create({
-      id,
-      name,
-      email,
-      password,
-      avatar,
-      company_id
-    })
+  async findByStripeCustomerId(id: string): Promise<User> {
+    const user = await this.repository.findOne({
+      where: { stripe_customer_id: id }
+    });
 
-    await this.repository.save(user)
+    return user;
+  }
+
+  async create(userData: ICreateUserDTO): Promise<User> {
+    const user = this.repository.create(userData)
+    const created = await this.repository.save(user)
+    return created
   }
 
   async findByEmail(email: string): Promise<User> {

@@ -11,10 +11,13 @@ import { routes } from './routes'
 import swaggerUI from 'swagger-ui-express'
 import swaggerFile from '../../../swagger.json'
 import { handleError } from './middlewares/handleError'
+import { stripeRoute } from './routes/stripe.routes';
 
 const app = express()
 
 app.use(cors())
+
+app.use(stripeRoute)
 
 app.use(express.json())
 

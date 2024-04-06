@@ -21,6 +21,15 @@ class User {
   @Column()
   company_id: string
 
+  @Column()
+  stripe_customer_id?: string
+
+  @Column()
+  stripe_subscription_id?: string
+
+  @Column()
+  stripe_subscription_status?: string
+
   @CreateDateColumn()
   created_at: Date
 

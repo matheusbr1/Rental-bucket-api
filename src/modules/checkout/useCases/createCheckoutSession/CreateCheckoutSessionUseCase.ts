@@ -27,8 +27,8 @@ class CreateCheckoutSessionUseCase {
         mode: 'subscription',
         client_reference_id: user.id,
         customer: user.stripe_customer_id,
-        success_url: 'http://localhost:3000/success',
-        cancel_url: 'http://localhost:3000/cancel',
+        success_url: process.env.STRIPE_CHECKOUT_SUCCESS_URL,
+        cancel_url: process.env.STRIPE_CHECKOUT_ERROR_URL,
         line_items: [{
           price: process.env.STRIPE_PRO_PRICE_ID,
           quantity: 1

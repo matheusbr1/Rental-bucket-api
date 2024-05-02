@@ -16,6 +16,9 @@ class Company {
   @CreateDateColumn()
   created_at: Date
 
+  @Column()
+  hasSubscription: boolean
+
   constructor() {
     if (!this.id) {
       this.id = uuidV4()

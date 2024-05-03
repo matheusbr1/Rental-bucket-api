@@ -8,6 +8,8 @@ export class AddHasSubscriptionFlagOnCompanies1714690365397 implements Migration
             new TableColumn({
                 name: 'hasSubscription',
                 type: 'boolean',
+                default: false,
+                isNullable: true
             })
         )
     }

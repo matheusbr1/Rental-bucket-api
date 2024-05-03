@@ -2,12 +2,15 @@ import { inject, injectable } from "tsyringe";
 import { IUsersRepository } from "../../../accounts/repositories/IUsersRepository";
 import { AppError } from "../../../../shared/errors/AppError";
 import Stripe from "stripe";
+import { ICompaniesRepository } from "../../../companies/repositories/ICompaniesRepository";
 
 @injectable()
 class ProcessWebhookUseCase {
   constructor(
     @inject('UsersRepository')
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
+    @inject('CompaniesRepository')
+    private companiesRepository: ICompaniesRepository
   ) { }
 
   async handleProcessWebhookCheckoutSessionCompleted(event: {
@@ -37,6 +40,11 @@ class ProcessWebhookUseCase {
         ...user,
         stripe_customer_id: stripeCustomerId,
         stripe_subscription_id: stripeSubscriptionId
+      })
+      const company = await this.companiesRepository.findById(user.company_id)
+      await this.companiesRepository.create({
+        ...company,
+        hasSubscription: true
       })
 
       console.log('[Stripe] checkout finished')
@@ -71,6 +79,11 @@ class ProcessWebhookUseCase {
         stripe_customer_id: stripeCustomerId,
         stripe_subscription_id: stripeSubscriptionId,
         stripe_subscription_status: stripeSubscriptionStatus
+      })
+      const company = await this.companiesRepository.findById(user.company_id)
+      await this.companiesRepository.create({
+        ...company,
+        hasSubscription: stripeSubscriptionStatus === 'active'
       })
 
       console.log('[Stripe] subscription update finished')

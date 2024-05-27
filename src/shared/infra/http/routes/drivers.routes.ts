@@ -4,37 +4,19 @@ import { DeleteDriverController } from '../../../../modules/drivers/useCases/del
 import { DriverDetailController } from '../../../../modules/drivers/useCases/driverDetail/DriverDetailController'
 import { ListDriversController } from '../../../../modules/drivers/useCases/listDriver/ListDriversController'
 import { UpdateDriverController } from '../../../../modules/drivers/useCases/updateDriver/UpdateDriverController'
-import { CreateAddressController } from '../../../../modules/infos/useCases/createAddress/CreateAddressController'
-import { CreateContactController } from '../../../../modules/infos/useCases/createContact/CreateContactController'
-import { DeleteAddressController } from '../../../../modules/infos/useCases/deleteAddress/DeleteAddressController'
-import { DeleteContactController } from '../../../../modules/infos/useCases/deleteContact/DeleteContactController'
 
 const driversRoutes = Router()
 
 const createDriverController = new CreateDriverController()
 const listDriversController = new ListDriversController()
-
-const createContactController = new CreateContactController()
-const deleteContactController = new DeleteContactController()
-
-const createAdressController = new CreateAddressController()
-const deleteAddressController = new DeleteAddressController()
-
 const driverDetailController = new DriverDetailController()
 const deleteDriverController = new DeleteDriverController()
 const updateDriverController = new UpdateDriverController()
 
 driversRoutes.post('/', createDriverController.handle)
 driversRoutes.get('/', listDriversController.handle)
-
 driversRoutes.get('/:id', driverDetailController.handle)
 driversRoutes.delete('/:id', deleteDriverController.handle)
 driversRoutes.put('/:id', updateDriverController.handle)
-
-driversRoutes.post('/contact', createContactController.handle)
-driversRoutes.delete('/contact/:id', deleteContactController.handle)
-
-driversRoutes.post('/address', createAdressController.handle)
-driversRoutes.delete('/address/:id', deleteAddressController.handle)
 
 export { driversRoutes }

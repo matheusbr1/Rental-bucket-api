@@ -9,10 +9,10 @@ class CreateContactUseCase {
   constructor(
     @inject('ContactsRepository')
     private contactsRepository: IContactsRepository
-  ) {}
+  ) { }
 
   async execute(data: ICreateContactDTO): Promise<Contact> {
-    if(!data?.customer_id && !data?.driver_id) {
+    if (!data?.customer_id && !data?.driver_id) {
       throw new AppError('missing customer_id or driver_id')
     }
 

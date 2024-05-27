@@ -1,10 +1,12 @@
 import * as validator from 'cpf-cnpj-validator'
-import { inject, injectable } from 'tsyringe';
+import { container, inject, injectable } from 'tsyringe';
 import { AppError } from '../../../../shared/errors/AppError';
 import { ICreateCustomerDTO } from '../../dtos/ICreateCustomerDTO';
 import { Customer } from '../../infra/typeorm/entities/Customer';
 import { ICustomerRepository } from "../../repositories/ICustomersRepository";
 import { CompaniesRepository } from '../../../companies/infra/typeorm/repositories/CompaniesRepository';
+import { CreateAddressUseCase } from '../../../_address/useCases/createAddress/CreateAddressUseCase';
+import { CreateContactUseCase } from '../../../_contact/useCases/createContact/CreateContactUseCase';
 
 const person_type = {
   fisic: 'F',
@@ -58,9 +60,33 @@ class CreateCustomerUseCase {
       throw new AppError("Customer already exists")
     }
 
+    const createAddressUseCase = container.resolve(CreateAddressUseCase)
+    const createContactUseCase = container.resolve(CreateContactUseCase)
+
     const customer = await this.customerRepository.create(data)
 
-    return customer
+    const addressesPromises = data.adresses.map(address => {
+      return createAddressUseCase.execute({
+        ...address,
+        customer_id: customer.id
+      })
+    })
+
+    const contactPromises = data.contacts.map(contact => {
+      return createContactUseCase.execute({
+        ...contact,
+        customer_id: customer.id
+      })
+    })
+
+    const adresses = await Promise.all(addressesPromises)
+    const contacts = await Promise.all(contactPromises)
+
+    return {
+      ...customer,
+      adresses,
+      contacts
+    }
   }
 }
 

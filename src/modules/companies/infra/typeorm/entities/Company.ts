@@ -1,6 +1,6 @@
 import { Column, CreateDateColumn, Entity, OneToOne, PrimaryColumn } from 'typeorm'
 import { v4 as uuidV4 } from 'uuid'
-import { Address } from '../../../../infos/infra/typeorm/entities/Address'
+import { Address } from '../../../../_address/infra/typeorm/entities/Address'
 
 @Entity('companies')
 class Company {

@@ -9,6 +9,8 @@ import { usersRoutes } from "./users.routes"
 import { authenticateRoutes } from "./authenticate.routes"
 import { ensureAutenticated } from "../middlewares/ensureAuthenticated"
 import { checkoutRoute } from "./stripe.routes"
+import { contactRoutes } from "./contact.routes"
+import { addressRoutes } from "./address.routes"
 
 const routes = Router()
 
@@ -22,6 +24,9 @@ routes.use('/users', usersRoutes)
 routes.use('/companies', companiesRoutes)
 
 routes.use(ensureAutenticated)
+
+routes.use(contactRoutes)
+routes.use(addressRoutes)
 
 routes.use('/drivers', driversRoutes)
 

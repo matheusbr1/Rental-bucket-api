@@ -1,7 +1,8 @@
 import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryColumn } from 'typeorm'
 import { v4 as uuidV4 } from 'uuid'
-import { Address } from '../../../../infos/infra/typeorm/entities/Address'
-import { Contact } from '../../../../infos/infra/typeorm/entities/Contact'
+import { Contact } from '../../../../_contact/infra/typeorm/entities/Contact'
+import { Address } from '../../../../_address/infra/typeorm/entities/Address'
+
 
 @Entity('drivers')
 class Driver {

@@ -3,10 +3,11 @@ import { v4 as uuidV4 } from 'uuid'
 import { Exclude } from 'class-transformer'
 import { Customer } from '../../../../customers/infra/typeorm/entities/Customer'
 import { Driver } from '../../../../drivers/infra/typeorm/entities/Driver'
-import { Address } from '../../../../infos/infra/typeorm/entities/Address'
 import { Equipment } from '../../../../trucks/infra/typeorm/entities/Equipment'
 import { Truck } from '../../../../trucks/infra/typeorm/entities/Truck'
 import { WorkType } from './WorkType'
+import { Address } from '../../../../_address/infra/typeorm/entities/Address'
+
 @Entity('works')
 class Work {
   @PrimaryColumn()

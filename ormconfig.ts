@@ -5,15 +5,15 @@ const connectionOptions = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
-  logging: true,
+  logging: false,
   entities: ["./src/modules/**/entities/*.{js,ts}"],
   migrations: ["./src/shared/infra/typeorm/migrations/*.{js,ts}"],
   cli: {
     migrationsDir: "./src/shared/infra/typeorm/migrations"
   },
-  ssl: {
-    rejectUnauthorized: false // You can set this to true in production for secure connections
-  }
+  // ssl: {
+  //   rejectUnauthorized: false // You can set this to true in production for secure connections
+  // }
 };
 
 export default connectionOptions;

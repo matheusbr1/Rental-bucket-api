@@ -8,10 +8,6 @@ import { CustomersRepository } from '../../modules/customers/infra/typeorm/repos
 import { ICustomerRepository } from '../../modules/customers/repositories/ICustomersRepository'
 import { DriversRepository } from '../../modules/drivers/infra/typeorm/repositories/DriversRepository'
 import { IDriversRepository } from '../../modules/drivers/repositories/IDriversRepository'
-import { AdressesRepository } from '../../modules/infos/infra/typeorm/repositories/AdressesRepository'
-import { IAdressesRepository } from '../../modules/infos/repositories/IAdressesRepository'
-import { ContactsRepository } from '../../modules/infos/infra/typeorm/repositories/ContactsRepository'
-import { IContactsRepository } from '../../modules/infos/repositories/IContactsRepository'
 import { EquipmentsRepository } from '../../modules/trucks/infra/typeorm/repositories/EquipmentsRepository'
 import { TrucksRepository } from '../../modules/trucks/infra/typeorm/repositories/TrucksRepository'
 import { TypesRepository } from '../../modules/trucks/infra/typeorm/repositories/TypesRepository'
@@ -26,6 +22,10 @@ import { IUsersTokensRepository } from '../../modules/accounts/repositories/IUse
 import { UsersTokensRepository } from '../../modules/accounts/infra/typeorm/repositories/UsersTokensRepository'
 import { CompaniesRepository } from '../../modules/companies/infra/typeorm/repositories/CompaniesRepository'
 import { ICompaniesRepository } from '../../modules/companies/repositories/ICompaniesRepository'
+import { IContactsRepository } from '../../modules/_contact/repositories/IContactsRepository'
+import { ContactsRepository } from '../../modules/_contact/infra/typeorm/repositories/ContactsRepository'
+import { IAdressesRepository } from '../../modules/_address/repositories/IAdressesRepository'
+import { AdressesRepository } from '../../modules/_address/infra/typeorm/repositories/AdressesRepository'
 
 container.registerSingleton<ICompaniesRepository>(
   'CompaniesRepository',

@@ -1,7 +1,8 @@
 import { inject, injectable } from "tsyringe"
-import { Driver } from "../../infra/typeorm/entities/Driver"
 import { IDriversRepository } from "../../repositories/IDriversRepository"
 import { AppError } from "../../../../shared/errors/AppError";
+import { IListDriversInDTO, IListDriversOutDTO } from "../../dtos/IListDriversDTO";
+
 @injectable()
 class ListDriversUseCase {
   constructor(
@@ -9,14 +10,26 @@ class ListDriversUseCase {
     private driversRepository: IDriversRepository
   ) { }
 
-  async execute(company_id: string): Promise<Driver[]> {
+  async execute({
+    company_id,
+    page,
+    limit
+  }: IListDriversInDTO): Promise<IListDriversOutDTO> {
     if (!company_id) {
       throw new AppError("company_id is missing");
     }
 
-    const drivers = await this.driversRepository.listByCompanyId(company_id)
+    if (!page) {
+      throw new AppError("page is missing");
+    }
 
-    return drivers
+    const output = await this.driversRepository.listByCompanyId({
+      company_id,
+      limit,
+      page
+    })
+
+    return output
   }
 }
 

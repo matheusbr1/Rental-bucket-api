@@ -2,6 +2,7 @@ import { getRepository, Repository } from "typeorm"
 import { ICreateDriverDTO } from "../../../dtos/ICreateDriverDTO"
 import { IDriversRepository } from "../../../repositories/IDriversRepository"
 import { Driver } from "../entities/Driver"
+import { IListDriversInDTO, IListDriversOutDTO } from "../../../dtos/IListDriversDTO"
 
 class DriversRepository implements IDriversRepository {
   repository: Repository<Driver>
@@ -47,13 +48,22 @@ class DriversRepository implements IDriversRepository {
     return drivers
   }
 
-  async listByCompanyId(company_id: string): Promise<Driver[]> {
-    const drivers = await this.repository.createQueryBuilder('driver')
+  async listByCompanyId({
+    company_id,
+    page,
+    limit
+  }: IListDriversInDTO): Promise<IListDriversOutDTO> {
+    const [drivers, total] = await this.repository.createQueryBuilder('driver')
       .leftJoinAndSelect("driver.contacts", "contacts")
       .leftJoinAndSelect("driver.address", "address")
       .where({ company_id })
-      .getMany()
-    return drivers
+      .skip((page - 1) * limit)
+      .take(limit)
+      .getManyAndCount()
+
+    const pageCount = Math.ceil(total / limit)
+
+    return { drivers, pageCount, total }
   }
 }
 

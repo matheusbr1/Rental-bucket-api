@@ -1,9 +1,7 @@
-type contactType = 'phone' | 'cellphone' | 'email'
-
 interface ICreateContactDTO {
   id?: string // If filled, the register will be updated
   contact: string
-  contact_type: contactType
+  contact_type: 'phone' | 'cellphone' | 'email'
   customer_id?: string
   driver_id?: string
 }

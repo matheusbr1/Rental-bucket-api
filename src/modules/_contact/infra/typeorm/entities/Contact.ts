@@ -13,12 +13,12 @@ class Contact {
   contact: string
 
   @Column()
-  contact_type: string
+  contact_type: 'phone' | 'cellphone' | 'email'
 
   @ManyToOne(() => Customer, (customer) => customer.adresses, { onDelete: 'CASCADE' })
   @JoinColumn({ name: "customer_id" })
   customer: Customer
-  
+
   @Column()
   @Exclude()
   customer_id: string
@@ -26,7 +26,7 @@ class Contact {
   @ManyToOne(() => Driver, (driver) => driver.address, { onDelete: 'CASCADE' })
   @JoinColumn({ name: "driver_id" })
   driver: Driver
-  
+
   @Column()
   @Exclude()
   driver_id: string

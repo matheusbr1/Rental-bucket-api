@@ -7,7 +7,6 @@ import { CompaniesRepository } from "../../../companies/infra/typeorm/repositori
 import { CreateAddressUseCase } from "../../../_address/useCases/createAddress/CreateAddressUseCase"
 import { CreateContactUseCase } from "../../../_contact/useCases/createContact/CreateContactUseCase"
 
-
 @injectable()
 class CreateDriverUseCase {
   constructor(
@@ -19,10 +18,24 @@ class CreateDriverUseCase {
   ) { }
 
   async execute(data: ICreateDriverDTO) {
-    const companyExists = await this.companiesRepository.findById(data.company_id)
+    const company = await this.companiesRepository.findById(data.company_id)
 
-    if (!companyExists) {
+    if (!company) {
       throw new AppError('This company does not exist')
+    }
+
+    const { total } = await this.driversRepository.listByCompanyId({
+      company_id: data.company_id,
+      limit: 1,
+      page: 1
+    })
+
+    if (!company.hasSubscription) {
+      const MAX_DRIVERS_FREE_PLAN = 15
+      if (total >= MAX_DRIVERS_FREE_PLAN) {
+        const message = `To register more than ${MAX_DRIVERS_FREE_PLAN} drivers buy premium plan.`
+        throw new AppError(message, 400, 'plan')
+      }
     }
 
     const driverAlredyExists = await this.driversRepository.findByCPF(data.CPF)

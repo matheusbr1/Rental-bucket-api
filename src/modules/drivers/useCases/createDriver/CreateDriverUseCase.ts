@@ -6,13 +6,13 @@ import { container, inject, injectable } from "tsyringe"
 import { CompaniesRepository } from "../../../companies/infra/typeorm/repositories/CompaniesRepository"
 import { CreateAddressUseCase } from "../../../_address/useCases/createAddress/CreateAddressUseCase"
 import { CreateContactUseCase } from "../../../_contact/useCases/createContact/CreateContactUseCase"
+import { MAX_FREE_PLAN } from "../../../../config/plan"
 
 @injectable()
 class CreateDriverUseCase {
   constructor(
     @inject('DriversRepository')
     private driversRepository: IDriversRepository,
-
     @inject('CompaniesRepository')
     private companiesRepository: CompaniesRepository,
   ) { }
@@ -31,9 +31,8 @@ class CreateDriverUseCase {
     })
 
     if (!company.hasSubscription) {
-      const MAX_DRIVERS_FREE_PLAN = 15
-      if (total >= MAX_DRIVERS_FREE_PLAN) {
-        const message = `To register more than ${MAX_DRIVERS_FREE_PLAN} drivers buy premium plan.`
+      if (total >= MAX_FREE_PLAN.drivers) {
+        const message = `To register more than ${MAX_FREE_PLAN.drivers} drivers buy premium plan.`
         throw new AppError(message, 400, 'plan')
       }
     }

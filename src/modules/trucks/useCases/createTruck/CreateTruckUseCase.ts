@@ -5,6 +5,7 @@ import { Truck } from "../../infra/typeorm/entities/Truck"
 import { ITrucksRepository } from "../../repositories/ITrucksRespository"
 import { ITypesRepository } from "../../repositories/ITypesRepository"
 import { CompaniesRepository } from "../../../companies/infra/typeorm/repositories/CompaniesRepository"
+import { MAX_FREE_PLAN } from "../../../../config/plan"
 
 @injectable()
 class CreateTruckUseCase {
@@ -18,10 +19,23 @@ class CreateTruckUseCase {
   ) { }
 
   async execute(data: ICreateTruckDTO): Promise<Truck> {
-    const companyExists = await this.companiesRepository.findById(data.company_id)
+    const company = await this.companiesRepository.findById(data.company_id)
 
-    if (!companyExists) {
+    if (!company) {
       throw new AppError('This company does not exist')
+    }
+
+    const { total } = await this.trucksRepository.listByCompanyId({
+      company_id: data.company_id,
+      limit: 1,
+      page: 1
+    })
+
+    if (!company.hasSubscription) {
+      if (total >= MAX_FREE_PLAN.trucks) {
+        const message = `To register more than ${MAX_FREE_PLAN.trucks} trucks buy premium plan.`
+        throw new AppError(message, 400, 'plan')
+      }
     }
 
     const truckAlreadyExistsRenavam = await this.trucksRepository.findByRenavam(data.renavam)

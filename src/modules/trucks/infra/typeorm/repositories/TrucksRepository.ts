@@ -2,6 +2,7 @@ import { getRepository, Repository } from "typeorm"
 import { ICreateTruckDTO } from "../../../dtos/ICreateTruckDTO"
 import { ITrucksRepository } from "../../../repositories/ITrucksRespository"
 import { Truck } from "../entities/Truck"
+import { IListTrucksInDTO, IListTrucksOutDTO } from "../../../dtos/IListTruckDTO"
 
 class TrucksRepository implements ITrucksRepository {
   repository: Repository<Truck>
@@ -43,11 +44,21 @@ class TrucksRepository implements ITrucksRepository {
       .getMany()
   }
 
-  async listByCompanyId(company_id: string): Promise<Truck[]> {
-    return await this.repository.createQueryBuilder("truck")
+  async listByCompanyId({
+    company_id,
+    page,
+    limit
+  }: IListTrucksInDTO): Promise<IListTrucksOutDTO> {
+    const [trucks, total] = await this.repository.createQueryBuilder("truck")
       .leftJoinAndSelect("truck.type", "type")
       .where({ company_id })
-      .getMany()
+      .skip((page - 1) * limit)
+      .take(limit)
+      .getManyAndCount()
+
+    const pageCount = Math.ceil(total / limit)
+
+    return { trucks, pageCount, total }
   }
 }
 

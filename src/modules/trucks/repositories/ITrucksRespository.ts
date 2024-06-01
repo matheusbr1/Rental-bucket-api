@@ -1,4 +1,5 @@
 import { ICreateTruckDTO } from "../dtos/ICreateTruckDTO";
+import { IListTrucksInDTO, IListTrucksOutDTO } from "../dtos/IListTruckDTO";
 import { Truck } from "../infra/typeorm/entities/Truck";
 interface ITrucksRepository {
   create(data: ICreateTruckDTO): Promise<Truck>
@@ -7,7 +8,7 @@ interface ITrucksRepository {
   findById(id: string): Promise<Truck>
   delete(id: string): Promise<void>
   list(): Promise<Truck[]>
-  listByCompanyId(company_id: string): Promise<Truck[]>
+  listByCompanyId(data: IListTrucksInDTO): Promise<IListTrucksOutDTO>
 }
 
 export { ITrucksRepository }

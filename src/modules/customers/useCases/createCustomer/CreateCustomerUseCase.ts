@@ -7,6 +7,7 @@ import { ICustomerRepository } from "../../repositories/ICustomersRepository";
 import { CompaniesRepository } from '../../../companies/infra/typeorm/repositories/CompaniesRepository';
 import { CreateAddressUseCase } from '../../../_address/useCases/createAddress/CreateAddressUseCase';
 import { CreateContactUseCase } from '../../../_contact/useCases/createContact/CreateContactUseCase';
+import { MAX_FREE_PLAN } from '../../../../config/plan';
 
 const person_type = {
   fisic: 'F',
@@ -18,16 +19,28 @@ class CreateCustomerUseCase {
   constructor(
     @inject('CustomersRepository')
     private customerRepository: ICustomerRepository,
-
     @inject('CompaniesRepository')
     private companiesRepository: CompaniesRepository
   ) { }
 
   async execute(data: ICreateCustomerDTO): Promise<Customer> {
-    const companyExists = await this.companiesRepository.findById(data.company_id)
+    const company = await this.companiesRepository.findById(data.company_id)
 
-    if (!companyExists) {
+    if (!company) {
       throw new AppError('This company does not exist')
+    }
+
+    const { total } = await this.customerRepository.listByCompanyId({
+      company_id: data.company_id,
+      limit: 1,
+      page: 1
+    })
+
+    if (!company.hasSubscription) {
+      if (total >= MAX_FREE_PLAN.customers) {
+        const message = `To register more than ${MAX_FREE_PLAN.customers} customers buy premium plan.`
+        throw new AppError(message, 400, 'plan')
+      }
     }
 
     if (data.person_type === person_type.fisic) {

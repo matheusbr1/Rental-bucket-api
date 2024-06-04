@@ -57,7 +57,7 @@ class CustomersRepository implements ICustomerRepository {
       .createQueryBuilder("customers")
       .leftJoinAndSelect("customers.contacts", "contacts")
       .leftJoinAndSelect("customers.adresses", "adresses")
-      .where("customers.company_id = :company_id", { company_id })
+      .where({ company_id })
       .skip((page - 1) * limit)
       .take(limit)
       .getManyAndCount()

@@ -2,16 +2,26 @@ import { Request, Response } from 'express'
 import { container } from 'tsyringe';
 import { ListWorkUseCase } from "./listWorkUseCase";
 import { instanceToPlain } from "class-transformer";
+import { WorkStatus } from '../../dtos/IListWorksDTO';
 
 class ListWorkController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { company_id } = request.query
+    const query = request.query
 
     const listWorksUseCase = container.resolve(ListWorkUseCase)
 
-    const allWorks = await listWorksUseCase.execute(company_id as string)
+    const work_status = (query.status ?? 'all') as WorkStatus
 
-    return response.json(instanceToPlain(allWorks))
+    const out = await listWorksUseCase.execute({
+      company_id: String(query.company_id),
+      limit: Number(query.limit ?? 10),
+      page: Number(query.page),
+      status: work_status
+    })
+
+    response.set('X-Total-Count', out.total.toString())
+    response.set('X-Page-Count', out.pageCount.toString())
+    return response.json(instanceToPlain(out))
   }
 }
 

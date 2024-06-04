@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe";
-import { Work } from "../../infra/typeorm/entities/Work";
 import { IWorksRepository } from "../../repositories/IWorksRepository";
 import { AppError } from "../../../../shared/errors/AppError";
+import { IListWorksInDTO, IListWorksOutDTO } from "../../dtos/IListWorksDTO";
 
 @injectable()
 class ListWorkUseCase {
@@ -10,14 +10,28 @@ class ListWorkUseCase {
     private worksRepository: IWorksRepository
   ) { }
 
-  async execute(company_id: string): Promise<Work[]> {
+  async execute({
+    company_id,
+    page,
+    limit,
+    status
+  }: IListWorksInDTO): Promise<IListWorksOutDTO> {
     if (!company_id) {
       throw new AppError("company_id is missing");
     }
 
-    const allWorks = await this.worksRepository.listByCompanyId(company_id)
+    if (!page) {
+      throw new AppError("page is missing");
+    }
 
-    return allWorks
+    const output = await this.worksRepository.listByCompanyId({
+      company_id,
+      limit,
+      page,
+      status
+    })
+
+    return output
   }
 }
 

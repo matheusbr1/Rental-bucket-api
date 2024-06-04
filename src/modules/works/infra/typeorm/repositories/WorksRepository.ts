@@ -2,6 +2,7 @@ import { getRepository, Repository } from "typeorm"
 import { ICreateWorkDTO } from "../../../dtos/ICreateWorkDTO"
 import { IWorksRepository } from "../../../repositories/IWorksRepository"
 import { Work } from "../entities/Work"
+import { IListWorksInDTO, IListWorksOutDTO } from "../../../dtos/IListWorksDTO"
 
 class WorksRepository implements IWorksRepository {
   repository: Repository<Work>
@@ -49,8 +50,13 @@ class WorksRepository implements IWorksRepository {
     return works
   }
 
-  async listByCompanyId(company_id: string): Promise<Work[]> {
-    const works = await this.repository.createQueryBuilder("works")
+  async listByCompanyId({
+    company_id,
+    page,
+    limit,
+    status
+  }: IListWorksInDTO): Promise<IListWorksOutDTO> {
+    const query = this.repository.createQueryBuilder("works")
       .leftJoinAndSelect("works.customer", "customer")
       .leftJoinAndSelect("works.driver", "driver")
       .leftJoinAndSelect("works.address", "address")
@@ -58,9 +64,19 @@ class WorksRepository implements IWorksRepository {
       .leftJoinAndSelect("works.work_type", "work_type")
       .leftJoinAndSelect("works.equipment", "equipment")
       .where({ company_id })
-      .getMany()
 
-    return works
+    if (status !== 'all') {
+      query.andWhere("works.is_done = :is_done", { is_done: status === 'done' });
+    }
+
+    const [works, total] = await query
+      .skip((page - 1) * limit)
+      .take(limit)
+      .getManyAndCount();
+
+    const pageCount = Math.ceil(total / limit)
+
+    return { works, pageCount, total }
   }
 }
 

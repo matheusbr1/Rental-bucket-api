@@ -2,6 +2,7 @@ import { getRepository, Repository } from "typeorm"
 import { ICreateCustomerDTO } from "../../../dtos/ICreateCustomerDTO"
 import { ICustomerRepository } from "../../../repositories/ICustomersRepository"
 import { Customer } from "../entities/Customer"
+import { IListCustomersInDTO, IListCustomersOutDTO } from "../../../dtos/IListCustomersDTO"
 
 class CustomersRepository implements ICustomerRepository {
   repository: Repository<Customer>
@@ -47,15 +48,23 @@ class CustomersRepository implements ICustomerRepository {
     return customers
   }
 
-  async listByCompanyId(company_id: string): Promise<Customer[]> {
-    const customers = await this.repository
+  async listByCompanyId({
+    company_id,
+    page,
+    limit
+  }: IListCustomersInDTO): Promise<IListCustomersOutDTO> {
+    const [customers, total] = await this.repository
       .createQueryBuilder("customers")
       .leftJoinAndSelect("customers.contacts", "contacts")
       .leftJoinAndSelect("customers.adresses", "adresses")
       .where("customers.company_id = :company_id", { company_id })
-      .getMany()
+      .skip((page - 1) * limit)
+      .take(limit)
+      .getManyAndCount()
 
-    return customers
+    const pageCount = Math.ceil(total / limit)
+
+    return { customers, pageCount, total }
   }
 }
 

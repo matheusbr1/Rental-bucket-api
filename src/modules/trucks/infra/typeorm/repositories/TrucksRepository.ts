@@ -58,7 +58,7 @@ class TrucksRepository implements ITrucksRepository {
 
     const pageCount = Math.ceil(total / limit)
 
-    return { trucks, pageCount, total }
+    return { total, pageCount, trucks }
   }
 }
 

@@ -76,7 +76,7 @@ class WorksRepository implements IWorksRepository {
 
     const pageCount = Math.ceil(total / limit)
 
-    return { works, pageCount, total }
+    return { total, pageCount, works }
   }
 }
 

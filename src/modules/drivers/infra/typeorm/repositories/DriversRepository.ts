@@ -63,7 +63,7 @@ class DriversRepository implements IDriversRepository {
 
     const pageCount = Math.ceil(total / limit)
 
-    return { drivers, pageCount, total }
+    return { total, pageCount, drivers }
   }
 }
 

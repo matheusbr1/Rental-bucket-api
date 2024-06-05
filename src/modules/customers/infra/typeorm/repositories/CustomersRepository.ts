@@ -64,7 +64,7 @@ class CustomersRepository implements ICustomerRepository {
 
     const pageCount = Math.ceil(total / limit)
 
-    return { customers, pageCount, total }
+    return { total, pageCount, customers }
   }
 }
 

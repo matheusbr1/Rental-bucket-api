@@ -8,6 +8,14 @@ import { Truck } from '../../../../trucks/infra/typeorm/entities/Truck'
 import { WorkType } from './WorkType'
 import { Address } from '../../../../_address/infra/typeorm/entities/Address'
 
+export enum WorkStatus {
+  CANCELED = "canceled",
+  PENDING = "pending",
+  PLACED = "placed",
+  REMOVED = 'removed',
+  'PARTIAL-REMOVED' = 'partial-removed',
+}
+
 @Entity('works')
 class Work {
   @PrimaryColumn()
@@ -19,8 +27,12 @@ class Work {
   @Column()
   end_date: Date
 
-  @Column()
-  is_done: boolean
+  @Column({
+    type: "enum",
+    enum: WorkStatus,
+    default: WorkStatus.PENDING
+  })
+  status: WorkStatus;
 
   @Column()
   quantity: number

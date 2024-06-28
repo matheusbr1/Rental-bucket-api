@@ -54,7 +54,6 @@ class WorksRepository implements IWorksRepository {
     company_id,
     page,
     limit,
-    status
   }: IListWorksInDTO): Promise<IListWorksOutDTO> {
     const query = this.repository.createQueryBuilder("works")
       .leftJoinAndSelect("works.customer", "customer")
@@ -64,10 +63,6 @@ class WorksRepository implements IWorksRepository {
       .leftJoinAndSelect("works.work_type", "work_type")
       .leftJoinAndSelect("works.equipment", "equipment")
       .where({ company_id })
-
-    if (status !== 'all') {
-      query.andWhere("works.is_done = :is_done", { is_done: status === 'done' });
-    }
 
     const [works, total] = await query
       .skip((page - 1) * limit)

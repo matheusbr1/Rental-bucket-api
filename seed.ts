@@ -5,6 +5,8 @@ import { Equipment } from './src/modules/trucks/infra/typeorm/entities/Equipment
 
 async function seed() {
   try {
+    console.log('[api] running seed')
+
     const connection = await createConnection();
 
     const workType1 = new WorkType();

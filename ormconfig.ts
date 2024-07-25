@@ -1,5 +1,14 @@
+const otherOptions = {
+  ssl: {
+    rejectUnauthorized: false // You can set this to true in production for secure connections
+  }
+}
+
+console.log('[api] creating database connection options')
+
 const connectionOptions = {
-  type: "postgres",
+  // ...otherOptions,
+  type: process.env.DB_TYPE || "postgres",
   host: process.env.DB_HOST || "localhost",
   port: parseInt(process.env.DB_PORT, 10) || 5432,
   username: process.env.DB_USERNAME,
@@ -11,9 +20,6 @@ const connectionOptions = {
   cli: {
     migrationsDir: "./src/shared/infra/typeorm/migrations"
   },
-  // ssl: {
-  //   rejectUnauthorized: false // You can set this to true in production for secure connections
-  // }
 };
 
 export default connectionOptions;

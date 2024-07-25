@@ -17,7 +17,7 @@ RUN npm install
 COPY . .
 
 # Expondo uma porta para o app
-EXPOSE 3334
+EXPOSE 3333
 
 # Rodando o script para iniciar o app
 CMD ["npm", "run", "dev"]
@@ -25,4 +25,4 @@ CMD ["npm", "run", "dev"]
 # Para criar a imagem com as instruções acima:
 # docker build -t rental-bucket . 
 # Para rodar após a criação
-# docker run -p 3334:3334 rental-bucket
+# docker run -p 3333:3333 rental-bucket

@@ -30,11 +30,10 @@ services:
     depends_on: 
       - database
 
-
 volumes: 
   pgdata: 
     driver: local
 
 # Para executa os serviços
-# docker-compose -p rental-bucket up 
+# docker-compose -p rental-bucket up --build
 # Para rodar as migrations: npm run typeorm migration:run

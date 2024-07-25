@@ -7,7 +7,7 @@ const otherOptions = {
 console.log('[api] creating database connection options')
 
 const connectionOptions = {
-  // ...otherOptions,
+  ...otherOptions,
   type: process.env.DB_TYPE || "postgres",
   host: process.env.DB_HOST || "localhost",
   port: parseInt(process.env.DB_PORT, 10) || 5432,

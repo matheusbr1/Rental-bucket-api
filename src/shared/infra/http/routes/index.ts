@@ -23,10 +23,10 @@ routes.use('/users', usersRoutes)
 
 routes.use('/companies', companiesRoutes)
 
-routes.use(ensureAutenticated)
-
 routes.use(contactRoutes)
 routes.use(addressRoutes)
+
+routes.use(ensureAutenticated)
 
 routes.use('/drivers', driversRoutes)
 

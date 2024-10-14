@@ -9,9 +9,10 @@ describe('List Trucks', () => {
     trucksRepositoryInMemory = new TrucksRepositoryInMemory()
     listTrucksUseCase = new ListTrucksUseCase(trucksRepositoryInMemory)
   })
-  
+
   it('should be able to list all trucks', async () => {
     await trucksRepositoryInMemory.create({
+      company_id: 'company_id',
       brand_id: '1',
       model_id: '2',
       manufacture_year: 1997,
@@ -21,7 +22,11 @@ describe('List Trucks', () => {
       truck_type_id: '1234'
     })
 
-    const trucks = await listTrucksUseCase.execute()
+    const { trucks } = await listTrucksUseCase.execute({
+      company_id: 'company_id',
+      limit: 10,
+      page: 1
+    })
 
     expect(trucks.length).toBe(1)
   })

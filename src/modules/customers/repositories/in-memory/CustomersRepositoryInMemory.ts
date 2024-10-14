@@ -1,4 +1,5 @@
 import { ICreateCustomerDTO } from "../../dtos/ICreateCustomerDTO";
+import { IListCustomersInDTO, IListCustomersOutDTO } from "../../dtos/IListCustomersDTO";
 import { Customer } from "../../infra/typeorm/entities/Customer";
 import { ICustomerRepository } from "../ICustomersRepository";
 
@@ -23,12 +24,21 @@ class CustomersRepositoryInMemory implements ICustomerRepository {
     return this.customers.find(customer => customer.CPF_CNPJ === CPF_CNPJ)
   }
 
-  findById(id: string): Promise<Customer> {
-    throw new Error("Method not implemented.");
+  async listByCompanyId(data: IListCustomersInDTO): Promise<IListCustomersOutDTO> {
+    const customers = this.customers.filter(customer => customer.company_id === data.company_id)
+    return {
+      customers,
+      pageCount: 0,
+      total: customers.length
+    }
   }
-  
-  delete(id: string): Promise<void> {
-    throw new Error("Method not implemented.");
+
+  async findById(id: string): Promise<Customer> {
+    return this.customers.find(customer => customer.id === id)
+  }
+
+  async delete(id: string): Promise<void> {
+    this.customers = this.customers.filter(customer => customer.id !== id)
   }
 }
 

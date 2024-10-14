@@ -1,4 +1,5 @@
 import { ICreateDriverDTO } from "../../dtos/ICreateDriverDTO";
+import { IListDriversInDTO, IListDriversOutDTO } from "../../dtos/IListDriversDTO";
 import { Driver } from "../../infra/typeorm/entities/Driver";
 import { IDriversRepository } from "../IDriversRepository";
 
@@ -23,12 +24,21 @@ class DriversRepositoryInMemory implements IDriversRepository {
     return this.drivers.find(driver => driver.CPF === CPF)
   }
 
-  findById(id: string): Promise<Driver> {
-    throw new Error("Method not implemented.");
+  async listByCompanyId(data: IListDriversInDTO): Promise<IListDriversOutDTO> {
+    const drivers = this.drivers.filter(driver => driver.company_id === data.company_id)
+    return {
+      drivers,
+      pageCount: 0,
+      total: drivers.length
+    }
   }
-  
-  delete(id: string): Promise<void> {
-    throw new Error("Method not implemented.");
+
+  async findById(id: string): Promise<Driver> {
+    return this.drivers.find(driver => driver.id === id)
+  }
+
+  async delete(id: string): Promise<void> {
+    this.drivers = this.drivers.filter(driver => driver.id !== id)
   }
 }
 

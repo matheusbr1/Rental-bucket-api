@@ -12,6 +12,9 @@ describe('List Driver', () => {
 
   it('should be able to list all drivers', async () => {
     await driversRepositoryInMemory.create({
+      company_id: 'company_id',
+      address: null,
+      contacts: [],
       name: 'Jhon Doe',
       CPF: 99005261552,
       CNH: 1234564,
@@ -19,7 +22,11 @@ describe('List Driver', () => {
       birthday: '01/03/1974',
     })
 
-    const drivers = await listDriversUseCase.execute()
+    const { drivers } = await listDriversUseCase.execute({
+      company_id: 'company_id',
+      limit: 10,
+      page: 1
+    })
 
     expect(drivers.length).toBe(1)
   })

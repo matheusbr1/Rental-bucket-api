@@ -24,7 +24,7 @@ class CreateUserUseCase {
     const companyExists = await this.companiesRepository.findById(company_id)
 
     if (!companyExists) {
-      throw new AppError('This company does not exist')
+      throw new AppError('[user] This company does not exist')
     }
 
     const userAlreadyExists = await this.usersRepository.findByEmail(email)

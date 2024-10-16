@@ -20,14 +20,18 @@ class CreateCustomerUseCase {
     @inject('CustomersRepository')
     private customerRepository: ICustomerRepository,
     @inject('CompaniesRepository')
-    private companiesRepository: ICompaniesRepository
+    private companiesRepository: ICompaniesRepository,
+    @inject('CreateAddressUseCase')
+    private createAddressUseCase: CreateAddressUseCase,
+    @inject('CreateContactUseCase')
+    private createContactUseCase: CreateContactUseCase,
   ) { }
 
   async execute(data: ICreateCustomerDTO): Promise<Customer> {
     const company = await this.companiesRepository.findById(data.company_id)
 
     if (!company) {
-      throw new AppError('This company does not exist')
+      throw new AppError('[customer] This company does not exist')
     }
 
     const { total } = await this.customerRepository.listByCompanyId({
@@ -73,20 +77,17 @@ class CreateCustomerUseCase {
       throw new AppError("Customer already exists")
     }
 
-    const createAddressUseCase = container.resolve(CreateAddressUseCase)
-    const createContactUseCase = container.resolve(CreateContactUseCase)
-
     const customer = await this.customerRepository.create(data)
 
     const addressesPromises = data.adresses.map(address => {
-      return createAddressUseCase.execute({
+      return this.createAddressUseCase.execute({
         ...address,
         customer_id: customer.id
       })
     })
 
     const contactPromises = data.contacts.map(contact => {
-      return createContactUseCase.execute({
+      return this.createContactUseCase.execute({
         ...contact,
         customer_id: customer.id
       })

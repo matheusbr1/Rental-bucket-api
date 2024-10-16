@@ -19,7 +19,7 @@ class CreateWorkUseCase {
     const company = await this.companiesRepository.findById(data.company_id)
 
     if (!company) {
-      throw new AppError('This company does not exist')
+      throw new AppError('[work] This company does not exist')
     }
 
     const { total } = await this.worksRepository.listByCompanyId({

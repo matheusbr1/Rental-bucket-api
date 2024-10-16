@@ -2,11 +2,11 @@ import { IDriversRepository } from "../../repositories/IDriversRepository"
 import { cpf } from 'cpf-cnpj-validator'
 import { AppError } from "../../../../shared/errors/AppError"
 import { ICreateDriverDTO } from "../../dtos/ICreateDriverDTO"
-import { container, inject, injectable } from "tsyringe"
-import { CompaniesRepository } from "../../../companies/infra/typeorm/repositories/CompaniesRepository"
+import { inject, injectable } from "tsyringe"
 import { CreateAddressUseCase } from "../../../_address/useCases/createAddress/CreateAddressUseCase"
 import { CreateContactUseCase } from "../../../_contact/useCases/createContact/CreateContactUseCase"
 import { MAX_FREE_PLAN } from "../../../../config/plan"
+import { ICompaniesRepository } from "../../../companies/repositories/ICompaniesRepository"
 
 @injectable()
 class CreateDriverUseCase {
@@ -14,14 +14,18 @@ class CreateDriverUseCase {
     @inject('DriversRepository')
     private driversRepository: IDriversRepository,
     @inject('CompaniesRepository')
-    private companiesRepository: CompaniesRepository,
+    private companiesRepository: ICompaniesRepository,
+    @inject('CreateAddressUseCase')
+    private createAddressUseCase: CreateAddressUseCase,
+    @inject('CreateContactUseCase')
+    private createContactUseCase: CreateContactUseCase,
   ) { }
 
   async execute(data: ICreateDriverDTO) {
     const company = await this.companiesRepository.findById(data.company_id)
 
     if (!company) {
-      throw new AppError('This company does not exist')
+      throw new AppError('[driver] This company does not exist')
     }
 
     const { total } = await this.driversRepository.listByCompanyId({
@@ -49,18 +53,15 @@ class CreateDriverUseCase {
       throw new AppError('This CPF is invalid')
     }
 
-    const createAddressUseCase = container.resolve(CreateAddressUseCase)
-    const createContactUseCase = container.resolve(CreateContactUseCase)
-
     const driver = await this.driversRepository.create(data)
 
-    const address = await createAddressUseCase.execute({
+    const address = await this.createAddressUseCase.execute({
       ...data.address,
       driver_id: driver.id
     })
 
     const contactPromises = data.contacts.map(async contact => {
-      return await createContactUseCase.execute({
+      return await this.createContactUseCase.execute({
         ...contact,
         driver_id: driver.id
       })

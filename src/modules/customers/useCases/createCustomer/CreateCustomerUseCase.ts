@@ -4,10 +4,10 @@ import { AppError } from '../../../../shared/errors/AppError';
 import { ICreateCustomerDTO } from '../../dtos/ICreateCustomerDTO';
 import { Customer } from '../../infra/typeorm/entities/Customer';
 import { ICustomerRepository } from "../../repositories/ICustomersRepository";
-import { CompaniesRepository } from '../../../companies/infra/typeorm/repositories/CompaniesRepository';
 import { CreateAddressUseCase } from '../../../_address/useCases/createAddress/CreateAddressUseCase';
 import { CreateContactUseCase } from '../../../_contact/useCases/createContact/CreateContactUseCase';
 import { MAX_FREE_PLAN } from '../../../../config/plan';
+import { ICompaniesRepository } from '../../../companies/repositories/ICompaniesRepository';
 
 const person_type = {
   fisic: 'F',
@@ -20,7 +20,7 @@ class CreateCustomerUseCase {
     @inject('CustomersRepository')
     private customerRepository: ICustomerRepository,
     @inject('CompaniesRepository')
-    private companiesRepository: CompaniesRepository
+    private companiesRepository: ICompaniesRepository
   ) { }
 
   async execute(data: ICreateCustomerDTO): Promise<Customer> {

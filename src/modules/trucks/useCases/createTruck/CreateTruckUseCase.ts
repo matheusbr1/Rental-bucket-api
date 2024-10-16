@@ -4,8 +4,8 @@ import { ICreateTruckDTO } from "../../dtos/ICreateTruckDTO"
 import { Truck } from "../../infra/typeorm/entities/Truck"
 import { ITrucksRepository } from "../../repositories/ITrucksRespository"
 import { ITypesRepository } from "../../repositories/ITypesRepository"
-import { CompaniesRepository } from "../../../companies/infra/typeorm/repositories/CompaniesRepository"
 import { MAX_FREE_PLAN } from "../../../../config/plan"
+import { ICompaniesRepository } from "../../../companies/repositories/ICompaniesRepository"
 
 @injectable()
 class CreateTruckUseCase {
@@ -15,7 +15,7 @@ class CreateTruckUseCase {
     @inject('TypesRepository')
     private typesRepository: ITypesRepository,
     @inject('CompaniesRepository')
-    private companiesRepository: CompaniesRepository
+    private companiesRepository: ICompaniesRepository
   ) { }
 
   async execute(data: ICreateTruckDTO): Promise<Truck> {

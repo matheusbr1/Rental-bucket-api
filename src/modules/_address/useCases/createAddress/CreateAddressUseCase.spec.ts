@@ -4,6 +4,22 @@ import { CreateAddressUseCase } from "./CreateAddressUseCase"
 let adressesRepositoryInMemory: AdressesRepositoryInMemory
 let createAddressUseCase: CreateAddressUseCase
 
+jest.mock('axios', () => ({
+  get: jest.fn().mockImplementation(() => ({
+    data: {
+      status: 'OK',
+      results: [{
+        geometry: {
+          location: {
+            lat: -23.55107364031963,
+            lng: -46.634364162759006
+          }
+        }
+      }]
+    }
+  }))
+}))
+
 describe('Create Address', () => {
   beforeEach(() => {
     adressesRepositoryInMemory = new AdressesRepositoryInMemory()
